@@ -18,6 +18,10 @@
     ],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": 0,
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/button-has-type": ["error", { "reset": true }],
+    "no-undef": "off",
+    "react/jsx-filename-extension": "off"
   }
 }
