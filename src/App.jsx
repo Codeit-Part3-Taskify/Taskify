@@ -1,4 +1,4 @@
-import Modal from './components/Layout/ModalLayer.tsx';
+import Modal from './components/Layout/Modal.tsx';
 import CreateColumn from './components/Modal/CreateColumn.tsx';
 
 function App() {
