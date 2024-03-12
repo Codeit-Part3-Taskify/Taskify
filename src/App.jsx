@@ -1,17 +1,13 @@
-import Modal from './components/Layout/Modal.tsx';
-import CreateColumn from './components/Modal/CreateColumn.tsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/Dashboard/Dashboard.tsx';
 
 function App() {
   return (
-    <div>
-      {true && (
-        <Modal>
-          <CreateColumn />
-        </Modal>
-      )}
-      <h1>Hello, World!</h1>
-      <p>This is a simple React app.</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

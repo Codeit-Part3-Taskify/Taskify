@@ -22,6 +22,8 @@
     "jsx-a11y/label-has-associated-control": "off",
     "react/button-has-type": ["error", { "reset": true }],
     "no-undef": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   }
 }
