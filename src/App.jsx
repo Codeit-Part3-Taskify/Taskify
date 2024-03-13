@@ -1,3 +1,4 @@
+import DashboardColorSelector from './components/ColorSelector/DashboardColorSelector.tsx';
 import Modal from './components/Layout/Modal.tsx';
 import CreateColumn from './components/Modal/CreateColumn.tsx';
 
