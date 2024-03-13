@@ -22,7 +22,7 @@ export default function ColorSelector({ colors }: Props) {
       {colors.map(color => (
         <button
           key={color}
-          className={`${bgColors[color]} w-12 h-12 rounded-full flex justify-center items-center`}
+          className={`${bgColors[color]} w-[3rem] h-[3rem] rounded-full flex justify-center items-center`}
           onClick={() => setSelectedColor(color)}
           type="button"
         >

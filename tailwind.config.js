@@ -30,7 +30,12 @@ module.exports = {
         purple: '#760DDE',
         orange: '#FFA500',
         blue: '#76A5EA',
-        pink: '#E876EA'
+        pink: '#E876EA',
+        brown_C4B1A2: '#C4B1A2',
+        skyblue_9DD7ED: '#9DD7ED',
+        yellow_FDD446: '#FDD446',
+        yellow_FFC85A: '#FFC85A',
+        khaki_A3C4A2: '#A3C4A2'
       }
     }
   },
