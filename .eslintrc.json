@@ -25,16 +25,6 @@
         "endOfLine": "auto"
       }
     ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": 0,
     "react/prop-types": "off",
@@ -42,7 +32,6 @@
     "no-undef": "off",
     "react/jsx-filename-extension": "off",
     "import/extensions": "off",
-    "import/no-unresolved": "off",
     "no-unused-vars": "off",
     "react/require-default-props": "off",
     "react/button-has-type": "off"
