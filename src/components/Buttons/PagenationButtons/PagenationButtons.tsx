@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Button from '../../Layout/Button';
+import ArrowForwardIcon from '@/assets/images/arrow-forward.svg';
+import ArrowBackwardIcon from '@/assets/images/arrow-backward.svg';
 
 export default function PagenationButtons() {
   const [allPage, setAllPage] = useState(1);
@@ -30,18 +32,14 @@ export default function PagenationButtons() {
           type="button"
           onClick={handleBackwardButtonClick}
         >
-          <img src="./images/arrow-backward.svg" alt="뒤로 가기 아이콘" />
+          <img src={ArrowBackwardIcon} alt="뒤로 가기 아이콘" />
         </Button>
         <Button
           className="flex items-center justify-center w-[4rem] h-[4rem] bg-white border rounded-r-[0.4rem] border-gray_D9D9D9"
           type="button"
           onClick={handleForwardButtonClick}
         >
-          <img
-            className=""
-            src="./images/arrow-forward.svg"
-            alt="앞으로 가기 아이콘"
-          />
+          <img className="" src={ArrowForwardIcon} alt="앞으로 가기 아이콘" />
         </Button>
       </div>
     </div>
