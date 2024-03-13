@@ -10,7 +10,7 @@ export default function ColorSelector({ colors }: Props) {
 
   const bgColors: StringMap = useMemo(
     () =>
-      colors.reduce((acc: StringMap, cur) => {
+      colors?.reduce((acc: StringMap, cur) => {
         acc[cur] = `bg-${cur}`;
         return acc;
       }, {}),
