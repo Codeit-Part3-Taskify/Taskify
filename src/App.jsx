@@ -1,18 +1,10 @@
-import Modal from './components/Layout/Modal.tsx';
-import SideBar from './components/Layout/SideBar.tsx';
-import CreateColumn from './components/Modal/CreateColumn.tsx';
+import { RouterProvider } from 'react-router-dom';
+import router from './router/router';
 
 function App() {
   return (
     <div>
-      {!true && (
-        <Modal>
-          <CreateColumn />
-        </Modal>
-      )}
-      <SideBar />
-      <h1>Hello, World!</h1>
-      <p>This is a simple React app.</p>
+      <RouterProvider router={router} />
     </div>
   );
 }
