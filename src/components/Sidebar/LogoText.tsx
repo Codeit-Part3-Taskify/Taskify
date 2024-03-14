@@ -1,5 +1,5 @@
-import taskify from '../../assets/images/Taskify.svg';
-import logo from '../../assets/images/logo.svg';
+import taskify from 'src/assets/images/Taskify.svg';
+import logo from 'src/assets/images/logo.svg';
 
 export default function LogoText() {
   return (

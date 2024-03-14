@@ -1,16 +1,14 @@
-import Sidebar from '../../components/Layout/SideBar';
-import Column from '../../components/Dashboard/Column';
-import AddColumn from '../../components/Dashboard/AddColumn';
-import CardDetail from '../../components/Modal/CardDetail';
-import Modal from '../../components/Layout/Modal';
+import CreateColumn from 'src/components/Modal/CreateColumn';
+import Column from 'src/components/Dashboard/Column';
+import AddColumn from 'src/components/Dashboard/AddColumn';
+import Modal from 'src/components/Layout/Modal';
 
 export default function Dashboard() {
   return (
     <main className="w-screen h-screen bg-[#FAFAFA] flex">
       <Modal>
-        <CardDetail />
+        <CreateColumn />
       </Modal>
-      <Sidebar />
       <Column />
       <Column />
       <Column />

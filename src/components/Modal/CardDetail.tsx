@@ -1,5 +1,5 @@
-import kebab from '../../assets/images/kebab.svg';
-import closeBtn from '../../assets/images/close.svg';
+import kebab from 'src/assets/images/kebab.svg';
+import closeBtn from 'src/assets/images/close.svg';
 // 작업중
 export default function CardDetail() {
   return (

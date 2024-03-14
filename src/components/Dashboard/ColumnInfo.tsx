@@ -1,5 +1,5 @@
-import purpleCircle from '../../assets/images/purple-circle.svg';
-import setting from '../../assets/images/setting.svg';
+import purpleCircle from 'src/assets/images/purple-circle.svg';
+import setting from 'src/assets/images/setting.svg';
 
 export default function ColumnInfo() {
   return (

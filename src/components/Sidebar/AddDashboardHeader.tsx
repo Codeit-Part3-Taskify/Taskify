@@ -1,4 +1,4 @@
-import addBox from '../../assets/images/add-box.svg';
+import addBox from 'src/assets/images/add-box.svg';
 
 export default function AddDashboardHeader() {
   return (

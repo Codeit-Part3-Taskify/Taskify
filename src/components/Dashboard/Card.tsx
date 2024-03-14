@@ -1,4 +1,4 @@
-import calendar from '../../assets/images/calendar.svg';
+import calendar from 'src/assets/images/calendar.svg';
 
 export default function Card() {
   return (

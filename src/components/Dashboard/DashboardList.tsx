@@ -1,4 +1,4 @@
-import crown from '../../assets/images/crown.svg';
+import crown from 'src/assets/images/crown.svg';
 
 function DashboardItem() {
   return (

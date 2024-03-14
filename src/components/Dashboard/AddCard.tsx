@@ -1,4 +1,4 @@
-import plusBtn from '../../assets/images/plus.svg';
+import plusBtn from 'src/assets/images/plus.svg';
 
 export default function AddCard() {
   return (
