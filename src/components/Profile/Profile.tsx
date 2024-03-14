@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-interface Props {
+interface ProfileProps {
   profileImgSrc?: string;
   email?: string;
   userName?: string;
@@ -10,7 +10,7 @@ export default function Profile({
   profileImgSrc,
   email = 'Test@codeit.kr',
   userName = '코드잇'
-}: Props) {
+}: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
   const firstLetterOfEmail = email?.charAt(0);
 
