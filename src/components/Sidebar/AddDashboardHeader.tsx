@@ -1,3 +1,5 @@
+import addBox from '../../assets/images/add-box.svg';
+
 export default function AddDashboardHeader() {
   return (
     <header className="flex items-center justify-center desktop:justify-between">
@@ -6,7 +8,7 @@ export default function AddDashboardHeader() {
       </span>
       <img
         className="w-[2rem] h-[2rem]"
-        src="/images/add-box.svg"
+        src={addBox}
         alt="대시보드 추가 버튼"
       />
     </header>

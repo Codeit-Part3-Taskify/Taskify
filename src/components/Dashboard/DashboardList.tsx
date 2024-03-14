@@ -1,3 +1,5 @@
+import crown from '../../assets/images/crown.svg';
+
 function DashboardItem() {
   return (
     <div className="flex flex-row items-center cursor-pointer tablet:gap-[1.6rem]">
@@ -8,7 +10,7 @@ function DashboardItem() {
         </div>
         <img
           className="w-[1.7rem] h-[1.4rem]"
-          src="/images/crown.svg"
+          src={crown}
           alt="내가 만든 대시보드를 표시하는 크라운 이미지"
         />
       </div>
