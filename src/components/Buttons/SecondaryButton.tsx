@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { ButtonType } from '@/types/common';
 
-interface PrimaryButtonProps {
+interface SecondaryButtonProps {
   className?: string;
   type?: ButtonType;
   prefix?: ReactNode;
@@ -11,7 +11,7 @@ interface PrimaryButtonProps {
   onClick?: () => void;
 }
 
-export default function PrimaryButton({
+export default function SecondaryButton({
   className,
   type = 'submit',
   prefix,
@@ -19,11 +19,11 @@ export default function PrimaryButton({
   appendix,
   disabled = false,
   onClick
-}: PrimaryButtonProps) {
+}: SecondaryButtonProps) {
   return (
     <button
       type={type}
-      className={`rounded-[0.4rem] text-white_FFFFFF bg-violet font-['Pretendard-500'] ${className} `} // 나머지 style은 className prop으로 설정
+      className={`border border-gray_D9D9D9 rounded-[0.4rem] text-violet bg-white_FFFFFF font-['Pretendard-500'] ${className}`} // 나머지 style은 className prop으로 설정
       disabled={disabled}
       onClick={onClick}
     >

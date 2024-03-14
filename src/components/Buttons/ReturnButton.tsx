@@ -7,7 +7,7 @@ export default function ReturnButton() {
       type="button"
     >
       <img
-        className="w-[2.8rem] h-[2.8rem]"
+        className="w-[2rem] h-[2rem]"
         src={BackwardIcon}
         alt="뒤로가기 아이콘"
       />

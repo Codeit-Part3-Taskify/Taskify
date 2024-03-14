@@ -12,7 +12,7 @@
   },
   "settings": {
     "import/resolver": {
-      "node": {
+      "typescript": {
         "paths": ["src"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"],
         "moduleDirectory": ["src", "node_modules"]
