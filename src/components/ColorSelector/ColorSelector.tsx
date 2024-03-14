@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CheckIcon from '../../assets/images/check.svg';
 
 export default function ColorSelector() {
   const colors = ['green', 'purple', 'orange', 'blue', 'pink'];
@@ -14,12 +15,7 @@ export default function ColorSelector() {
           type="button"
         >
           {selectedColor === `${color}` ? (
-            <img
-              width={24}
-              height={24}
-              src="@/assets/images/check.svg"
-              alt="체크 아이콘"
-            />
+            <img width={24} height={24} src={CheckIcon} alt="체크 아이콘" />
           ) : null}
         </button>
       ))}
