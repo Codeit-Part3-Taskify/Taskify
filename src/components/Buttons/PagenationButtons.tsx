@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import BackwardIcon from '../../assets/images/arrow-backward.svg';
-import ForwardIcon from '../../assets/images/arrow-forward.svg';
+import BackwardIcon from '../../assets/images/arrow-backward-white.svg';
+import ForwardIcon from '../../assets/images/arrow-forward-white.svg';
 
 export default function PagenationButtons() {
   const [allPage, setAllPage] = useState(10);
