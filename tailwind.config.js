@@ -1,10 +1,43 @@
-/** @type {import('tailwindcss').Config} */
-export const content = [
-  './src/**/*.{js,ts,jsx,tsx}',
-  './pages/**/*.{js,ts,jsx,tsx}',
-  './components/**/*.{js,ts,jsx,tsx}'
-];
-export const theme = {
-  extend: {}
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}'
+  ],
+  safelist: ['bg-green', 'bg-purple', 'bg-orange', 'bg-blue', 'bg-pink'],
+  theme: {
+    screens: {
+      mobile: '0px',
+      tablet: '768px',
+      desktop: '1200px'
+    },
+    extend: {
+      colors: {
+        black_000000: '#000000',
+        black_171717: '#171717',
+        black_333236: '#333236',
+        black_4B4B4B: '#4B4B4B',
+        gray_787486: '#787486',
+        gray_9FA6B2: '#9FA6B2',
+        gray_D9D9D9: '#D9D9D9',
+        gray_EEEEEE: '#EEEEEE',
+        gray_FAFAFA: '#FAFAFA',
+        white_FFFFFF: '#FFFFFF',
+        violet: '#5534DA',
+        violet_8: '#F1EFFD',
+        red: '#D6173A',
+        green: '#7AC555',
+        purple: '#760DDE',
+        orange: '#FFA500',
+        blue: '#76A5EA',
+        pink: '#E876EA',
+        brown_C4B1A2: '#C4B1A2',
+        skyblue_9DD7ED: '#9DD7ED',
+        yellow_FDD446: '#FDD446',
+        yellow_FFC85A: '#FFC85A',
+        khaki_A3C4A2: '#A3C4A2'
+      }
+    }
+  },
+  plugins: []
 };
-export const plugins = [];
