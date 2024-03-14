@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import PagenationButtons from '../../Buttons/PagenationButtons';
-import DashboardMemberList from './DashboardMemberList';
+import PagenationButtons from '../Buttons/PagenationButtons';
+import DashboardMemberList from './Lists/DashboardMemberList';
 
 export default function EditDashboardMembers() {
-  const [members, setMembers] = useState([
+  const [members, setMembers] = useState<string[]>([
     '김율민',
     '최무현',
     '박준수',
     '윤해용'
-  ]); // 대시보드 구성원 목록 받오기 전 임시 데이터
+  ]); // 임시 데이터
 
   return (
     <section className=" pt-[2.9rem] pb-[0.4rem] bg-white_FFFFFF rounded-[0.8rem] w-[62rem]">

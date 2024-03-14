@@ -4,7 +4,7 @@ import ColorSelector from '../ColorSelector/ColorSelector';
 export default function EditDashboardTitle() {
   return (
     <section className="px-[2.8rem] pt-[2.9rem] pb-[2.8rem] bg-white_FFFFFF rounded-[0.8rem] w-[62rem]">
-      <div className="flex items-center justify-between">
+      <div className="flex justify-between ">
         <h2 className="font-bold text-black_333236 mb-[32px] text-[2rem] font-['Pretendard-700']">
           비브리지
         </h2>

@@ -13,7 +13,7 @@ export default function DashboardMemberList({
     <>
       {members.map(member => (
         <>
-          <div className="flex justify-between px-[2.8rem] py-[1.6rem]">
+          <div className="flex justify-between items-center px-[2.8rem] py-[1.6rem]">
             <Profile userName={member} />
             <SecondaryButton className="px-[2.9rem] py-[0.7rem]">
               삭제
