@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import DashboardList from '../Dashboard/DashboardList';
 import AddDashboardHeader from '../Sidebar/AddDashboardHeader';
 import LogoText from '../Sidebar/LogoText';
