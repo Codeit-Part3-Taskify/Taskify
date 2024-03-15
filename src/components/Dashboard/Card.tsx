@@ -1,5 +1,5 @@
 import calendar from 'src/assets/images/calendar.svg';
-import { CardData } from './Cards';
+import type { CardData } from 'src/types/cardType';
 
 interface Prop {
   cardData: CardData;
