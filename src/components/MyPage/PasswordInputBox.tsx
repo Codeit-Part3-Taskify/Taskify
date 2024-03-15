@@ -8,7 +8,7 @@ export default function PasswordInputBox() {
         type="password"
         placeholder="새 비밀번호를 다시 입력하세요."
       />
-      <button className="purplebutton" type="button">
+      <button className="violetbutton w-[8.4rem] h-[3.2rem] " type="button">
         변경
       </button>
     </div>
