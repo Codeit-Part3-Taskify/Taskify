@@ -1,24 +1,40 @@
 // 작업중
 
-export default function CreateCard() {
+export default function UpdateCard() {
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
-        할 일 생성
+        할 일 수정
       </h2>
       <form className="flex flex-col">
-        <label
-          className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
-          htmlFor="assigner"
-        >
-          담당자
-        </label>
-        <input
-          className="w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none  text-[1.6rem]"
-          id="asigner"
-          type="text"
-          placeholder="이름을 입력해 주세요"
-        />
+        <div className="block">
+          <label
+            className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
+            htmlFor="assigner"
+          >
+            상태
+          </label>
+          <input
+            className="w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none  text-[1.6rem]"
+            id="asigner"
+            type="text"
+            placeholder="이름을 입력해 주세요"
+          />
+        </div>
+        <div>
+          <label
+            className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
+            htmlFor="assigner"
+          >
+            담당자
+          </label>
+          <input
+            className="w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none  text-[1.6rem]"
+            id="asigner"
+            type="text"
+            placeholder="이름을 입력해 주세요"
+          />
+        </div>
         <label
           className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
           htmlFor="inputId"

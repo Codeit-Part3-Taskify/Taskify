@@ -1,6 +1,7 @@
 import kebab from 'src/assets/images/kebab.svg';
 import closeBtn from 'src/assets/images/close.svg';
 // 작업중
+
 export default function CardDetail() {
   return (
     <div className="w-[73rem] h-[76.3rem] ">
