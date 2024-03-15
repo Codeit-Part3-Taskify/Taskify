@@ -16,7 +16,7 @@ export default function DashboardList() {
   // if (isError) return <ErrorPage />;
 
   return (
-    <div className="flex flex-col items-center gap-[3.8rem] pt-[3.8rem] tablet:gap-[2.7rem] tablet:items-start tablet:ml-[2.4rem] desktop:ml-0">
+    <div className="flex flex-col items-center gap-[0.3rem] pt-[2.2rem] tablet:mx-[1.2rem]">
       {dashboards.map(dashboard => (
         <DashboardItem key={dashboard.id} dashboard={dashboard} />
       ))}
