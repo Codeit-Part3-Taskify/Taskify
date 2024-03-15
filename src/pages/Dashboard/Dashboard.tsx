@@ -2,6 +2,8 @@ import Column from 'src/components/Dashboard/Column';
 import AddColumn from 'src/components/Dashboard/AddColumn';
 import axiosInstance from 'src/apis/axios';
 import { useEffect, useState } from 'react';
+import Modal from 'src/components/Layout/Modal';
+import CreateDashBoard from 'src/components/Modal/CreateDashboard';
 // "id": 1264,
 // "email": "test@codeit.com",
 // "nickname": "test",
@@ -34,6 +36,9 @@ import { useEffect, useState } from 'react';
 export default function Dashboard() {
   return (
     <main className="w-screen h-screen bg-[#FAFAFA] flex">
+      <Modal>
+        <CreateDashBoard />
+      </Modal>
       <Column />
       <AddColumn />
     </main>
