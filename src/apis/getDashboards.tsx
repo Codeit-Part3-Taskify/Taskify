@@ -1,5 +1,5 @@
 import axios from './axiosInstance';
-import { DashboardsResponse } from '../types/api';
+import { DashboardsResponse } from '../types/dashboardTypes';
 
 // 임시 토큰
 const accessToken =
