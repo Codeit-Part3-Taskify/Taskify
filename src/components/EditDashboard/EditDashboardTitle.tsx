@@ -1,4 +1,4 @@
-import PrimaryButton from '../Buttons/PrimaryButton';
+import Button from '../Buttons/Button';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
 export default function EditDashboardTitle() {
@@ -24,9 +24,12 @@ export default function EditDashboardTitle() {
           placeholder="뉴프로젝트"
         />
         <div className="flex justify-end">
-          <PrimaryButton className="px-[2.9rem] py-[0.7rem] text-[1.4rem]">
+          <Button
+            variant="primary"
+            customStyles="px-[2.9rem] py-[0.7rem] text-[1.4rem]"
+          >
             변경
-          </PrimaryButton>
+          </Button>
         </div>
       </form>
     </section>

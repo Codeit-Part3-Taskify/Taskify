@@ -1,3 +1,5 @@
+import Button from '@/components/Buttons/Button';
+
 export default function CreateColumn() {
   return (
     <>
@@ -17,19 +19,17 @@ export default function CreateColumn() {
           type="text"
           placeholder="새로운 프로젝트"
         />
-        <div className="flex gap-3 justify-end">
-          <button
+        <div className="flex justify-end gap-3">
+          <Button
+            variant="reset"
             type="reset"
-            className="w-[120px] h-[48px] border rounded-lg font-['Pretendard-500'] text-[#787486]"
+            customStyles="w-[120px] h-[48px]"
           >
             취소
-          </button>
-          <button
-            type="submit"
-            className="w-[120px] h-[48px] border rounded-lg text-[#fff] bg-[#5534DA] font-['Pretendard-500']"
-          >
+          </Button>
+          <Button variant="primary" customStyles="w-[120px] h-[48px]">
             생성
-          </button>
+          </Button>
         </div>
       </form>
     </>

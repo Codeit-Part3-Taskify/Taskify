@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PagenationButtons from '../Buttons/PagenationButtons';
 import InviteList from './Lists/InviteList';
-import PrimaryButton from '../Buttons/PrimaryButton';
+import Button from '../Buttons/Button';
 import AddBoxIcon from '../../assets/images/add-box-white.svg';
 
 export default function InvitationSettings() {
@@ -19,8 +19,9 @@ export default function InvitationSettings() {
         <h1 className="text-[2.4rem] font-bold">초대 내역</h1>
         <div className="flex gap-[1.6rem]">
           <PagenationButtons />
-          <PrimaryButton
-            className="flex items-center gap-[0.8rem] px-[1.6rem] py-[0.8rem] text-[1.4rem]"
+          <Button
+            variant="primary"
+            customStyles="flex items-center gap-[0.8rem] px-[1.6rem] py-[0.8rem] text-[1.4rem]"
             prefix={
               <img
                 className="w-[1.6rem] h-[1.6rem]"
@@ -30,7 +31,7 @@ export default function InvitationSettings() {
             }
           >
             초대하기
-          </PrimaryButton>
+          </Button>
         </div>
       </div>
       <div className="text-[1.6rem] pt-[2.7rem]">
