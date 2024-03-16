@@ -5,6 +5,12 @@ interface Prop {
   cardData: CardData;
 }
 
+const tagsColor = [
+  'text-orange-400 bg-rose-100',
+  'text-lime-400 bg-green-100',
+  'text-pink-500 bg-green-100',
+  'text-blue-500 bg-blue-100'
+];
 export default function Card({ cardData }: Prop) {
   return (
     <section className="p-[2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer">
@@ -12,10 +18,10 @@ export default function Card({ cardData }: Prop) {
         {cardData?.title}
       </h2>
       <div className="flex gap-[0.6rem] mb-[1.5rem]">
-        {cardData?.tags.map(tag => (
+        {cardData?.tags.map((tag, index) => (
           <span
             key={tag}
-            className="rounded-[0.4rem] text-orange-600 text-orange text-[1.2rem]"
+            className={`rounded-[0.4rem] text-[1.2rem] px-[0.6rem] py-[0.2rem] ${tagsColor[index % 4]}`}
           >
             {tag}
           </span>

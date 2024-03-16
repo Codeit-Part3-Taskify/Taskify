@@ -1,12 +1,20 @@
+import { useParams } from 'react-router-dom';
+import { atom, useAtom } from 'jotai';
+import { columnListAtom } from 'src/store/store';
 import Column from 'src/components/Dashboard/Column';
 import AddColumn from 'src/components/Dashboard/AddColumn';
-import Modal from 'src/components/Layout/Modal';
-import AlertDeleteCard from 'src/components/Modal/AlertDeleteCard';
 
 export default function Dashboard() {
+  const { boardId } = useParams();
+  const boardIdAtom = atom(boardId);
+  console.log(boardIdAtom);
+  const [{ data }] = useAtom(columnListAtom);
+  console.log(data);
   return (
-    <main className="w-screen h-screen bg-[#FAFAFA] flex">
-      <Column />
+    <main className="bg-[#FAFAFA] flex">
+      {data?.map((columnData: any) => (
+        <Column key={columnData.id} columnInfo={columnData} />
+      ))}
       <AddColumn />
     </main>
   );

@@ -1,11 +1,11 @@
 import type { CardData } from 'src/types/cardType';
-import useCardList from 'src/hooks/useCardList';
-import AddCard from './AddCard';
+import { useAtom } from 'jotai';
+import { cardListAtom } from 'src/store/store';
 import Card from './Card';
+import AddCard from './AddCard';
 
 export default function Cards() {
-  const { data } = useCardList();
-
+  const [{ data }] = useAtom(cardListAtom);
   return (
     <section className="flex flex-col gap-[1.6rem]">
       <AddCard />
