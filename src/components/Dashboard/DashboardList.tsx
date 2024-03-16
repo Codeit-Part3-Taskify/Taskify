@@ -1,18 +1,8 @@
-import { useAtom } from 'jotai';
-import { useNavigate } from 'react-router-dom';
-import { dashboardsAtom } from '../../store/store';
+import useDashboardList from 'src/hooks/useDashboardList';
 import DashboardItem from './DashboardItem';
 
 export default function DashboardList() {
-  const [{ data, isError }] = useAtom(dashboardsAtom);
-  const dashboards = data?.dashboards ?? [];
-
-  const navigate = useNavigate();
-
-  if (isError) {
-    alert('로그인 에러');
-    navigate('/login');
-  }
+  const dashboards = useDashboardList();
 
   return (
     <div className="flex flex-col items-center gap-[0.3rem] pt-[2.2rem] tablet:mx-[1.2rem]">
