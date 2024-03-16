@@ -1,3 +1,5 @@
+import Button from '../Buttons/Button';
+
 export default function PasswordInputBox() {
   return (
     <div>
@@ -37,9 +39,13 @@ export default function PasswordInputBox() {
         type="password"
         placeholder="새 비밀번호 입력"
       />
-      <button className="violetbutton w-[8.4rem] h-[3.2rem] " type="button">
+      <Button
+        variant="primary"
+        customStyles="w-[8.4rem] h-[3.2rem] text-[1.4rem] rounded-[0.4rem]"
+        type="button"
+      >
         변경
-      </button>
+      </Button>
     </div>
   );
 }

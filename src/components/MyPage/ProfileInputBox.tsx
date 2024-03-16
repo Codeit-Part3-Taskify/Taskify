@@ -1,3 +1,5 @@
+import Button from '../Buttons/Button';
+
 export default function ProfileBox() {
   return (
     <div>
@@ -19,9 +21,13 @@ export default function ProfileBox() {
           </label>
           <input id="NicknameInput" className="basicinput" type="text" />
         </div>
-        <button type="button" className="violetbutton w-[8.4rem] h-[3.2rem] ">
+        <Button
+          variant="primary"
+          type="button"
+          customStyles="w-[8.4rem] h-[3.2rem] text-[1.4rem] rounded-[0.4rem]"
+        >
           저장
-        </button>
+        </Button>
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import BackwardIcon from '../../assets/images/arrow-backward.svg';
-import ForwardIcon from '../../assets/images/arrow-forward.svg';
+import BackwardIcon from 'src/assets/images/arrow-backward-white.svg';
+import ForwardIcon from 'src/assets/images/arrow-forward-white.svg';
+import Button from './Button';
 
 export default function PagenationButtons() {
   const [allPage, setAllPage] = useState(10);
@@ -26,20 +27,22 @@ export default function PagenationButtons() {
         {allPage} 페이지 중 {nowPage}
       </span>
       <div className="flex items-center">
-        <button
-          className="flex items-center justify-center w-[4rem] h-[4rem] bg-white border rounded-l-[0.4rem] border-gray_D9D9D9"
+        <Button
+          variant="secondary"
+          customStyles="w-[4rem] h-[4rem] rounded-l-[0.4rem]"
           type="button"
           onClick={handleBackwardButtonClick}
         >
           <img src={BackwardIcon} alt="뒤로 가기 아이콘" />
-        </button>
-        <button
-          className="flex items-center justify-center w-[4rem] h-[4rem] bg-white border rounded-r-[0.4rem] border-gray_D9D9D9"
+        </Button>
+        <Button
+          variant="secondary"
+          customStyles="w-[4rem] h-[4rem] rounded-r-[0.4rem]"
           type="button"
           onClick={handleForwardButtonClick}
         >
           <img className="" src={ForwardIcon} alt="앞으로 가기 아이콘" />
-        </button>
+        </Button>
       </div>
     </div>
   );

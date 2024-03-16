@@ -38,7 +38,7 @@ export default function Profile({
         ) : (
           <>
             <div
-              className={`${randomBgColor} rounded-full  w-[3.8rem] h-[3.8rem]`}
+              className={`${randomBgColor} rounded-full w-[3.8rem] h-[3.8rem]`}
             />
             <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-[1.6rem] font-semibold">
               {firstLetterOfEmail}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CheckIcon from '../../assets/images/check.svg';
+import CheckIcon from 'src/assets/images/check.svg';
 
 export default function ColorSelector() {
   const colors = ['green', 'purple', 'orange', 'blue', 'pink'];
