@@ -3,8 +3,9 @@ import { ButtonType, ButtonVariant } from 'src/types/buttonTypes';
 
 interface ButtonProps {
   variant: ButtonVariant; // 버튼 종류
-  customStyles?: string; // 추가 스타일(padding, border-radius, width, height ...)
   type?: ButtonType;
+  customStyles?: string; // 추가 스타일(padding, border-radius, width ...)
+  isActive?: boolean;
   disabled?: boolean;
   onClick?: () => void;
   onBlur?: () => void;
@@ -16,8 +17,9 @@ interface ButtonProps {
 
 export default function Button({
   variant,
-  customStyles,
   type = 'submit',
+  customStyles,
+  isActive = true,
   disabled = false,
   onClick,
   onBlur,
@@ -25,18 +27,20 @@ export default function Button({
   children,
   appendix
 }: ButtonProps) {
-  const basicStyles = `flex justify-center items-center`;
-  // variant에 따라 적용할 스타일을 결정
+  const baseStyle = `flex justify-center items-center`;
+  const activeStyle = isActive
+    ? 'opacity-100'
+    : 'text-white bg-gray_9FA6B2 cursor-not-allowed';
   const variantStyles = {
-    primary: `${basicStyles} bg-violet text-white`,
-    secondary: `${basicStyles} bg-white text-violet border border-gray_D9D9D9`,
-    ghost: `${basicStyles} bg-invisible border border-gray_D9D9D9`
+    primary: 'bg-violet text-white',
+    secondary: 'bg-white border border-gray_D9D9D9',
+    ghost: 'bg-invisible border border-gray_D9D9D9'
   };
 
   return (
     <button
       type={type}
-      className={`${variantStyles[variant]} ${customStyles}`}
+      className={`${baseStyle} ${activeStyle} ${variantStyles[variant]} ${customStyles}`}
       disabled={disabled}
       onClick={onClick}
       onBlur={onBlur}

@@ -4,7 +4,7 @@ import Button from '../Buttons/Button';
 export default function AddColumn() {
   return (
     <Button
-      variant="ghost"
+      variant="secondary"
       customStyles="flex-shrink-0 mt-[6.8rem] ml-[2rem] p-[2.45rem] rounded-[0.6rem] gap-[1.2rem] w-[35.4rem] h-[7rem]"
       appendix={
         <img

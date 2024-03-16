@@ -3,6 +3,7 @@ import Layout from '../components/Layout/SideBarLayout';
 import MyPage from '../pages/MyPage/MyPage';
 import Dashboard from '../pages/Dashboard/DashboardPage';
 import MyDashboardPage from '../pages/Dashboard/MyDashboardPage';
+import EditDashboardPage from '../pages/EditDashboard/EditDashboardPage';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/mydashboard',
         element: <MyDashboardPage />
+      },
+      {
+        path: '/dashboard/:boardid/edit',
+        element: <EditDashboardPage />
       }
     ]
   }

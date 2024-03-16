@@ -4,7 +4,7 @@ import Button from '../Buttons/Button';
 export default function AddCard() {
   return (
     <Button
-      variant="ghost"
+      variant="secondary"
       customStyles="mt-[2.5rem] p-[0.9rem] rounded-[0.6rem]"
     >
       <img

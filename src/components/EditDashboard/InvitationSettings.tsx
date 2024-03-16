@@ -21,7 +21,7 @@ export default function InvitationSettings() {
           <PagenationButtons />
           <Button
             variant="primary"
-            customStyles="flex items-center gap-[0.8rem] px-[1.6rem] py-[0.8rem] text-[1.4rem] rounded-[0.4rem]"
+            customStyles="gap-[0.8rem] px-[1.6rem] py-[0.8rem] text-[1.4rem] rounded-[0.4rem]"
             prefix={
               <img
                 className="w-[1.6rem] h-[1.6rem]"

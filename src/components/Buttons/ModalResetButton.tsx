@@ -8,7 +8,7 @@ interface ModalResetButtonProp {
 export default function ModalResetButton({ children }: ModalResetButtonProp) {
   return (
     <Button
-      variant="ghost"
+      variant="secondary"
       type="reset"
       customStyles="w-[12rem] h-[4.8rem] rounded-[0.8rem] text-[#787486] text-[1.6rem]"
     >
