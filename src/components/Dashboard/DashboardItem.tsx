@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import crown from 'src/assets/images/crown.svg';
 import { Dashboard } from '../../types/api';
 
 export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
@@ -30,7 +31,7 @@ export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
         {dashboard.createdByMe ? (
           <img
             className="w-[1.7rem] h-[1.4rem]"
-            src="/images/crown.svg"
+            src={crown}
             alt="내가 만든 대시보드를 표시하는 크라운 이미지"
           />
         ) : null}

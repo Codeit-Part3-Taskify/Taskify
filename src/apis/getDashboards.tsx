@@ -10,7 +10,7 @@ const getDashboards = async (
   size?: number,
   navigationMethod: string = 'infiniteScroll'
 ): Promise<DashboardsResponse> => {
-  let dashboardsURL = `/dashboards?navigationMethod=${navigationMethod}`;
+  let dashboardsURL = `dashboards?navigationMethod=${navigationMethod}`;
 
   if (page && size) {
     dashboardsURL = `${dashboardsURL}&page=${page}&size=${size}`;
