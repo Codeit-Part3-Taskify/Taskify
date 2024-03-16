@@ -11,7 +11,7 @@ export default function EditDashboardMembers() {
   ]); // 임시 데이터
 
   return (
-    <section className=" pt-[2.9rem] pb-[0.4rem] bg-white_FFFFFF rounded-[0.8rem] w-[62rem]">
+    <section className=" pt-[2.9rem] pb-[0.4rem] bg-white rounded-[0.8rem] w-[62rem]">
       <div className="flex items-center justify-between px-[2.8rem]">
         <h1 className="text-[2.4rem] font-bold">구성원</h1>
         <PagenationButtons />

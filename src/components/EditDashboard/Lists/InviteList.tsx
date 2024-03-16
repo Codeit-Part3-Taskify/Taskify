@@ -1,5 +1,5 @@
-import HorizontalLine from '../../Lines/HorizontalLine';
-import Button from '@/components/Buttons/Button';
+import HorizontalLine from 'src/components/Lines/HorizontalLine';
+import Button from 'src/components/Buttons/Button';
 
 interface InviteListProps {
   invitedUsers: string[];
@@ -12,7 +12,10 @@ export default function InviteList({ invitedUsers }: InviteListProps) {
         <>
           <div className="flex justify-between items-center px-[2.8rem] py-[1.6rem]">
             <span>{user}</span>
-            <Button variant="secondary" customStyles="px-[2.9rem] py-[0.7rem]">
+            <Button
+              variant="secondary"
+              customStyles="px-[2.9rem] py-[0.7rem] rounded-[0.4rem]"
+            >
               취소
             </Button>
           </div>

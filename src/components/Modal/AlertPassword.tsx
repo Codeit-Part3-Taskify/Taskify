@@ -1,3 +1,5 @@
+import ModalSubmitButton from '../Buttons/ModalSubmitButton';
+
 export default function AlertPassword() {
   return (
     <>
@@ -5,12 +7,7 @@ export default function AlertPassword() {
         현재 비밀번호가 틀렸습니다.
       </h3>
       <div className="flex justify-end">
-        <button
-          type="submit"
-          className="w-[12rem] h-[4.8rem] border rounded-[0.8rem] text-[#fff] bg-[#5534DA] font-medium text-[1.6rem]"
-        >
-          확인
-        </button>
+        <ModalSubmitButton>확인</ModalSubmitButton>
       </div>
     </>
   );

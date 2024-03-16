@@ -1,4 +1,4 @@
-import BackwardIcon from '../../assets/images/arrow-backward-black.svg';
+import BackwardIcon from 'src/assets/images/arrow-backward-black.svg';
 
 export default function ReturnButton() {
   return (
