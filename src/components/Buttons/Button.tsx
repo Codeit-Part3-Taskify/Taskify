@@ -28,19 +28,19 @@ export default function Button({
   appendix
 }: ButtonProps) {
   const baseStyle = `flex justify-center items-center`;
-  const activeStyle = isActive
-    ? 'opacity-100'
-    : 'text-white bg-gray_9FA6B2 cursor-not-allowed';
   const variantStyles = {
     primary: 'bg-violet text-white',
     secondary: 'bg-white border border-gray_D9D9D9',
     ghost: 'bg-invisible border border-gray_D9D9D9'
   };
+  const activeStyle = isActive
+    ? `${variantStyles[variant]}`
+    : 'text-white bg-gray_9FA6B2 cursor-not-allowed';
 
   return (
     <button
       type={type}
-      className={`${baseStyle} ${activeStyle} ${variantStyles[variant]} ${customStyles}`}
+      className={`${baseStyle} ${activeStyle} ${customStyles}`}
       disabled={disabled}
       onClick={onClick}
       onBlur={onBlur}
