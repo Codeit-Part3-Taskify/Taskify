@@ -1,3 +1,5 @@
+import ModalResetButton from '../Buttons/ModalResetButton';
+import ModalSubmitButton from '../Buttons/ModalSubmitButton';
 import Modal from '../Layout/Modal';
 
 export default function AlertDeleteCard() {
@@ -7,18 +9,8 @@ export default function AlertDeleteCard() {
         컬럼의 모든 카드가 삭제됩니다.
       </h3>
       <div className="flex justify-end gap-[1.2rem]">
-        <button
-          type="reset"
-          className="w-[12rem] h-[4.8rem] border rounded-[0.8rem] text-[#787486] text-[1.6rem]"
-        >
-          취소
-        </button>
-        <button
-          type="submit"
-          className="w-[12rem] h-[4.8rem] border rounded-[0.8rem] text-[#fff] bg-[#5534DA] font-medium text-[1.6rem]"
-        >
-          삭제
-        </button>
+        <ModalResetButton>취소</ModalResetButton>
+        <ModalSubmitButton>삭제</ModalSubmitButton>
       </div>
     </>
   );

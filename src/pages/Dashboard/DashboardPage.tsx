@@ -11,10 +11,8 @@ export default function Dashboard() {
   const [{ data }] = useAtom(columnListAtom);
   console.log(data);
   return (
-    <main className="bg-[#FAFAFA] flex">
-      {data?.map((columnData: any) => (
-        <Column key={columnData.id} columnInfo={columnData} />
-      ))}
+    <main className="flex">
+      <Column />
       <AddColumn />
     </main>
   );
