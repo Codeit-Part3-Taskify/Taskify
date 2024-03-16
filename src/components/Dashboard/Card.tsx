@@ -13,7 +13,10 @@ export default function Card({ cardData }: Prop) {
       </h2>
       <div className="flex gap-[0.6rem] mb-[1.5rem]">
         {cardData?.tags.map(tag => (
-          <span className="rounded-[0.4rem] text-orange-600 text-orange text-[1.2rem]">
+          <span
+            key={tag}
+            className="rounded-[0.4rem] text-orange-600 text-orange text-[1.2rem]"
+          >
             {tag}
           </span>
         ))}

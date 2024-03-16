@@ -1,3 +1,5 @@
+import Modal from '../Layout/Modal';
+
 export default function AlertDeleteCard() {
   return (
     <>
