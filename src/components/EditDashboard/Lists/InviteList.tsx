@@ -1,4 +1,3 @@
-import HorizontalLine from 'src/components/Lines/HorizontalLine';
 import Button from 'src/components/Buttons/Button';
 
 interface InviteListProps {
@@ -19,7 +18,22 @@ export default function InviteList({ invitedUsers }: InviteListProps) {
               취소
             </Button>
           </div>
-          {user !== invitedUsers[invitedUsers.length - 1] && <HorizontalLine />}
+          {user !== invitedUsers[invitedUsers.length - 1] && (
+            <svg
+              width="100%"
+              height="1"
+              className="stroke-current text-gray_EEEEEE"
+            >
+              <line
+                x1="0"
+                y1="0"
+                x2="100%"
+                y2="0"
+                stroke="currentColor"
+                strokeWidth="1"
+              />
+            </svg>
+          )}
         </>
       ))}
     </>

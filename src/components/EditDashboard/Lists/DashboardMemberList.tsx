@@ -1,5 +1,4 @@
 import Profile from 'src/components/Profile/Profile';
-import HorizontalLine from 'src/components/Lines/HorizontalLine';
 import Button from 'src/components/Buttons/Button';
 
 interface DashboardMemberListProps {
@@ -22,7 +21,22 @@ export default function DashboardMemberList({
               삭제
             </Button>
           </div>
-          {member !== members[members.length - 1] && <HorizontalLine />}
+          {member !== members[members.length - 1] && (
+            <svg
+              width="100%"
+              height="1"
+              className="stroke-current text-gray_EEEEEE"
+            >
+              <line
+                x1="0"
+                y1="0"
+                x2="100%"
+                y2="0"
+                stroke="currentColor"
+                strokeWidth="1"
+              />
+            </svg>
+          )}
         </>
       ))}
     </>
