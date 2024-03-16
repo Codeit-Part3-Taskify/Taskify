@@ -36,6 +36,9 @@
     "import/extensions": "off",
     "no-unused-vars": "off",
     "react/require-default-props": "off",
-    "react/button-has-type": "off"
+    "react/button-has-type": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/prefer-default-export": "off",
+    "no-alert": "off"
   }
 }
