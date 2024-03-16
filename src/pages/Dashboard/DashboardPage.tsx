@@ -5,7 +5,7 @@ import AlertDeleteCard from 'src/components/Modal/AlertDeleteCard';
 
 export default function Dashboard() {
   return (
-    <main className="w-screen h-screen bg-[#FAFAFA] flex">
+    <main className="flex">
       <Column />
       <AddColumn />
     </main>
