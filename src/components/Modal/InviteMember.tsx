@@ -1,3 +1,6 @@
+import ModalResetButton from '../Buttons/ModalResetButton';
+import ModalSubmitButton from '../Buttons/ModalSubmitButton';
+
 export default function InviteMember() {
   return (
     <>
@@ -18,18 +21,8 @@ export default function InviteMember() {
           placeholder="codeit@codeit.com"
         />
         <div className="flex justify-end gap-[1.2rem]">
-          <button
-            type="reset"
-            className="w-[12rem] h-[4.8rem] border rounded-[0.8rem] text-[#787486] text-[1.6rem]"
-          >
-            취소
-          </button>
-          <button
-            type="submit"
-            className="w-[12rem] h-[4.8rem] border rounded-[0.8rem] text-[#fff] bg-[#5534DA] font-medium text-[1.6rem]"
-          >
-            초대
-          </button>
+          <ModalResetButton>취소</ModalResetButton>
+          <ModalSubmitButton>초대</ModalSubmitButton>
         </div>
       </form>
     </>
