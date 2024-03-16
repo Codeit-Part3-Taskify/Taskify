@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-import { dashboardsAtom } from '../store/store';
-import DashboardItem from '../components/Dashboard/DashboardItem';
+import { dashboardsAtom } from '../../store/store';
+import DashboardItem from '../../components/Dashboard/DashboardItem';
 
 export default function MyDashboardPage() {
   const [{ data, isError }] = useAtom(dashboardsAtom);
