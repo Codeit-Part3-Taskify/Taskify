@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-import { dashboardsAtom } from '../../store/store';
-import DashboardItem from './DashboardItem';
+import { dashboardsAtom } from '../store/store';
+import DashboardItem from '../components/Dashboard/DashboardItem';
 
-export default function DashboardList() {
+export default function MyDashboardPage() {
   const [{ data, isError }] = useAtom(dashboardsAtom);
   const dashboards = data?.dashboards ?? [];
 
@@ -15,10 +15,12 @@ export default function DashboardList() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-[0.3rem] pt-[2.2rem] tablet:mx-[1.2rem]">
+    <>
       {dashboards.map(dashboard => (
         <DashboardItem key={dashboard.id} dashboard={dashboard} />
       ))}
-    </div>
+      <div>초대받은 대시보드</div>
+      <div>아직 초대받은 대시보드가 없어요</div>
+    </>
   );
 }
