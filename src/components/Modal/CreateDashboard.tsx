@@ -2,7 +2,11 @@ import ModalResetButton from '../Buttons/ModalResetButton';
 import ModalSubmitButton from '../Buttons/ModalSubmitButton';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
-export default function CreateDashBoard() {
+type CreateDashBoardProps = {
+  onClick: () => void;
+};
+
+export default function CreateDashBoard({ onClick }: CreateDashBoardProps) {
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
@@ -23,8 +27,8 @@ export default function CreateDashBoard() {
         />
         <ColorSelector />
         <div className="flex justify-end gap-[1.2rem] mt-[2.8rem]">
-          <ModalResetButton>취소</ModalResetButton>
-          <ModalSubmitButton>생성</ModalSubmitButton>
+          <ModalResetButton onClick={onClick}>취소</ModalResetButton>
+          <ModalSubmitButton onClick={onClick}>생성</ModalSubmitButton>
         </div>
       </form>
     </>

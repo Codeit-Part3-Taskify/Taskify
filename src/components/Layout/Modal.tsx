@@ -3,17 +3,17 @@ import { createPortal } from 'react-dom';
 
 type ModalProps = {
   children: ReactNode;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  onClick: () => void;
 };
 
-export default function Modal({ children, setShowModal }: ModalProps) {
+export default function Modal({ children, onClick }: ModalProps) {
   const background = useRef<HTMLDivElement>(null);
 
   const handleModalBackground = (
     e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
   ) => {
     if (e.target === background.current) {
-      setShowModal(false);
+      onClick();
     }
   };
 
