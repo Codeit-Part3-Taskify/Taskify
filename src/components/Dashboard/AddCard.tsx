@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
-import { modalAtom } from 'src/pages/Dashboard/DashboardPage';
 import plusBtn from 'src/assets/images/plus.svg';
+import { modalAtom } from 'src/store/store';
 import Button from '../Buttons/Button';
 
 export default function AddCard() {

@@ -3,8 +3,8 @@ import { useSetAtom } from 'jotai';
 import readCardList from 'src/apis/readCardList';
 import purpleCircle from 'src/assets/images/purple-circle.svg';
 import setting from 'src/assets/images/setting.svg';
-import { modalAtom } from 'src/pages/Dashboard/DashboardPage';
 import { ColumnData } from 'src/types/columnTypes';
+import { modalAtom } from 'src/store/store';
 
 interface Props {
   columnInfo: ColumnData;

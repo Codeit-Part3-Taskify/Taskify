@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useSetAtom } from 'jotai';
-import { modalAtom } from 'src/pages/Dashboard/DashboardPage';
+import { modalAtom } from 'src/store/store';
 import Button from './Button';
 
 interface ModalResetButtonProp {

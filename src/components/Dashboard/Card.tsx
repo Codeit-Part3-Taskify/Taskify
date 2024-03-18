@@ -1,7 +1,7 @@
 import { useSetAtom } from 'jotai';
 import calendar from 'src/assets/images/calendar.svg';
-import { modalAtom } from 'src/pages/Dashboard/DashboardPage';
 import type { CardData } from 'src/types/cardTypes';
+import { modalAtom } from 'src/store/store';
 
 interface Prop {
   cardData: CardData;
