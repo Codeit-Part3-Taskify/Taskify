@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import readColumnList from 'src/apis/readColumnList';
-import Column from 'src/components/Dashboard/Column';
-import AddColumn from 'src/components/Dashboard/AddColumn';
+import Column from 'src/components/Dashboard/Column/Column';
+import AddColumn from 'src/components/Dashboard/Column/AddColumn';
 import { useQuery } from '@tanstack/react-query';
 import Modal from 'src/components/Layout/Modal';
 

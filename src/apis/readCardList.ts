@@ -10,7 +10,6 @@ interface Props {
 
 const readCardList = async ({ queryKey }: Props) => {
   const columnId = queryKey[1];
-
   const { data } = await axiosInstance.get(`cards?columnId=${columnId}`, {
     headers: { Authorization }
   });

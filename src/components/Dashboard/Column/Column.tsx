@@ -1,5 +1,5 @@
 import { ColumnData } from 'src/types/columnTypes';
-import Cards from './Cards';
+import Cards from '../Card/Cards';
 import ColumnInfo from './ColumnInfo';
 
 interface Props {

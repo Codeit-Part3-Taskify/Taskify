@@ -1,6 +1,6 @@
-import ModalResetButton from '../Buttons/ModalResetButton';
-import ModalSubmitButton from '../Buttons/ModalSubmitButton';
-import LabelAndInput from './LabelAndInput/LabelAndInput';
+import ModalResetButton from '../../Buttons/ModalResetButton';
+import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
+import LabelAndInput from '../LabelAndInput/LabelAndInput';
 
 export default function CreateCard() {
   return (
