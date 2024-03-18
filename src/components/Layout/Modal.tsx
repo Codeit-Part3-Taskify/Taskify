@@ -1,24 +1,16 @@
-import { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
+import { selectModal } from 'src/utils/selectModal';
+import { useAtomValue } from 'jotai';
+import { modalAtom } from 'src/store/store';
+import ModalContainer from '../Modal/Container/ModalContainer';
 
-type Props = {
-  children: ReactNode;
-};
+export default function Modal() {
+  const modal = useAtomValue(modalAtom);
 
-export default function Modal({ children }: Props) {
-  return (
-    <>
-      {ReactDOM.createPortal(
-        <>
-          <div className="fixed top-0 w-screen h-screen bg-black opacity-70" />
-          <div className="fixed top-0 flex items-center justify-center w-screen h-screen">
-            <div className="px-[2.8rem] pt-[3.2rem] pb-[2.8rem] bg-[#fff] rounded-[0.8rem]">
-              {children}
-            </div>
-          </div>
-        </>,
-        document.body
-      )}
-    </>
+  return ReactDOM.createPortal(
+    modal['status'] && (
+      <ModalContainer>{selectModal(modal['name'])}</ModalContainer>
+    ),
+    document.body
   );
 }
