@@ -11,34 +11,17 @@ const putDashboardTitle = async (
   title: string,
   color: string
 ) => {
-  try {
-    const { data } = await axiosInstance.put<Dashboard>(
-      `/dashboards/${dashboardId}`,
-      {
-        title,
-        color
-      },
-      {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      }
-    );
-    return data;
-  } catch (error) {
-    // axios 에러
-    if (axios.isAxiosError(error)) {
-      const axiosError = error as AxiosError;
-      alert(axiosError.message);
-      throw new Error(axiosError.message);
+  const { data } = await axiosInstance.put<Dashboard>(
+    `/dashboards/${dashboardId}`,
+    {
+      title,
+      color
+    },
+    {
+      headers: { Authorization: `Bearer ${accessToken}` }
     }
-    // SyntaxError, TypeError, ReferenceError 등의 에러
-    if (error instanceof Error) {
-      console.error(`에러 발생: ${error.message}`);
-      throw Error;
-    }
-    // 그 밖의 에러
-    console.error(`알 수 없는 에러: ${error}`);
-    throw error;
-  }
+  );
+  return data;
 };
 
 export default putDashboardTitle;

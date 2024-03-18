@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import axios, { AxiosError } from 'axios';
 import putDashboardTitle from 'src/apis/putDashboardTitle';
 import getDashboardDetails from 'src/apis/getDashboardDetails';
 import Button from '../Buttons/Button';
@@ -46,8 +47,18 @@ export default function EditDashboardTitle() {
       });
     },
 
-    onError: () => {
-      alert('제목 변경이 불가합니다.'); // 임시 처리
+    onError: error => {
+      // axios 에러
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        alert(axiosError.message);
+      }
+      // SyntaxError, TypeError, ReferenceError 등의 에러
+      if (error instanceof Error) {
+        console.error(`에러 발생: ${error.message}`);
+      }
+      // 그 밖의 에러
+      console.error(`알 수 없는 에러: ${error}`);
     }
   });
 
