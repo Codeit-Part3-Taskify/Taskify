@@ -1,7 +1,7 @@
 // 작업중
 
-import ModalResetButton from '../Buttons/ModalResetButton';
-import ModalSubmitButton from '../Buttons/ModalSubmitButton';
+import ModalResetButton from '../../Buttons/ModalResetButton';
+import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
 
 export default function UpdateCard() {
   return (

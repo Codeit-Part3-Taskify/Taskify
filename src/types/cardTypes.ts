@@ -18,3 +18,14 @@ export interface CardData {
   title: string;
   updatedAt: string;
 }
+
+export interface PostCard {
+  assigneeUserId: Number;
+  dashboardId: Number;
+  columnId: Number;
+  title: String;
+  description: String;
+  dueDate: String;
+  tags: String[];
+  imageUrl: String;
+}
