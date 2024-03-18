@@ -1,7 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
+import readCardList from 'src/apis/readCardList';
 import purpleCircle from 'src/assets/images/purple-circle.svg';
 import setting from 'src/assets/images/setting.svg';
+import { modalAtom } from 'src/pages/Dashboard/DashboardPage';
+import { ColumnData } from 'src/types/columnTypes';
 
-export default function ColumnInfo({ columnInfo }: { columnInfo: any }) {
+interface Props {
+  columnInfo: ColumnData;
+}
+export default function ColumnInfo({ columnInfo }: Props) {
+  const setModal = useSetAtom(modalAtom);
+
+  const { data } = useQuery({
+    queryKey: ['readCardList', columnInfo.id],
+    queryFn: readCardList
+  });
+
   return (
     <section className="flex items-center justify-between">
       <div className="flex items-center gap-[0.8rem]">
@@ -12,10 +27,14 @@ export default function ColumnInfo({ columnInfo }: { columnInfo: any }) {
         />
         <h2 className="text-[1.8rem] font-bold">{columnInfo?.title}</h2>
         <span className="flex items-center justify-center rounded-[0.4rem] text-[1.2rem] font-medium text-[#787486] ml-[0.4rem] bg-[#EEE] w-[2rem] h-[2rem]">
-          as
+          {data?.totalCount}
         </span>
       </div>
-      <img src={setting} alt="톱니 이미지" className="cursor-pointer" />
+      <button
+        onClick={() => setModal(() => ({ name: 'manageColumn', status: true }))}
+      >
+        <img src={setting} alt="톱니 이미지" className="cursor-pointer" />
+      </button>
     </section>
   );
 }

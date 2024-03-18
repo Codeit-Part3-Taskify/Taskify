@@ -1,6 +1,5 @@
 import ModalResetButton from '../Buttons/ModalResetButton';
 import ModalSubmitButton from '../Buttons/ModalSubmitButton';
-import Modal from '../Layout/Modal';
 
 export default function AlertDeleteCard() {
   return (
