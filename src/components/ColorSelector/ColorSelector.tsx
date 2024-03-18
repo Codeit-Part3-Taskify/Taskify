@@ -11,14 +11,12 @@ export default function ColorSelector({
   setSelectedColor
 }: ColorSelectorProps) {
   const colors = ['#7AC555', '#760DDE', '#FFA500', '#76A5EA', '#E876EA'];
-  const bgColors: {
-    [key: string]: string;
-  } = {
-    '#7AC555': 'bg-green',
-    '#760DDE': 'bg-purple',
-    '#FFA500': 'bg-orange',
-    '#76A5EA': 'bg-blue',
-    '#E876EA': 'bg-pink'
+  const colorVariants: Record<string, string> = {
+    '#7AC555': 'bg-green_7AC555',
+    '#760DDE': 'bg-purple_760DDE',
+    '#FFA500': 'bg-orange_FFA500',
+    '#76A5EA': 'bg-blue_76A5EA',
+    '#E876EA': 'bg-pink_E876EA'
   };
 
   return (
@@ -26,7 +24,7 @@ export default function ColorSelector({
       {colors.map(color => (
         <button
           key={color}
-          className={`${bgColors[color]} w-[3rem] h-[3rem] rounded-full flex justify-center items-center`}
+          className={`${colorVariants[color]} w-[3rem] h-[3rem] rounded-full flex justify-center items-center`}
           onClick={() => setSelectedColor(color)}
           type="button"
         >
