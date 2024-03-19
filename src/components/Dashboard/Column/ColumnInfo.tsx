@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import readCardList from 'src/apis/readCardList';
 import purpleCircle from 'src/assets/images/purple-circle.svg';
 import setting from 'src/assets/images/setting.svg';
@@ -11,12 +11,10 @@ interface Props {
 }
 export default function ColumnInfo({ columnInfo }: Props) {
   const setModal = useSetAtom(modalAtom);
-
   const { data } = useQuery({
     queryKey: ['readCardList', columnInfo.id],
     queryFn: readCardList
   });
-
   return (
     <section className="flex items-center justify-between">
       <div className="flex items-center gap-[0.8rem]">
@@ -31,7 +29,14 @@ export default function ColumnInfo({ columnInfo }: Props) {
         </span>
       </div>
       <button
-        onClick={() => setModal(() => ({ name: 'manageColumn', status: true }))}
+        onClick={() =>
+          setModal(() => ({
+            name: 'manageColumn',
+            status: true,
+            columnId: columnInfo.id,
+            columnTitle: columnInfo.title
+          }))
+        }
       >
         <img src={setting} alt="톱니 이미지" className="cursor-pointer" />
       </button>

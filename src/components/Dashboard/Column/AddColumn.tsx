@@ -16,7 +16,9 @@ export default function AddColumn() {
           className="w-[2.2rem] h-[2.2rem] bg-[#F1EFFD] rounded"
         />
       }
-      onClick={() => setModal(() => ({ name: 'createColumn', status: true }))}
+      onClick={() =>
+        setModal(prev => ({ ...prev, name: 'createColumn', status: true }))
+      }
     >
       <span className="text-[1.8rem] font-bold">새로운 컬럼 추가하기</span>
     </Button>
