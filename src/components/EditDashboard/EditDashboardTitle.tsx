@@ -5,6 +5,7 @@ import getDashboardDetails from 'src/apis/getDashboardDetails';
 import putDashboardTitle from 'src/apis/putDashboardTitle';
 import { useAtomValue } from 'jotai';
 import { dashboardsAtom } from 'src/store/store';
+import { useMutateDashboardTitle } from 'src/utils/useMutateDashboardTitle';
 import Button from '../Buttons/Button';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
@@ -12,8 +13,6 @@ export default function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const { boardId } = useParams();
-  const queryClient = useQueryClient();
-  const { refetch } = useAtomValue(dashboardsAtom);
 
   // 대시보드 데이터 불러오기
   const { data } = useQuery({
@@ -30,34 +29,15 @@ export default function EditDashboardTitle() {
     setInputValue(dashboardTitle);
   }, [dashboardColor, dashboardTitle]);
 
-  // 사이드바 대시보드 목록 업데이트
-  const refreshDashboards = async () => {
-    await refetch();
-  };
+  const { updateDashboardTitle, isPending } = useMutateDashboardTitle(
+    boardId,
+    inputValue,
+    selectedColor
+  );
 
-  // 대시보드 수정
-  const { mutate, isPending } = useMutation({
-    mutationFn: ({
-      dashboardId,
-      title,
-      color
-    }: {
-      dashboardId: string | undefined;
-      title: string;
-      color: string;
-    }) => putDashboardTitle(dashboardId, title, color),
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['dashboardDetails', boardId]
-      });
-      refreshDashboards();
-    }
-  });
-
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate({ dashboardId: boardId, title: inputValue, color: selectedColor });
+    updateDashboardTitle();
   };
 
   return (
