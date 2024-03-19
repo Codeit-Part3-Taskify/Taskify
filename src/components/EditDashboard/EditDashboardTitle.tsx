@@ -1,35 +1,41 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
-import putDashboardTitle from 'src/apis/putDashboardTitle';
 import getDashboardDetails from 'src/apis/getDashboardDetails';
+import putDashboardTitle from 'src/apis/putDashboardTitle';
+import { useAtomValue } from 'jotai';
+import { dashboardsAtom } from 'src/store/store';
 import Button from '../Buttons/Button';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
 export default function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
-  const { boardid } = useParams();
+  const { boardId } = useParams();
   const queryClient = useQueryClient();
+  const { refetch } = useAtomValue(dashboardsAtom);
 
-  // 대시보드 데이터 불러오기 [GET]
+  // 대시보드 데이터 불러오기
   const { data } = useQuery({
-    queryKey: ['dashboardDetails', boardid],
-    queryFn: () => getDashboardDetails(boardid)
+    queryKey: ['dashboardDetails', boardId],
+    queryFn: () => getDashboardDetails(boardId)
   });
 
-  // 받아온 대시보드 데이터에 따라 초기값 설정
-  useEffect(() => {
-    if (data?.color) {
-      setSelectedColor(data.color);
-    }
-    if (data?.title) {
-      setInputValue(data.title);
-    }
-  }, [data]);
+  const dashboardColor = data?.color ?? '';
+  const dashboardTitle = data?.title ?? '';
 
-  // 대시보드 수정하기 [PUT]
+  // 받아온 대시보드 데이터로 초기값 설정
+  useEffect(() => {
+    setSelectedColor(dashboardColor);
+    setInputValue(dashboardTitle);
+  }, [dashboardColor, dashboardTitle]);
+
+  // 사이드바 대시보드 목록 업데이트
+  const refreshDashboards = async () => {
+    await refetch();
+  };
+
+  // 대시보드 수정
   const { mutate, isPending } = useMutation({
     mutationFn: ({
       dashboardId,
@@ -43,37 +49,23 @@ export default function EditDashboardTitle() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['dashboardDetails']
+        queryKey: ['dashboardDetails', boardId]
       });
-    },
-
-    onError: error => {
-      // axios 에러
-      if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        alert(axiosError.message);
-      }
-      // SyntaxError, TypeError, ReferenceError 등의 에러
-      if (error instanceof Error) {
-        console.error(`에러 발생: ${error.message}`);
-      }
-      // 그 밖의 에러
-      console.error(`알 수 없는 에러: ${error}`);
+      refreshDashboards();
     }
   });
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate({ dashboardId: boardid, title: inputValue, color: selectedColor });
-    setInputValue('');
+    mutate({ dashboardId: boardId, title: inputValue, color: selectedColor });
   };
 
   return (
     <section className="px-[2.8rem] pt-[2.9rem] pb-[2.8rem] bg-white rounded-[0.8rem] w-[62rem]">
       <div className="flex justify-between ">
-        <h2 className="font-bold text-black_333236 mb-[32px] text-[2rem] font-['Pretendard-700']">
+        <h1 className="font-bold text-black_333236 mb-[32px] text-[2rem] font-['Pretendard-700']">
           비브리지
-        </h2>
+        </h1>
         <ColorSelector
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
