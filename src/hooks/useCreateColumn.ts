@@ -1,14 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { boardIdAtom, modalAtom } from 'src/store/store';
+import { useSetAtom } from 'jotai';
+import { modalAtom } from 'src/store/store';
 import { createColumn } from 'src/apis/createColumn';
 import readColumnList from 'src/apis/readColumnList';
 import { ColumnData } from 'src/types/columnTypes';
+import { useParams } from 'react-router-dom';
 
 export default function useCreateColumn() {
   const [value, setValue] = useState('');
-  const boardId = useAtomValue(boardIdAtom);
+  const { boardId } = useParams();
   const queryClient = useQueryClient();
   const setModalState = useSetAtom(modalAtom);
 
@@ -16,6 +17,7 @@ export default function useCreateColumn() {
     queryKey: ['readColumnList', boardId],
     queryFn: readColumnList
   });
+
   const { mutateAsync: createColumnMutation } = useMutation({
     mutationFn: createColumn,
     onSuccess: () => {

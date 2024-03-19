@@ -1,32 +1,41 @@
+import useDeleteColumn from 'src/hooks/useManageColumn';
+import Button from 'src/components/Buttons/Button';
 import ModalResetButton from '../../Buttons/ModalResetButton';
-import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
+import LabelAndInput from '../LabelAndInput/LabelAndInput';
 
 export default function ManageColumn() {
+  const { inputValue, setValue, handleClick, handleSubmit } = useDeleteColumn();
+
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
         컬럼 관리
       </h2>
-      <form className="flex flex-col">
-        <label
-          className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
-          htmlFor="inputId"
-        >
-          이름
-        </label>
-        <input
-          className="w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none placeholder:text-[#333236] text-[1.6rem]"
-          id="InputId"
+      <form className="flex flex-col" onSubmit={handleSubmit}>
+        <LabelAndInput
+          title="이름"
           type="text"
+          id="name"
           placeholder="Done"
+          value={inputValue}
+          setValue={setValue}
         />
         <div className="flex justify-between">
-          <span className="underline text-[1.4rem] text-[#9FA6B2] flex items-end cursor-pointer">
+          <button
+            className="underline text-[1.4rem] text-[#9FA6B2] flex items-end cursor-pointer"
+            onClick={handleClick}
+          >
             삭제하기
-          </span>
+          </button>
           <div className="flex gap-3">
             <ModalResetButton>취소</ModalResetButton>
-            <ModalSubmitButton>변경</ModalSubmitButton>
+            <Button
+              variant="primary"
+              type="submit"
+              customStyles="w-[12rem] h-[4.8rem] rounded-[0.8rem] font-medium text-[1.6rem]"
+            >
+              변경
+            </Button>
           </div>
         </div>
       </form>

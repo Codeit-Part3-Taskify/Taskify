@@ -19,5 +19,3 @@ export const modalAtom = atom<{
   columnId: 0,
   columnTitle: ''
 });
-
-export const boardIdAtom = atom<string | undefined>('');
