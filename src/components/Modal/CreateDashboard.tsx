@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import ModalResetButton from '../Buttons/ModalResetButton';
 import ModalSubmitButton from '../Buttons/ModalSubmitButton';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
 export default function CreateDashBoard() {
+  const [selectedColor, setSelectedColor] = useState('');
+
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
@@ -21,7 +24,10 @@ export default function CreateDashBoard() {
           type="text"
           placeholder="대시보드 이름을 입력하세요."
         />
-        <ColorSelector />
+        <ColorSelector
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+        />
         <div className="flex justify-end gap-[1.2rem] mt-[2.8rem]">
           <ModalResetButton>취소</ModalResetButton>
           <ModalSubmitButton>생성</ModalSubmitButton>
