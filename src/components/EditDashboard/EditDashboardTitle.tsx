@@ -1,11 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import getDashboardDetails from 'src/apis/getDashboardDetails';
-import putDashboardTitle from 'src/apis/putDashboardTitle';
-import { useAtomValue } from 'jotai';
-import { dashboardsAtom } from 'src/store/store';
-import { useMutateDashboardTitle } from 'src/utils/useMutateDashboardTitle';
+import { useEditDashboardtitle } from 'src/hooks/useEditDashboardTitle';
 import Button from '../Buttons/Button';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
@@ -13,31 +8,17 @@ export default function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const { boardId } = useParams();
+  const { dashboardColor, dashboardTitle, mutate, isPending } =
+    useEditDashboardtitle(boardId);
 
-  // 대시보드 데이터 불러오기
-  const { data } = useQuery({
-    queryKey: ['dashboardDetails', boardId],
-    queryFn: () => getDashboardDetails(boardId)
-  });
-
-  const dashboardColor = data?.color ?? '';
-  const dashboardTitle = data?.title ?? '';
-
-  // 받아온 대시보드 데이터로 초기값 설정
   useEffect(() => {
     setSelectedColor(dashboardColor);
     setInputValue(dashboardTitle);
   }, [dashboardColor, dashboardTitle]);
 
-  const { updateDashboardTitle, isPending } = useMutateDashboardTitle(
-    boardId,
-    inputValue,
-    selectedColor
-  );
-
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateDashboardTitle();
+    mutate({ dashboardId: boardId, title: inputValue, color: selectedColor });
   };
 
   return (
