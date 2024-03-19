@@ -1,11 +1,11 @@
 import useManageColumn from 'src/hooks/useManageColumn';
-import Button from 'src/components/Buttons/Button';
+import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import LabelAndInput from '../LabelAndInput/LabelAndInput';
-import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 
 export default function ManageColumn() {
-  const { inputValue, setValue, handleClick, handleSubmit } = useManageColumn();
+  const { inputValue, setInputValue, handleDeleteClick, handleSubmit } =
+    useManageColumn();
 
   return (
     <>
@@ -19,13 +19,13 @@ export default function ManageColumn() {
           id="name"
           placeholder="Done"
           value={inputValue}
-          setValue={setValue}
+          setValue={setInputValue}
         />
         <div className="flex justify-between">
           <button
             type="button"
             className="underline text-[1.4rem] text-[#9FA6B2] flex items-end cursor-pointer"
-            onClick={handleClick}
+            onClick={handleDeleteClick}
           >
             삭제하기
           </button>

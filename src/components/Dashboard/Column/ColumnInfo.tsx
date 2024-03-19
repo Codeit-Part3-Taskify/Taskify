@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import readCardList from 'src/apis/readCardList';
 import purpleCircle from 'src/assets/images/purple-circle.svg';
 import setting from 'src/assets/images/setting.svg';

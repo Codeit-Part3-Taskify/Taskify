@@ -8,7 +8,7 @@ import { deleteColumn } from 'src/apis/deleteColumn';
 export default function useManageColumn() {
   const [modal, setModal] = useAtom(modalAtom);
   const queryClient = useQueryClient();
-  const [inputValue, setValue] = useState(modal.columnTitle);
+  const [inputValue, setInputValue] = useState<string>(modal.columnTitle);
   const { mutateAsync: deleteColumnMutation } = useMutation<
     void,
     Error,
@@ -20,7 +20,6 @@ export default function useManageColumn() {
     }
   });
 
-  // useMutation
   const { mutateAsync: updateColumnMutation } = useMutation<
     void,
     Error,
@@ -32,10 +31,20 @@ export default function useManageColumn() {
     }
   });
 
-  const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    e.preventDefault();
+  const handleDeleteAlertClick = () => {
     deleteColumnMutation({ columnId: modal.columnId });
-    setModal(prev => ({ ...prev, status: false }));
+    setModal(prev => ({
+      ...prev,
+      status: false
+    }));
+  };
+
+  const handleDeleteClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    setModal(prev => ({
+      ...prev,
+      name: 'alertDeleteCard'
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,5 +53,11 @@ export default function useManageColumn() {
     setModal(prev => ({ ...prev, status: false }));
   };
 
-  return { inputValue, setValue, handleClick, handleSubmit };
+  return {
+    inputValue,
+    setInputValue,
+    handleDeleteClick,
+    handleSubmit,
+    handleDeleteAlertClick
+  };
 }

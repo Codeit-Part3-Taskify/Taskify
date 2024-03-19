@@ -1,8 +1,7 @@
 import useCreateColumn from 'src/hooks/useCreateColumn';
-import Button from 'src/components/Buttons/Button';
+import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import LabelAndInput from '../LabelAndInput/LabelAndInput';
-import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 
 export default function CreateColumn() {
   const { handleSubmit, value, setValue } = useCreateColumn();

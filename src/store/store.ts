@@ -12,7 +12,7 @@ export const modalAtom = atom<{
   status: boolean;
   name: ModalType;
   columnId: number;
-  columnTitle: string;
+  columnTitle: ModalType | string;
 }>({
   status: false,
   name: '',
