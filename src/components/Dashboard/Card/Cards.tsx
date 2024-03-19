@@ -12,7 +12,7 @@ interface Props {
 export default function Cards({ columnInfo }: Props) {
   const { data } = useQuery({
     queryKey: ['readCardList', columnInfo.id],
-    queryFn: readCardList
+    queryFn: () => readCardList(columnInfo.id)
   });
 
   return (

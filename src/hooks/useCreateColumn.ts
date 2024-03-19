@@ -5,28 +5,34 @@ import { modalAtom } from 'src/store/store';
 import { createColumn } from 'src/apis/createColumn';
 import readColumnList from 'src/apis/readColumnList';
 import { ColumnData } from 'src/types/columnTypes';
-import { useParams } from 'react-router-dom';
+import { Params, useParams } from 'react-router-dom';
 
 export default function useCreateColumn() {
   const [value, setValue] = useState('');
-  const { boardId } = useParams();
+  const { boardId } = useParams<Params>();
   const queryClient = useQueryClient();
   const setModalState = useSetAtom(modalAtom);
 
   const { data } = useQuery({
     queryKey: ['readColumnList', boardId],
-    queryFn: readColumnList
+    queryFn: () => readColumnList(boardId as string)
   });
 
-  const { mutateAsync: createColumnMutation } = useMutation({
-    mutationFn: createColumn,
+  const { mutateAsync: createColumnMutation } = useMutation<
+    void,
+    Error,
+    {
+      title: string;
+      dashboardId: number;
+    }
+  >({
+    mutationFn: body => createColumn(body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['readColumnList'] });
     }
   });
 
-  // 타입 찾아야함
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     const title = e.target['name'].value;
     const result = data.data.some(

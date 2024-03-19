@@ -10,7 +10,7 @@ export default function Dashboard() {
   const { boardId } = useParams();
   const { data } = useQuery({
     queryKey: ['readColumnList', boardId],
-    queryFn: readColumnList
+    queryFn: () => readColumnList(boardId as string)
   });
   return (
     <main className="flex">

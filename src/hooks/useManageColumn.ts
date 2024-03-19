@@ -5,17 +5,22 @@ import { updateColumn } from 'src/apis/updateColumn';
 import { modalAtom } from 'src/store/store';
 import { deleteColumn } from 'src/apis/deleteColumn';
 
-export default function useDeleteColumn() {
+export default function useManageColumn() {
   const [modal, setModal] = useAtom(modalAtom);
-  const [inputValue, setValue] = useState(modal.columnTitle);
   const queryClient = useQueryClient();
-  const { mutateAsync: deleteColumnMutation } = useMutation({
-    mutationFn: deleteColumn,
+  const [inputValue, setValue] = useState(modal.columnTitle);
+  const { mutateAsync: deleteColumnMutation } = useMutation<
+    void,
+    Error,
+    { columnId: number }
+  >({
+    mutationFn: ({ columnId }) => deleteColumn(columnId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['readColumnList'] });
     }
   });
 
+  // useMutation
   const { mutateAsync: updateColumnMutation } = useMutation<
     void,
     Error,
@@ -29,14 +34,14 @@ export default function useDeleteColumn() {
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
-    deleteColumnMutation(modal.columnId);
+    deleteColumnMutation({ columnId: modal.columnId });
     setModal(prev => ({ ...prev, status: false }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     updateColumnMutation({ value: inputValue, columnId: modal.columnId });
-    queryClient.invalidateQueries({ queryKey: ['readColumnList'] });
+    setModal(prev => ({ ...prev, status: false }));
   };
 
   return { inputValue, setValue, handleClick, handleSubmit };

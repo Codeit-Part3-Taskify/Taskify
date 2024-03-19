@@ -13,7 +13,7 @@ export default function ColumnInfo({ columnInfo }: Props) {
   const setModal = useSetAtom(modalAtom);
   const { data } = useQuery({
     queryKey: ['readCardList', columnInfo.id],
-    queryFn: readCardList
+    queryFn: () => readCardList(columnInfo.id)
   });
   return (
     <section className="flex items-center justify-between">

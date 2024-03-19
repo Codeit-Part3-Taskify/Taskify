@@ -1,10 +1,10 @@
-import useDeleteColumn from 'src/hooks/useManageColumn';
+import useManageColumn from 'src/hooks/useManageColumn';
 import Button from 'src/components/Buttons/Button';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import LabelAndInput from '../LabelAndInput/LabelAndInput';
 
 export default function ManageColumn() {
-  const { inputValue, setValue, handleClick, handleSubmit } = useDeleteColumn();
+  const { inputValue, setValue, handleClick, handleSubmit } = useManageColumn();
 
   return (
     <>
@@ -22,6 +22,7 @@ export default function ManageColumn() {
         />
         <div className="flex justify-between">
           <button
+            type="button"
             className="underline text-[1.4rem] text-[#9FA6B2] flex items-end cursor-pointer"
             onClick={handleClick}
           >
