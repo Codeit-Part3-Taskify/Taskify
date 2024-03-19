@@ -2,6 +2,7 @@ import useCreateColumn from 'src/hooks/useCreateColumn';
 import Button from 'src/components/Buttons/Button';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import LabelAndInput from '../LabelAndInput/LabelAndInput';
+import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 
 export default function CreateColumn() {
   const { handleSubmit, value, setValue } = useCreateColumn();
@@ -21,14 +22,7 @@ export default function CreateColumn() {
         />
         <div className="flex justify-end gap-[1.2rem]">
           <ModalResetButton>취소</ModalResetButton>
-          <Button
-            variant="primary"
-            type="submit"
-            customStyles="w-[12rem] h-[4.8rem] rounded-[0.8rem] font-medium text-[1.6rem]"
-            disabled={!value}
-          >
-            생성
-          </Button>
+          <ModalSubmitButton disabled={!value}>생성</ModalSubmitButton>
         </div>
       </form>
     </>

@@ -1,18 +1,20 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import Button from './Button';
 
 interface ModalSubmitButtonProp {
-  children?: ReactNode;
+  disabled?: boolean;
 }
 
-export default function ModalSubmitButton({ children }: ModalSubmitButtonProp) {
+export default function ModalSubmitButton(
+  props: PropsWithChildren<ModalSubmitButtonProp>
+) {
   return (
     <Button
       variant="primary"
       type="submit"
       customStyles="w-[12rem] h-[4.8rem] rounded-[0.8rem] font-medium text-[1.6rem]"
     >
-      {children}
+      {props.children}
     </Button>
   );
 }

@@ -2,6 +2,7 @@ import useManageColumn from 'src/hooks/useManageColumn';
 import Button from 'src/components/Buttons/Button';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import LabelAndInput from '../LabelAndInput/LabelAndInput';
+import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 
 export default function ManageColumn() {
   const { inputValue, setValue, handleClick, handleSubmit } = useManageColumn();
@@ -30,13 +31,7 @@ export default function ManageColumn() {
           </button>
           <div className="flex gap-3">
             <ModalResetButton>취소</ModalResetButton>
-            <Button
-              variant="primary"
-              type="submit"
-              customStyles="w-[12rem] h-[4.8rem] rounded-[0.8rem] font-medium text-[1.6rem]"
-            >
-              변경
-            </Button>
+            <ModalSubmitButton>변경</ModalSubmitButton>
           </div>
         </div>
       </form>
