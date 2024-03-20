@@ -1,4 +1,6 @@
 import { usePagenationDashboardInvitations } from 'src/hooks/usePagenationDashboardInvitations';
+import { modalAtom } from 'src/store/store';
+import { useSetAtom } from 'jotai';
 import AddBoxIcon from 'src/assets/images/add-box-white.svg';
 import PagenationButtons from '../Buttons/PagenationButtons';
 import InviteList from './Lists/InviteList';
@@ -13,6 +15,7 @@ export default function InvitationSettings() {
     handleForwardButtonClick,
     handleDeleteButtonClick
   } = usePagenationDashboardInvitations();
+  const setModal = useSetAtom(modalAtom);
 
   return (
     <section className=" pt-[2.9rem] pb-[0.4rem] bg-white rounded-[0.8rem] w-[62rem] h-[50rem]">
@@ -34,6 +37,9 @@ export default function InvitationSettings() {
                 src={AddBoxIcon}
                 alt="추가하기 박스 아이콘"
               />
+            }
+            onClick={() =>
+              setModal(() => ({ name: 'inviteMember', status: true }))
             }
           >
             초대하기
