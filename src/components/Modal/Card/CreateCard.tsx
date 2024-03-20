@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
 import LabelAndInput from '../LabelAndInput/LabelAndInput';
 
 export default function CreateCard() {
+  const [value, setValue] = useState('');
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
@@ -14,6 +16,8 @@ export default function CreateCard() {
           type="text"
           id="assigner"
           placeholder="이름을 입력하세요."
+          value={value}
+          setValue={setValue}
         />
         <LabelAndInput
           title="제목"
@@ -21,6 +25,8 @@ export default function CreateCard() {
           id="title"
           placeholder="제목을 입력해 주세요."
           star="*"
+          value={value}
+          setValue={setValue}
         />
         <LabelAndInput
           title="설명"
@@ -28,20 +34,32 @@ export default function CreateCard() {
           id="description"
           placeholder="설명을 입력해 주세요."
           star="*"
+          value={value}
+          setValue={setValue}
         />
         <LabelAndInput
           title="마감일"
           type="datetime-local"
           id="due-date"
           placeholder="날짜를 입력해 주세요."
+          value={value}
+          setValue={setValue}
         />
         <LabelAndInput
           title="태그"
           type="text"
           id="tags"
           placeholder="입력 후 Enter"
+          value={value}
+          setValue={setValue}
         />
-        <LabelAndInput title="이미지" type="file" id="image" />
+        <LabelAndInput
+          title="이미지"
+          type="file"
+          id="image"
+          value={value}
+          setValue={setValue}
+        />
         <div className="flex justify-end gap-[1.2rem]">
           <ModalResetButton>취소</ModalResetButton>
           <ModalSubmitButton>생성</ModalSubmitButton>

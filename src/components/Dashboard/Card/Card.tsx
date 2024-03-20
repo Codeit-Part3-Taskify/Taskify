@@ -24,7 +24,9 @@ export default function Card({ cardData }: Prop) {
   return (
     <button
       className="p-[2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer"
-      onClick={() => setModal(() => ({ name: 'cardDetail', status: true }))}
+      onClick={() =>
+        setModal(prev => ({ ...prev, name: 'cardDetail', status: true }))
+      }
     >
       <h2 className="text-[1.6rem] font-medium text-[#333236] mb-[1rem] text-left">
         {cardData?.title}

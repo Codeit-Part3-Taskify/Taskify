@@ -20,12 +20,12 @@ export interface CardData {
 }
 
 export interface PostCard {
-  assigneeUserId: Number;
-  dashboardId: Number;
-  columnId: Number;
-  title: String;
-  description: String;
-  dueDate: String;
-  tags: String[];
-  imageUrl: String;
+  assigneeUserId: number;
+  dashboardId: number;
+  columnId: number;
+  title: string;
+  description: string;
+  dueDate: string;
+  tags: string[];
+  imageUrl: string;
 }
