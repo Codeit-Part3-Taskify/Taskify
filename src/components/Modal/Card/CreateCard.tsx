@@ -1,68 +1,70 @@
+import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMemberList } from 'src/apis/getMemberList';
-import { useQuery } from '@tanstack/react-query';
 import {
-  Controller,
-  UseFieldArrayProps,
-  useFieldArray,
-  useForm
-} from 'react-hook-form';
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient
+} from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
+import moment from 'moment';
 import { createCard } from 'src/apis/createCard';
 import type { PostCard } from 'src/types/cardTypes';
 import { modalAtom } from 'src/store/store';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
+import ReactDatePicker from 'react-datepicker';
+import calendar from 'src/assets/images/calendar.svg';
+import 'react-datepicker/dist/react-datepicker.css';
 import Profile from 'src/components/Profile/Profile';
 import plusBtn from 'src/assets/images/plus.svg';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
 
-// assigner: '',
-// title: '',
-// description: '',
-// dueDate: '',
-// tags: [],
-// image: null
+const BasicStyle = `w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] p-[1.5rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]`;
 
 export default function CreateCard() {
-  const modal = useAtomValue(modalAtom);
+  const [modal, setModal] = useAtom(modalAtom);
+  const queryClient = useQueryClient();
+
   const { boardId } = useParams();
-  const {
-    register,
-    formState: { errors },
-    watch,
-    reset,
-    control,
-    handleSubmit,
-    getValues,
-    setError,
-    setFocus
-  } = useForm<PostCard>({
+  const { register, setValue, control, handleSubmit } = useForm<PostCard>({
     mode: 'onSubmit',
     defaultValues: {
       dashboardId: Number(boardId),
       columnId: modal.columnId
     }
   });
-  // const { fields, append } = useFieldArray({
-  //   control,
-  //   name: 'tags'
-  // });
   const { data } = useQuery({
     queryKey: ['memberList', boardId],
     queryFn: () => getMemberList(boardId as string)
   });
 
-  const submit = (formData: PostCard) => {
-    createCard({
-      assigneeUserId: formData.assigneeUserId,
-      columnId: modal.columnId,
-      dashboardId: Number(boardId),
-      description: formData.description,
-      dueDate: formData.dueDate,
-      title: formData.title,
-      tags: ['gawe', 'aseg'],
-      imageUrl: undefined
+  const [selecTedDate, setSelectedDate] = useState(new Date());
+
+  const [tagList, setTagList] = useState<string[]>([]);
+  const [tagValue, setTagValue] = useState<string>('');
+  const handleChange = (dateChange: any) => {
+    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD hh:mm'), {
+      shouldDirty: true
     });
+    setSelectedDate(dateChange);
+  };
+  const { mutateAsync: createCardMutation } = useMutation<
+    void,
+    Error,
+    PostCard
+  >({
+    mutationFn: body => createCard(body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['readCardList'] });
+    }
+  });
+
+  const submit = (formData: PostCard) => {
+    setValue('tags', tagList);
+    createCardMutation({ ...formData, imageUrl: undefined });
+    setModal(prev => ({ ...prev, status: false }));
   };
 
   return (
@@ -82,68 +84,114 @@ export default function CreateCard() {
           className="w-[21.7rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]"
           {...register('assigneeUserId', { valueAsNumber: true })}
         >
+          <option value="" hidden>
+            선택해주세요.
+          </option>
           {data?.members.map(member => (
-            <option key={member.userId} value={Number(member.userId)}>
+            <option
+              key={member.userId}
+              value={member.userId}
+              defaultValue={member.userId}
+            >
               {member.nickname}
             </option>
           ))}
         </select>
-        {/* <Controller
-          control={control}
-          name="title"
-          render={({ field, fieldState }) => (
-            <LabelAndInput
-              title="제목"
-              type="text"
-              id="title"
-              placeholder="제목을 입력해 주세요."
-              star="*"
-              {...field} // field 객체에서 제공하는 onChange, onBlur, value를 Input에 전달
-              // error={fieldState.error} // fieldState에서 error 상태를 가져와서 Input에 전달
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="description"
-          render={({ field, fieldState }) => (
-            <LabelAndInput
-              title="설명"
-              type="text"
-              id="description"
-              placeholder="설명을 입력해 주세요."
-              star="*"
-              {...field}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="dueDate"
-          render={({ field: { onBlur, onChange, value }, fieldState }) => (
-            <LabelAndInput
-              title="마감일"
-              type="text"
-              id="due-date"
-              placeholder="날짜를 입력해 주세요."
-              onBlur={onBlur}
-              onChange={onChange}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="tags"
-          render={({ field, fieldState }) => (
-            <LabelAndInput
-              title="태그"
-              type="text"
+
+        <div className="relative flex flex-col">
+          <label
+            className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
+            htmlFor="title"
+          >
+            제목 *
+          </label>
+          <input
+            className={BasicStyle}
+            id="title"
+            placeholder="제목을 입력해 주세요."
+            {...register('title')}
+          />
+        </div>
+
+        <div className="relative flex flex-col">
+          <label
+            className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
+            htmlFor="description"
+          >
+            설명 *
+          </label>
+          <textarea
+            className={`${BasicStyle} h-[9.6rem] resize-none`}
+            id="description"
+            placeholder="설명을 입력해 주세요."
+            {...register('description')}
+          />
+        </div>
+
+        <div className="relative flex flex-col">
+          <label
+            className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
+            htmlFor="due-data"
+          >
+            마감일
+          </label>
+          <Controller
+            control={control}
+            name="dueDate"
+            render={() => (
+              <ReactDatePicker
+                showIcon
+                icon={calendar}
+                className={`${BasicStyle}`}
+                closeOnScroll // 스크롤 하면 선택box 닫히게
+                showTimeSelect // 시간 나오게 하기
+                timeFormat="HH:mm" // 시간 포맷
+                timeIntervals={15} // 15분 단위로 선택 가능한 box가 나옴
+                timeCaption="time"
+                onChange={handleChange}
+                selected={selecTedDate}
+                dateFormat="yyyy-MM-dd hh:mm"
+              />
+            )}
+          />
+        </div>
+        <div className="relative flex flex-col">
+          <label
+            className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
+            htmlFor="tags"
+          >
+            태그
+          </label>
+          <div
+            className={`${BasicStyle} flex overflow-x-scroll overflow-y-hidden items-center`}
+          >
+            <ul className="flex gap-[1rem] overflow-hidden shrink-0">
+              {tagList &&
+                tagList.map((item: any) => {
+                  const key = Math.random();
+                  return <li key={key}>{item}</li>;
+                })}
+            </ul>
+            <input
+              className="outline-none ml-[1rem]"
               id="tags"
-              placeholder="입력 후 Enter"
-              {...field}
+              placeholder="입력 후 엔터."
+              value={tagValue}
+              onChange={e => setTagValue(e.target.value)}
+              onKeyDown={(e: any) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  setTagList(prev => [...prev, tagValue]);
+
+                  const list = [...tagList, e.target.value];
+                  setValue('tags', list);
+                  setTagValue('');
+                }
+              }}
             />
-          )}
-        /> */}
+          </div>
+        </div>
+
         <div className="relative flex flex-col">
           <h2 className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium">
             이미지
