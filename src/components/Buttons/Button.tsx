@@ -7,7 +7,7 @@ interface ButtonProps {
   customStyles?: string; // 추가 스타일(padding, border-radius, width ...)
   isActive?: boolean;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBlur?: () => void;
   // 버튼 내용물
   prefix?: ReactNode;
