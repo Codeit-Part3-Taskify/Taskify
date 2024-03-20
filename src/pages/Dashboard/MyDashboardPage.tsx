@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
+import { Dashboard } from 'src/types/api';
 import { dashboardsAtom } from '../../store/store';
 import DashboardItem from '../../components/Dashboard/DashboardItem';
 
@@ -16,7 +17,7 @@ export default function MyDashboardPage() {
 
   return (
     <>
-      {dashboards.map(dashboard => (
+      {dashboards.map((dashboard: Dashboard) => (
         <DashboardItem key={dashboard.id} dashboard={dashboard} />
       ))}
       <div>초대받은 대시보드</div>

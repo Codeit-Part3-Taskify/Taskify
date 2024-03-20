@@ -4,11 +4,11 @@ import { Dashboard } from '../../types/api';
 
 export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
   const colorVariants: Record<string, string> = {
-    '#7AC555': 'bg-green',
-    '#760DDE': 'bg-purple',
-    '#FFA500': 'bg-orange',
-    '#76A5EA': 'bg-blue',
-    '#E876EA': 'bg-pink'
+    '#7AC555': 'bg-green_7AC555',
+    '#760DDE': 'bg-purple_760DDE',
+    '#FFA500': 'bg-orange_FFA500',
+    '#76A5EA': 'bg-blue_76A5EA',
+    '#E876EA': 'bg-pink_E876EA'
   };
 
   const navLinkStyled =
@@ -22,7 +22,9 @@ export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
       }
     >
       <div
-        className={`${colorVariants[dashboard.color] ?? 'bg-green'} w-[0.8rem] h-[0.8rem] rounded-full`}
+        className={`${
+          colorVariants[dashboard.color] ?? 'bg-green'
+        } w-[0.8rem] h-[0.8rem] rounded-full`}
       />
       <div className="flex items-center gap-[0.4rem] mobile:hidden tablet:flex desktop:gap-[0.6rem]">
         <div className="max-w-[7rem] text-[1.6rem] font-bold text-gray_787486 overflow-hidden text-ellipsis whitespace-nowrap	desktop:max-w-[22rem]">

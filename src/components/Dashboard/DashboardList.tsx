@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
+import { Dashboard } from 'src/types/api';
 import { dashboardsAtom } from '../../store/store';
 import DashboardItem from './DashboardItem';
 
@@ -16,7 +17,7 @@ export default function DashboardList() {
 
   return (
     <div className="flex flex-col items-center gap-[0.3rem] pt-[2.2rem] tablet:mx-[1.2rem]">
-      {dashboards.map(dashboard => (
+      {dashboards.map((dashboard: Dashboard) => (
         <DashboardItem key={dashboard.id} dashboard={dashboard} />
       ))}
     </div>
