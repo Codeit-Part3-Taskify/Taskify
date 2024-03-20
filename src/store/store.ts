@@ -12,8 +12,8 @@ export const dashboardsAtom = atomWithQuery(() => ({
 export const modalAtom = atom<{
   status: boolean;
   name: ModalType;
-  columnId: number;
-  columnTitle: ModalType | string;
+  columnId?: number;
+  columnTitle?: ModalType | string;
 }>({
   status: false,
   name: '',

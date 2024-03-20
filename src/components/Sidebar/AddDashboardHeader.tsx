@@ -20,9 +20,7 @@ export default function AddDashboardHeader() {
           onClick={() =>
             setModal(() => ({
               name: 'createDashboard',
-              status: true,
-              columnId: 0,
-              columnTitle: ''
+              status: true
             }))
           }
           role="presentation"
