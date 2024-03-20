@@ -12,7 +12,9 @@ function App() {
       <Provider>
         <RouterProvider router={router} />
       </Provider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <div className="text-[1.6rem]">
+        <ReactQueryDevtools initialIsOpen={false} />
+      </div>
     </QueryClientProvider>
   );
 }

@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import Button from '../Buttons/Button';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
 export default function EditDashboardTitle() {
+  const [selectedColor, setSelectedColor] = useState('');
+
   return (
     <section className="px-[2.8rem] pt-[2.9rem] pb-[2.8rem] bg-white rounded-[0.8rem] w-[62rem]">
       <div className="flex justify-between ">
         <h2 className="font-bold text-black_333236 mb-[32px] text-[2rem] font-['Pretendard-700']">
           비브리지
         </h2>
-        <ColorSelector />
+        <ColorSelector onColorSelect={setSelectedColor} />
       </div>
       <form className="flex flex-col">
         <label

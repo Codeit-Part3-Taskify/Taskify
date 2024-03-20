@@ -16,7 +16,7 @@ export default function CreateColumn() {
         </label>
         <input
           className="w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none placeholder:text-[#333236] text-[1.6rem]"
-          id="InputId"
+          id="inputId"
           type="text"
           placeholder="새로운 프로젝트"
         />

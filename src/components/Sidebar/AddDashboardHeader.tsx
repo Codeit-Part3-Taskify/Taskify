@@ -23,7 +23,7 @@ export default function AddDashboardHeader() {
       </header>
       {showModal && (
         <Modal onClick={() => setShowModal(false)}>
-          <CreateDashBoard onClick={() => setShowModal(false)} />
+          <CreateDashBoard onClose={() => setShowModal(false)} />
         </Modal>
       )}
     </>

@@ -3,19 +3,19 @@ import Button from './Button';
 
 interface ModalSubmitButtonProp {
   children?: ReactNode;
-  onClick?: () => void;
+  disabled?: boolean;
 }
 
 export default function ModalSubmitButton({
   children,
-  onClick
+  disabled
 }: ModalSubmitButtonProp) {
   return (
     <Button
       variant="primary"
       type="submit"
       customStyles="w-[12rem] h-[4.8rem] rounded-[0.8rem] font-medium text-[1.6rem]"
-      onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </Button>
