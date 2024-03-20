@@ -1,25 +1,29 @@
 import plusBtn from 'src/assets/images/plus.svg';
-import { useState } from 'react';
 
 interface Props {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   title: string;
   type: string;
   id: string;
   star?: string;
+  custom?: string;
   placeholder?: string;
 }
 const basicStyle =
   'w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]';
 export default function LabelAndInput({
+  value,
+  setValue,
   title,
   type,
   id,
+  custom,
   placeholder,
   star
 }: Props) {
-  const [value, setValue] = useState('');
   return (
-    <>
+    <div className="flex flex-col">
       <label
         className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
         htmlFor={id}
@@ -27,7 +31,7 @@ export default function LabelAndInput({
         {title} {star}
       </label>
       <input
-        className={`${basicStyle} ${id === 'image' && 'hidden'}`}
+        className={`${basicStyle} ${custom} ${id === 'image' && 'hidden'}`}
         id={id}
         type={type}
         placeholder={placeholder}
@@ -43,6 +47,6 @@ export default function LabelAndInput({
           <img src={plusBtn} alt="버튼" className="h-[2.8rem] w-[2.8rem]" />
         </label>
       )}
-    </>
+    </div>
   );
 }

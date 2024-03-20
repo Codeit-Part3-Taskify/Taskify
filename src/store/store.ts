@@ -8,7 +8,14 @@ export const dashboardsAtom = atomWithQuery(() => ({
   queryFn: () => getDashboards()
 }));
 
-export const modalAtom = atom<{ status: boolean; name: ModalType }>({
+export const modalAtom = atom<{
+  status: boolean;
+  name: ModalType;
+  columnId: number;
+  columnTitle: ModalType | string;
+}>({
   status: false,
-  name: ''
+  name: '',
+  columnId: 0,
+  columnTitle: ''
 });

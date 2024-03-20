@@ -1,8 +1,14 @@
+
 export interface ColumnData {
-  createdAt: String;
-  dashboardId: Number;
-  id: Number;
-  teamId: String;
-  title: String;
-  updatedAt: String;
+  createdAt: string;
+  dashboardId: number;
+  id: number;
+  teamId: string;
+  title: string;
+  updatedAt: string;
+}
+
+export interface PostColumn {
+  title: string;
+  dashboardId: number;
 }

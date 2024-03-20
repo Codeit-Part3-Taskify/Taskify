@@ -9,7 +9,9 @@ export default function AddCard() {
     <Button
       variant="secondary"
       customStyles="mt-[2.5rem] p-[0.9rem] rounded-[0.6rem]"
-      onClick={() => setModal(() => ({ name: 'createCard', status: true }))}
+      onClick={() =>
+        setModal(prev => ({ ...prev, name: 'createCard', status: true }))
+      }
     >
       <img
         src={plusBtn}
