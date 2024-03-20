@@ -1,13 +1,8 @@
 // 작업중
-
-import { useState } from 'react';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
-import LabelAndInput from '../LabelAndInput/LabelAndInput';
 
 export default function UpdateCard() {
-  const [value, setValue] = useState('');
-
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
@@ -15,14 +10,12 @@ export default function UpdateCard() {
       </h2>
       <form className="flex flex-col">
         <section className="flex justify-between">
-          <LabelAndInput
+          {/* <LabelAndInput
             title="상태"
             type="text"
             id="condition"
             placeholder="상태"
             custom="w-[21.7rem]"
-            value={value}
-            setValue={setValue}
           />
           <LabelAndInput
             title="담당자"
@@ -31,9 +24,7 @@ export default function UpdateCard() {
             placeholder="제목을 입력해 주세요."
             star="*"
             custom="w-[21.7rem]"
-            value={value}
-            setValue={setValue}
-          />
+          /> */}
         </section>
         <label
           className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"

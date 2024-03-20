@@ -1,5 +1,5 @@
 import { PostCard } from 'src/types/cardTypes';
-import axiosInstance from './axiosInstance';
+import axiosInstance from './axios';
 import { Authorization } from './readCardList';
 
 export const createCard = async (body: PostCard) => {

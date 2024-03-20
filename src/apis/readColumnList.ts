@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from './axios';
 import { Authorization } from './readCardList';
 
 const readColumnList = async (boardId: string) => {

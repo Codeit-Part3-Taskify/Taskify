@@ -1,4 +1,4 @@
-import axios from './axiosInstance';
+import axios from './axios';
 import { DashboardsResponse } from '../types/api';
 
 // 임시 토큰

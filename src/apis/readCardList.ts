@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from './axios';
 
 // 임시
 export const Authorization =

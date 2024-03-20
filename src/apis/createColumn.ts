@@ -1,5 +1,5 @@
 import type { PostColumn } from 'src/types/columnTypes';
-import axiosInstance from './axiosInstance';
+import axiosInstance from './axios';
 import { Authorization } from './readCardList';
 
 export const createColumn = async (body: PostColumn) => {
