@@ -21,7 +21,7 @@ export const usePagenationDashboardInvitations = () => {
       deleteDashboardInvitation(boardId, invitationId),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ['invitations', boardId]
       });
     }

@@ -21,7 +21,7 @@ export const usePagenationDashboardMembers = () => {
       deleteDashboardMember(memberId),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ['dashboardMembers', boardId, nowPage]
       });
     }

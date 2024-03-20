@@ -13,7 +13,7 @@ export default function InviteList({
   return (
     <div>
       {invitations?.map((invitation, index) => (
-        <>
+        <div>
           <div
             key={invitation.id}
             className="flex justify-between items-center px-[2.8rem] py-[1.6rem]"
@@ -43,7 +43,7 @@ export default function InviteList({
               />
             </svg>
           )}
-        </>
+        </div>
       ))}
     </div>
   );
