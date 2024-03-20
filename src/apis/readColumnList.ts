@@ -1,5 +1,4 @@
 import axiosInstance from './axiosInstance';
-import { Authorization } from './readCardList';
 
 interface Props {
   queryKey: string | readonly unknown[];
@@ -7,9 +6,7 @@ interface Props {
 
 const readColumnList = async ({ queryKey }: Props) => {
   const boardId = queryKey[1];
-  const { data } = await axiosInstance.get(`columns?dashboardId=${boardId}`, {
-    headers: { Authorization }
-  });
+  const { data } = await axiosInstance.get(`columns?dashboardId=${boardId}`);
   return data;
 };
 

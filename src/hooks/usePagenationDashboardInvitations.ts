@@ -28,9 +28,11 @@ export const usePagenationDashboardInvitations = () => {
   });
 
   useEffect(() => {
-    setAllPage(
-      Math.ceil((data?.totalCount ?? 1) / PAGENATION_SIZE.DASHBOARD.INVITATIONS)
+    const totalCount = data?.totalCount ?? 1;
+    const calculatedAllPage = Math.ceil(
+      totalCount / PAGENATION_SIZE.DASHBOARD.INVITATIONS
     );
+    setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
   }, [data?.totalCount]);
 
   const handleBackwardButtonClick = () => {

@@ -19,9 +19,7 @@ export default function useInviteMember() {
       queryClient.refetchQueries({
         queryKey: ['invitations', boardId]
       });
-    },
-
-    onError: error => alert(error.message)
+    }
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
