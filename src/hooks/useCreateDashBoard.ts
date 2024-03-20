@@ -1,8 +1,10 @@
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { modalAtom } from 'src/store/store';
 import createDashboards from 'src/apis/createDashboards';
+import { Dashboard } from 'src/types/dashboardTypes';
 
 interface NewPost {
   title: string;
@@ -14,11 +16,13 @@ export default function useCreateDashBoard() {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const queryClient = useQueryClient();
   const setModalState = useSetAtom(modalAtom);
+  const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (newPost: NewPost) => createDashboards(newPost),
-    onSuccess: () => {
+    onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: ['dashboards'] });
+      navigate(`/dashboard/${(data as Dashboard).id}`);
     }
   });
 
