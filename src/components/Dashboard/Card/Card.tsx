@@ -23,6 +23,13 @@ export default function Card({ cardData }: Prop) {
         setModal(prev => ({ ...prev, name: 'cardDetail', status: true }))
       }
     >
+      {cardData.imageUrl && (
+        <img
+          src={cardData.imageUrl}
+          alt="이미지"
+          className="w-[27.4rem] h-[16rem] mb-[1rem]"
+        />
+      )}
       <h2 className="text-[1.6rem] font-medium text-[#333236] mb-[1rem] text-left">
         {cardData?.title}
       </h2>
