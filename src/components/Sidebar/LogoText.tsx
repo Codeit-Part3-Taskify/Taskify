@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function LogoText() {
   return (
     <Link to="/">
-      <div className="pb-[3.8rem] cursor-pointer flex items-center justify-center tablet:pb-[6rem] desktop:justify-start">
+      <div className="mb-[3.8rem] cursor-pointer flex items-center justify-center tablet:mb-[6rem] desktop:justify-start">
         <img
           className="w-[2.3rem] h-[2.7rem]"
           src={logo}
