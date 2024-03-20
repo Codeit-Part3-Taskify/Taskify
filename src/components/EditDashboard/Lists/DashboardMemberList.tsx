@@ -1,27 +1,39 @@
 import Profile from 'src/components/Profile/Profile';
 import Button from 'src/components/Buttons/Button';
+import { DashboardMember } from 'src/types/api';
 
-interface DashboardMemberListProps {
-  members: string[];
+interface Props {
+  members: DashboardMember[] | undefined;
+  handleDeleteButtonClick: (memberId: number) => void;
 }
 
 export default function DashboardMemberList({
-  members
-}: DashboardMemberListProps) {
+  members,
+  handleDeleteButtonClick
+}: Props) {
   return (
-    <>
-      {members.map(member => (
-        <>
-          <div className="flex justify-between items-center px-[2.8rem] py-[1.6rem]">
-            <Profile userName={member} />
+    <div>
+      {members?.map((member, index) => (
+        <div>
+          <div
+            key={member.id}
+            className="flex justify-between items-center px-[2.8rem] py-[1.6rem]"
+          >
+            <Profile
+              profileImgSrc={member.profileImageUrl}
+              email={member.email}
+              userName={member.nickname}
+            />
             <Button
               variant="secondary"
+              type="button"
               customStyles="px-[2.9rem] py-[0.7rem] rounded-[0.4rem] text-violet"
+              onClick={() => handleDeleteButtonClick(member.id)}
             >
               삭제
             </Button>
           </div>
-          {member !== members[members.length - 1] && (
+          {index !== members.length - 1 && (
             <svg
               width="100%"
               height="1"
@@ -37,8 +49,8 @@ export default function DashboardMemberList({
               />
             </svg>
           )}
-        </>
+        </div>
       ))}
-    </>
+    </div>
   );
 }

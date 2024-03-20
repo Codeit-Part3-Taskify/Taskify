@@ -1,26 +1,20 @@
-import { useState } from 'react';
 import BackwardIcon from 'src/assets/images/arrow-backward-white.svg';
 import ForwardIcon from 'src/assets/images/arrow-forward-white.svg';
 import Button from './Button';
 
-export default function PagenationButtons() {
-  const [allPage, setAllPage] = useState(10);
-  const [nowPage, setNowPage] = useState(1); // Page 값들은 임시로 만들어 두었습니다. 추후에 api 연동해서 페이지네이션 구현 시 설정해줘야 합니다.
+interface PagenationButtonsProps {
+  allPage: number;
+  nowPage: number;
+  handleBackwardButtonClick: () => void;
+  handleForwardButtonClick: () => void;
+}
 
-  const handleBackwardButtonClick = () => {
-    if (nowPage === 1) {
-      return;
-    }
-    setNowPage(nowPage - 1);
-  };
-
-  const handleForwardButtonClick = () => {
-    if (nowPage === allPage) {
-      return;
-    }
-    setNowPage(nowPage + 1);
-  };
-
+export default function PagenationButtons({
+  allPage,
+  nowPage,
+  handleBackwardButtonClick,
+  handleForwardButtonClick
+}: PagenationButtonsProps) {
   return (
     <div className="flex items-center gap-[1.6rem]">
       <span className="text-[1.6rem]">
