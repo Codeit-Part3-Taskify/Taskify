@@ -4,6 +4,7 @@ import MyPage from '../pages/MyPage/MyPage';
 import Dashboard from '../pages/Dashboard/DashboardPage';
 import MyDashboardPage from '../pages/Dashboard/MyDashboardPage';
 import EditDashboardPage from '../pages/EditDashboard/EditDashboardPage';
+import LogIn from '../pages/LogIn/LogIn';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         element: <EditDashboardPage />
       }
     ]
+  },
+  {
+    path: '/login',
+    element: <LogIn />
   }
 ]);
 
