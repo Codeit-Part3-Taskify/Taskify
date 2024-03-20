@@ -1,38 +1,34 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import CheckIcon from 'src/assets/images/check.svg';
 
 interface ColorSelectorProps {
-  onColorSelect: (color: string) => void;
+  selectedColor: string;
+  setSelectedColor: Dispatch<SetStateAction<string>>;
 }
 
-type Color = 'green' | 'purple' | 'orange' | 'blue' | 'pink';
-
-const colors: Record<Color, string> = {
-  green: '#7AC555',
-  purple: '#760DDE',
-  orange: '#FFA500',
-  blue: '#76A5EA',
-  pink: '#E876EA'
-};
-
-export default function ColorSelector({ onColorSelect }: ColorSelectorProps) {
-  const [selectedColor, setSelectedColor] = useState('#7AC555');
-
-  const handleColorSelect = (hex: string) => {
-    setSelectedColor(hex);
-    onColorSelect(hex);
+export default function ColorSelector({
+  selectedColor,
+  setSelectedColor
+}: ColorSelectorProps) {
+  const colors = ['#7AC555', '#760DDE', '#FFA500', '#76A5EA', '#E876EA'];
+  const colorVariants: Record<string, string> = {
+    '#7AC555': 'bg-green_7AC555',
+    '#760DDE': 'bg-purple_760DDE',
+    '#FFA500': 'bg-orange_FFA500',
+    '#76A5EA': 'bg-blue_76A5EA',
+    '#E876EA': 'bg-pink_E876EA'
   };
 
   return (
     <div className="flex gap-4">
-      {Object.entries(colors).map(([color, hex]) => (
+      {colors.map(color => (
         <button
           key={color}
-          className={`bg-${color} w-[3rem] h-[3rem] rounded-full flex justify-center items-center`}
-          onClick={() => handleColorSelect(hex)}
+          className={`${colorVariants[color]} w-[3rem] h-[3rem] rounded-full flex justify-center items-center`}
+          onClick={() => setSelectedColor(color)}
           type="button"
         >
-          {selectedColor === `${hex}` ? (
+          {selectedColor === `${color}` ? (
             <img width={24} height={24} src={CheckIcon} alt="체크 아이콘" />
           ) : null}
         </button>

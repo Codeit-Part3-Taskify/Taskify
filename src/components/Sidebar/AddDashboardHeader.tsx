@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useSetAtom } from 'jotai';
+import { modalAtom } from 'src/store/store';
 import addBox from 'src/assets/images/add-box.svg';
 import Modal from '../Layout/Modal';
-import CreateDashBoard from '../Modal/CreateDashboard';
 
 export default function AddDashboardHeader() {
-  const [showModal, setShowModal] = useState(false);
+  const setModal = useSetAtom(modalAtom);
 
   return (
     <>
+      <Modal />
       <header className="flex items-center justify-center desktop:justify-between">
         <span className="font-bold text-gray_787486 text-[1.2rem] pr-[2.4rem] mobile:hidden tablet:inline">
           Dash Boards
@@ -16,16 +17,17 @@ export default function AddDashboardHeader() {
           className="w-[2rem] h-[2rem] cursor-pointer"
           src={addBox}
           alt="대시보드 추가 버튼"
-          onClick={() => setShowModal(true)}
-          onKeyDown={() => setShowModal(true)}
+          onClick={() =>
+            setModal(() => ({
+              name: 'createDashboard',
+              status: true,
+              columnId: 0,
+              columnTitle: ''
+            }))
+          }
           role="presentation"
         />
       </header>
-      {showModal && (
-        <Modal onClick={() => setShowModal(false)}>
-          <CreateDashBoard onClose={() => setShowModal(false)} />
-        </Modal>
-      )}
     </>
   );
 }

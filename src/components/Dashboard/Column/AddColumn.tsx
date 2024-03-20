@@ -1,7 +1,10 @@
 import plusBtn from 'src/assets/images/plus.svg';
-import Button from '../Buttons/Button';
+import { useSetAtom } from 'jotai';
+import { modalAtom } from 'src/store/store';
+import Button from '../../Buttons/Button';
 
 export default function AddColumn() {
+  const setModal = useSetAtom(modalAtom);
   return (
     <Button
       variant="secondary"
@@ -12,6 +15,9 @@ export default function AddColumn() {
           alt="더하기 버튼"
           className="w-[2.2rem] h-[2.2rem] bg-[#F1EFFD] rounded"
         />
+      }
+      onClick={() =>
+        setModal(prev => ({ ...prev, name: 'createColumn', status: true }))
       }
     >
       <span className="text-[1.8rem] font-bold">새로운 컬럼 추가하기</span>

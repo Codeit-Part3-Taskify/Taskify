@@ -1,16 +1,14 @@
-import { AxiosError, AxiosResponse } from 'axios';
 import axiosInstance from './axiosInstance';
 
 // 임시
-const Authorization =
-  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI2NCwidGVhbUlkIjoiMy01IiwiaWF0IjoxNzEwNDkxNzU2LCJpc3MiOiJzcC10YXNraWZ5In0.ok4Qv3OQeQzq_R6wJf2upY44DE4wa2EIvf6e3ix7iMY';
+export const Authorization =
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI3NCwidGVhbUlkIjoiMy01IiwiaWF0IjoxNzEwNTA5OTgzLCJpc3MiOiJzcC10YXNraWZ5In0.bs7A-8tp8FT9PcL1uIvbSQEJJpKEesjHZc8z280ZtCk';
 
-const readCardList = async () => {
-  const data = await axiosInstance
-    .get('cards?columnId=16331', {
-      headers: { Authorization }
-    })
-    .then(res => res.data);
+// react-query과 관련이 없도록 사용
+const readCardList = async (columnId: number) => {
+  const { data } = await axiosInstance.get(`cards?columnId=${columnId}`, {
+    headers: { Authorization }
+  });
   return data;
 };
 

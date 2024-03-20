@@ -1,4 +1,5 @@
 import useDashboardList from 'src/hooks/useDashboardList';
+import { Dashboard } from 'src/types/dashboardTypes';
 import DashboardItem from '../../components/Dashboard/DashboardItem';
 
 export default function MyDashboardPage() {
@@ -6,7 +7,7 @@ export default function MyDashboardPage() {
 
   return (
     <>
-      {dashboards.map(dashboard => (
+      {dashboards.map((dashboard: Dashboard) => (
         <DashboardItem key={dashboard.id} dashboard={dashboard} />
       ))}
       <div>초대받은 대시보드</div>

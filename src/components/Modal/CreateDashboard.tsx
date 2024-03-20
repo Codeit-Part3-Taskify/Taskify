@@ -1,25 +1,23 @@
 import { FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
+import { modalAtom } from 'src/store/store';
 import createDashboards from 'src/apis/createDashboards';
 import ModalResetButton from '../Buttons/ModalResetButton';
 import ModalSubmitButton from '../Buttons/ModalSubmitButton';
 import ColorSelector from '../ColorSelector/ColorSelector';
-
-interface CreateDashBoardProps {
-  onClose: () => void;
-}
 
 interface NewPost {
   title: string;
   color: string;
 }
 
-export default function CreateDashBoard({ onClose }: CreateDashBoardProps) {
-  // TODO
-  // usehooks로 빼기
+export default function CreateDashBoard() {
+  // TODO usehooks로 빼기
   const [selectedColor, setSelectedColor] = useState('#7AC555');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const queryClient = useQueryClient();
+  const setModalState = useSetAtom(modalAtom);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (newPost: NewPost) => createDashboards(newPost),
@@ -43,7 +41,7 @@ export default function CreateDashBoard({ onClose }: CreateDashBoardProps) {
     };
     mutate(newPost, {
       onSuccess: () => {
-        onClose();
+        setModalState(prev => ({ ...prev, status: false }));
       }
     });
   };
@@ -69,11 +67,16 @@ export default function CreateDashBoard({ onClose }: CreateDashBoardProps) {
           placeholder="대시보드 이름을 입력하세요."
         />
         {errorMessage && (
-          <p className="text-red text-[1.6rem] py-[1rem]">{errorMessage}</p>
+          <p className="text-red_D6173A text-[1.6rem] py-[1rem]">
+            {errorMessage}
+          </p>
         )}
-        <ColorSelector onColorSelect={setSelectedColor} />
+        <ColorSelector
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+        />
         <div className="flex justify-end gap-[1.2rem] mt-[2.8rem]">
-          <ModalResetButton onClick={onClose}>취소</ModalResetButton>
+          <ModalResetButton>취소</ModalResetButton>
           <ModalSubmitButton disabled={isPending}>생성</ModalSubmitButton>
         </div>
       </form>

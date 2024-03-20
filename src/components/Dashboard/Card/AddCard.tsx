@@ -1,11 +1,17 @@
+import { useSetAtom } from 'jotai';
 import plusBtn from 'src/assets/images/plus.svg';
-import Button from '../Buttons/Button';
+import { modalAtom } from 'src/store/store';
+import Button from '../../Buttons/Button';
 
 export default function AddCard() {
+  const setModal = useSetAtom(modalAtom);
   return (
     <Button
       variant="secondary"
       customStyles="mt-[2.5rem] p-[0.9rem] rounded-[0.6rem]"
+      onClick={() =>
+        setModal(prev => ({ ...prev, name: 'createCard', status: true }))
+      }
     >
       <img
         src={plusBtn}
