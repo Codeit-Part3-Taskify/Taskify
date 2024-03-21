@@ -20,7 +20,13 @@ export default function Card({ cardData }: Prop) {
     <button
       className="p-[2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer"
       onClick={() =>
-        setModal(prev => ({ ...prev, name: 'cardDetail', status: true }))
+        setModal(prev => ({
+          ...prev,
+          name: 'updateCard',
+          status: true,
+          cardId: cardData.id,
+          columnId: cardData.columnId
+        }))
       }
     >
       {cardData.imageUrl && (

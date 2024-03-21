@@ -1,22 +1,17 @@
-import { useRef, useState } from 'react';
+import { BaseSyntheticEvent, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMemberList } from 'src/apis/getMemberList';
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient
-} from '@tanstack/react-query';
-import { Controller, useForm } from 'react-hook-form';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Controller, NativeFieldValue, useForm } from 'react-hook-form';
 import moment from 'moment';
 import { createCard } from 'src/apis/createCard';
 import type { PostCard } from 'src/types/cardTypes';
 import { modalAtom } from 'src/store/store';
-import { useAtom, useAtomValue } from 'jotai';
+import { uploadCardImage } from 'src/apis/uploadCardImage';
+import { useAtom } from 'jotai';
 import ReactDatePicker from 'react-datepicker';
 import calendar from 'src/assets/images/calendar.svg';
 import 'react-datepicker/dist/react-datepicker.css';
-import Profile from 'src/components/Profile/Profile';
 import plusBtn from 'src/assets/images/plus.svg';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
@@ -26,7 +21,6 @@ const BasicStyle = `w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rou
 export default function CreateCard() {
   const [modal, setModal] = useAtom(modalAtom);
   const queryClient = useQueryClient();
-
   const { boardId } = useParams();
   const { register, setValue, control, handleSubmit } = useForm<PostCard>({
     mode: 'onSubmit',
@@ -39,12 +33,10 @@ export default function CreateCard() {
     queryKey: ['memberList', boardId],
     queryFn: () => getMemberList(boardId as string)
   });
-
   const [selecTedDate, setSelectedDate] = useState(new Date());
-
   const [tagList, setTagList] = useState<string[]>([]);
   const [tagValue, setTagValue] = useState<string>('');
-  const handleChange = (dateChange: any) => {
+  const handleChange = (dateChange: Date) => {
     setValue('dueDate', moment(dateChange).format('yyyy-MM-DD hh:mm'), {
       shouldDirty: true
     });
@@ -61,12 +53,21 @@ export default function CreateCard() {
     }
   });
 
-  const submit = (formData: PostCard) => {
-    setValue('tags', tagList);
-    createCardMutation({ ...formData, imageUrl: undefined });
+  const submit = async (formData: PostCard) => {
+    const { imageUrl } = await uploadCardImage(
+      modal.columnId,
+      formData.imageUrl
+    );
+    await createCardMutation({ ...formData, imageUrl });
     setModal(prev => ({ ...prev, status: false }));
   };
 
+  const [imageValue, setImageValue] = useState('');
+  const onChangeImage = (event: BaseSyntheticEvent) => {
+    const imgUrl = URL.createObjectURL(event.target.files[0]);
+    setImageValue(imgUrl);
+    setValue('imageUrl', event.target.files[0]);
+  };
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
@@ -167,7 +168,7 @@ export default function CreateCard() {
           >
             <ul className="flex gap-[1rem] overflow-hidden shrink-0">
               {tagList &&
-                tagList.map((item: any) => {
+                tagList.map(item => {
                   const key = Math.random();
                   return <li key={key}>{item}</li>;
                 })}
@@ -178,6 +179,7 @@ export default function CreateCard() {
               placeholder="입력 후 엔터."
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
+              // 타입 찾아야 함
               onKeyDown={(e: any) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
@@ -196,17 +198,28 @@ export default function CreateCard() {
           <h2 className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium">
             이미지
           </h2>
-          <label
-            htmlFor="image"
-            className="w-[76px] h-[76px] p-6 bg-neutral-100 rounded-md justify-center items-center inline-flex"
-          >
-            <img src={plusBtn} alt="버튼" className="h-[2.8rem] w-[2.8rem]" />
-          </label>
+          {imageValue ? (
+            <label htmlFor="image">
+              <img
+                src={imageValue}
+                alt="imageValue"
+                className="w-[7.6rem] h-[7.6rem]"
+              />
+            </label>
+          ) : (
+            <label
+              htmlFor="image"
+              className="w-[7.6rem] h-[7.6rem] p-6 bg-neutral-100 rounded-md justify-center items-center inline-flex"
+            >
+              <img src={plusBtn} alt="버튼" className="h-[2.8rem] w-[2.8rem]" />
+            </label>
+          )}
           <input
             type="file"
             id="image"
             className="hidden"
             {...register('imageUrl')}
+            onChange={onChangeImage}
           />
         </div>
         <div className="flex justify-end gap-[1.2rem]">

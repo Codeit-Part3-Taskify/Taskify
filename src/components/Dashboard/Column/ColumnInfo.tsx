@@ -30,7 +30,8 @@ export default function ColumnInfo({ columnInfo }: Props) {
       </div>
       <button
         onClick={() =>
-          setModal(() => ({
+          setModal(prev => ({
+            ...prev,
             name: 'manageColumn',
             status: true,
             columnId: columnInfo.id,

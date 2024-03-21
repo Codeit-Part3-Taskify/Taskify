@@ -26,6 +26,6 @@ export interface PostCard {
   title: string;
   description: string;
   dueDate?: string;
-  tags?: string[];
-  imageUrl?: string;
+  tags: string[];
+  imageUrl?: any;
 }
