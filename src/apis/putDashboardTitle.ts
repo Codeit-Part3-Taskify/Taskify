@@ -1,6 +1,5 @@
-import axios, { AxiosError } from 'axios';
 import axiosInstance from 'src/apis/axiosInstance';
-import { Dashboard } from 'src/types/api';
+import { Dashboard } from 'src/types/dashboardTypes';
 
 // 임시 토큰
 const accessToken =
