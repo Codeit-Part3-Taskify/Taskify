@@ -4,8 +4,11 @@ import EditDashboardMembers from 'src/components/EditDashboard/EditDashboardMemb
 import InvitationSettings from 'src/components/EditDashboard/InvitationSettings';
 import Button from 'src/components/Buttons/Button';
 import Modal from 'src/components/Layout/Modal';
+import useDeleteDashboard from 'src/hooks/useDeleteDashboard';
 
 export default function EditDashboardPage() {
+  const { handleDashboardDeleteButtonClick } = useDeleteDashboard();
+
   return (
     <main className="mt-[2rem] ml-[2rem]">
       <Modal />
@@ -18,6 +21,7 @@ export default function EditDashboardPage() {
           variant="ghost"
           type="button"
           customStyles="w-[32rem] h-[6.2rem] mt-[2.8rem] text-[1.8rem] rounded-[0.8rem] font-medium"
+          onClick={handleDashboardDeleteButtonClick}
         >
           대시보드 삭제하기
         </Button>

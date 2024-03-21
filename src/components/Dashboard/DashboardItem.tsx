@@ -16,7 +16,8 @@ export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
     >
       <div
         className={`${
-          COLOR_VARIANTS[dashboard.color] ?? 'bg-green'
+          COLOR_VARIANTS[dashboard.color as keyof typeof COLOR_VARIANTS] ??
+          'bg-green'
         } w-[0.8rem] h-[0.8rem] rounded-full`}
       />
       <div className="flex items-center gap-[0.4rem] mobile:hidden tablet:flex desktop:gap-[0.6rem]">

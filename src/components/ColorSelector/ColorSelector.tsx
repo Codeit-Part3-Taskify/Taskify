@@ -18,7 +18,9 @@ export default function ColorSelector({
       {colors.map(color => (
         <button
           key={color}
-          className={`${COLOR_VARIANTS[color]} w-[3rem] h-[3rem] rounded-full flex justify-center items-center`}
+          className={`${
+            COLOR_VARIANTS[color as keyof typeof COLOR_VARIANTS]
+          } w-[3rem] h-[3rem] rounded-full flex justify-center items-center`}
           onClick={() => setSelectedColor(color)}
           type="button"
         >
