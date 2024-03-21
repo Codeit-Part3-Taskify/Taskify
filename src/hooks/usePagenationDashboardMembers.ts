@@ -16,7 +16,7 @@ export const usePagenationDashboardMembers = () => {
     queryFn: () => getDashboardMembers(boardId, nowPage)
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ memberId }: { memberId: number }) =>
       deleteDashboardMember(memberId),
 
@@ -50,7 +50,7 @@ export const usePagenationDashboardMembers = () => {
   };
 
   const handleDeleteButtonClick = (memberId: number) => {
-    if (isLoading) {
+    if (isPending) {
       return;
     }
     mutate({ memberId });

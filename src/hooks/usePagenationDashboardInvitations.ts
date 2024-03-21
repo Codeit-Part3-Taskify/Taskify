@@ -16,7 +16,7 @@ export const usePagenationDashboardInvitations = () => {
     queryFn: () => getDashboardInvitations(boardId, nowPage)
   });
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ invitationId }: { invitationId: number }) =>
       deleteDashboardInvitation(boardId, invitationId),
 
@@ -50,7 +50,7 @@ export const usePagenationDashboardInvitations = () => {
   };
 
   const handleDeleteButtonClick = (invitationId: number) => {
-    if (isLoading) {
+    if (isPending) {
       return;
     }
     mutate({ invitationId });
