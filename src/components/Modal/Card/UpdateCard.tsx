@@ -28,14 +28,10 @@ export default function updateCard() {
   const { register, setValue, control, handleSubmit, getValues } =
     useForm<PostCard>({
       mode: 'onSubmit'
-      //   title: cardQueryData?.title,
-      //   description: cardQueryData?.description,
-      //   dueDate: cardQueryData?.dueDate,
-      //   tags: cardQueryData?.tags,
-      //   imageUrl: cardQueryData?.imageUrl
     });
   const [tagList, setTagList] = useState<PostCard['tags']>([]);
   const [imageValue, setImageValue] = useState<PostCard['imageUrl']>();
+
   useQuery<CardData>({
     queryKey: ['readCardDetail', modal.cardId],
     queryFn: async () => {
@@ -61,11 +57,9 @@ export default function updateCard() {
           setValue(key, value);
         }
       }
-      console.log(getValues());
       return cardData;
     }
   });
-  // setValue(cardData);
 
   const query = useQuery({
     queryKey: ['readColumnList', boardId],
@@ -82,13 +76,6 @@ export default function updateCard() {
 
   const [tagValue, setTagValue] = useState<string>('');
 
-  const deleteTag = (e: any) => {
-    // setTagList(
-    //   tagList?.map(tag => {
-    //     if (tag !== e.target.value) return tag;
-    //   })
-    // );
-  };
   const handleChange = (dateChange: Date) => {
     setValue('dueDate', moment(dateChange).format('yyyy-MM-DD hh:mm'));
     setSelectedDate(dateChange);
@@ -105,6 +92,12 @@ export default function updateCard() {
     }
   });
 
+  const onChangeImage = (event: BaseSyntheticEvent) => {
+    const imgUrl = URL.createObjectURL(event.target.files[0]);
+    setImageValue(imgUrl);
+    setValue('imageUrl', event.target.files[0]);
+  };
+
   const submit = async (formData: PostCard) => {
     const { imageUrl } = await uploadCardImage(
       modal.columnId,
@@ -113,11 +106,6 @@ export default function updateCard() {
     const body = { ...formData, imageUrl };
     await updateCardMutation({ cardId: modal.cardId, body });
     setModal(prev => ({ ...prev, status: false }));
-  };
-  const onChangeImage = (event: BaseSyntheticEvent) => {
-    const imgUrl = URL.createObjectURL(event.target.files[0]);
-    setImageValue(imgUrl);
-    setValue('imageUrl', event.target.files[0]);
   };
 
   return (
@@ -141,7 +129,7 @@ export default function updateCard() {
             >
               {query.data.data.map((board: ColumnData) => (
                 <option key={board.id} value={board.id}>
-                  {board.title} {board.id}
+                  {board.title}
                 </option>
               ))}
             </select>
@@ -238,11 +226,7 @@ export default function updateCard() {
               {tagList &&
                 tagList.map(item => {
                   const key = Math.random();
-                  return (
-                    <button key={key} type="button" onClick={deleteTag}>
-                      <li>{item}</li>
-                    </button>
-                  );
+                  return <li key={key}>{item}</li>;
                 })}
             </ul>
             <input
@@ -256,7 +240,6 @@ export default function updateCard() {
                 if (e.key === 'Enter') {
                   e.preventDefault();
                   setTagList(prev => [...(prev as any), tagValue]);
-
                   const list = [...(tagList as any), e.target.value];
                   setValue('tags', list);
                   setTagValue('');
