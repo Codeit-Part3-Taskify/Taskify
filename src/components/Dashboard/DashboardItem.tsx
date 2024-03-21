@@ -1,16 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import crown from 'src/assets/images/crown.svg';
+import { COLOR_VARIANTS } from 'src/constants/colors';
 import { Dashboard } from '../../types/dashboardTypes';
 
 export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
-  const colorVariants: Record<string, string> = {
-    '#7AC555': 'bg-green_7AC555',
-    '#760DDE': 'bg-purple_760DDE',
-    '#FFA500': 'bg-orange_FFA500',
-    '#76A5EA': 'bg-blue_76A5EA',
-    '#E876EA': 'bg-pink_E876EA'
-  };
-
   const navLinkStyled =
     'w-[4rem] h-[4rem] rounded-[0.4rem] flex justify-center items-center cursor-pointer tablet:gap-[1.6rem] tablet:w-[13.4rem] tablet:h-[4.3rem] tablet:justify-start tablet:pl-[1rem] desktop:w-[27.6rem] desktop:h-[4.5rem] desktop:pl-[1.2rem]';
 
@@ -23,7 +16,8 @@ export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
     >
       <div
         className={`${
-          colorVariants[dashboard.color] ?? 'bg-green'
+          COLOR_VARIANTS[dashboard.color as keyof typeof COLOR_VARIANTS] ??
+          'bg-green'
         } w-[0.8rem] h-[0.8rem] rounded-full`}
       />
       <div className="flex items-center gap-[0.4rem] mobile:hidden tablet:flex desktop:gap-[0.6rem]">

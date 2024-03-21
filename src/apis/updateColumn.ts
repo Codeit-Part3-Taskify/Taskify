@@ -1,15 +1,8 @@
 import axiosInstance from './axiosInstance';
-import { Authorization } from './readCardList';
 
 export const updateColumn = async (value: string, columnId: number) => {
-  const { data } = await axiosInstance.put(
-    `/columns/${columnId}`,
-    {
-      title: value
-    },
-    {
-      headers: { Authorization }
-    }
-  );
+  const { data } = await axiosInstance.put(`/columns/${columnId}`, {
+    title: value
+  });
   return data;
 };

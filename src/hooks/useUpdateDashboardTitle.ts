@@ -4,16 +4,13 @@ import putDashboardTitle from 'src/apis/putDashboardTitle';
 import { useAtomValue } from 'jotai';
 import { dashboardsAtom } from 'src/store/store';
 
-export const useEditDashboardtitle = (boardId: string | undefined) => {
+export const useUpdateDashboardTitle = (boardId: string | undefined) => {
   const queryClient = useQueryClient();
   const { refetch } = useAtomValue(dashboardsAtom);
   const { data } = useQuery({
     queryKey: ['dashboardDetails', boardId],
     queryFn: () => getDashboardDetails(boardId)
   });
-
-  const dashboardColor = data?.color ?? '';
-  const dashboardTitle = data?.title ?? '';
 
   const refreshDashboards = async () => {
     await refetch();
@@ -35,12 +32,13 @@ export const useEditDashboardtitle = (boardId: string | undefined) => {
         queryKey: ['dashboardDetails', boardId]
       });
       refreshDashboards();
-    }
+    },
+
+    onError: error => alert(error.message)
   });
 
   return {
-    dashboardColor,
-    dashboardTitle,
+    data,
     mutate,
     isPending
   };

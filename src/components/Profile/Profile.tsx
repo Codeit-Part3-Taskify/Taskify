@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 interface ProfileProps {
-  profileImgSrc?: string;
+  profileImgSrc?: string | null;
   email?: string;
   userName?: string;
 }
@@ -12,7 +12,7 @@ export default function Profile({
   userName = '코드잇'
 }: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
-  const firstLetterOfEmail = email?.charAt(0);
+  const firstLetterOfEmail = email?.charAt(0).toUpperCase();
 
   useEffect(() => {
     // profileImgSrc 없을 시 랜덤 배경색
@@ -40,7 +40,7 @@ export default function Profile({
             <div
               className={`${randomBgColor} rounded-full w-[3.8rem] h-[3.8rem]`}
             />
-            <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-[1.6rem] font-semibold">
+            <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-[1.6rem] font-semibold text-white">
               {firstLetterOfEmail}
             </span>
           </>
