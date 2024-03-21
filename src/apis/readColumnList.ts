@@ -1,10 +1,7 @@
-import axiosInstance from './axios';
-import { Authorization } from './readCardList';
+import axiosInstance from './axiosInstance';
 
 const readColumnList = async (boardId: string) => {
-  const { data } = await axiosInstance.get(`columns?dashboardId=${boardId}`, {
-    headers: { Authorization }
-  });
+  const { data } = await axiosInstance.get(`columns?dashboardId=${boardId}`);
   return data;
 };
 

@@ -1,8 +1,8 @@
-import { BaseSyntheticEvent, useRef, useState } from 'react';
+import { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMemberList } from 'src/apis/getMemberList';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Controller, NativeFieldValue, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import moment from 'moment';
 import { createCard } from 'src/apis/createCard';
 import type { PostCard } from 'src/types/cardTypes';
@@ -53,23 +53,26 @@ export default function CreateCard() {
     }
   });
 
+  const [imageValue, setImageValue] = useState('');
+
+  const onChangeImage = (event: BaseSyntheticEvent) => {
+    setImageValue(URL.createObjectURL(event.target.files[0]));
+    setValue('imageUrl', event.target.files[0]);
+    console.log(imageValue);
+  };
+
   const submit = async (formData: PostCard) => {
     const { imageUrl } = await uploadCardImage(
       modal.columnId,
       formData.imageUrl
     );
-    await createCardMutation({ ...formData, imageUrl });
-    setModal(prev => ({ ...prev, status: false }));
-  };
-
-  const [imageValue, setImageValue] = useState('');
-  const onChangeImage = (event: BaseSyntheticEvent) => {
-    const imgUrl = URL.createObjectURL(event.target.files[0]);
-    setImageValue(imgUrl);
-    setValue('imageUrl', event.target.files[0]);
+    console.log(imageUrl);
+    // await createCardMutation({ ...formData, imageUrl });
+    // setModal(prev => ({ ...prev, status: false }));
   };
   return (
     <>
+      <h2 className="text-black_000000 text-8xl">{imageValue}</h2>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
         할 일 생성
       </h2>
@@ -78,7 +81,7 @@ export default function CreateCard() {
           className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
           htmlFor="assigner"
         >
-          담당자
+          담당자 *
         </label>
         <select
           id="assigner"

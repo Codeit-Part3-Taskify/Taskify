@@ -65,6 +65,7 @@ export default function updateCard() {
     queryKey: ['readColumnList', boardId],
     queryFn: () => readColumnList(boardId as string)
   });
+
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
@@ -99,6 +100,7 @@ export default function updateCard() {
   };
 
   const submit = async (formData: PostCard) => {
+    console.log(formData);
     const { imageUrl } = await uploadCardImage(
       modal.columnId,
       formData.imageUrl
@@ -279,7 +281,7 @@ export default function updateCard() {
         </div>
         <div className="flex justify-end gap-[1.2rem]">
           <ModalResetButton>취소</ModalResetButton>
-          <ModalSubmitButton>생성</ModalSubmitButton>
+          <ModalSubmitButton>수정</ModalSubmitButton>
         </div>
       </form>
     </>

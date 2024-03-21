@@ -1,20 +1,19 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useEditDashboardtitle } from 'src/hooks/useEditDashboardTitle';
+import { Params, useParams } from 'react-router-dom';
+import { useUpdateDashboardTitle } from 'src/hooks/useUpdateDashboardTitle';
 import Button from '../Buttons/Button';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
 export default function EditDashboardTitle() {
   const [inputValue, setInputValue] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
-  const { boardId } = useParams();
-  const { dashboardColor, dashboardTitle, mutate, isPending } =
-    useEditDashboardtitle(boardId);
+  const { boardId } = useParams<Params>();
+  const { data, mutate, isPending } = useUpdateDashboardTitle(boardId);
 
   useEffect(() => {
-    setSelectedColor(dashboardColor);
-    setInputValue(dashboardTitle);
-  }, [dashboardColor, dashboardTitle]);
+    setSelectedColor(data?.color ?? '');
+    setInputValue(data?.title ?? '');
+  }, [data]);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

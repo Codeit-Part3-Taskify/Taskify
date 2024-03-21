@@ -1,13 +1,15 @@
-import axiosInstance from './axios';
-import { Authorization } from './readCardList';
+import axios from './axiosInstance';
 
 export const uploadCardImage = async (columnId: number, imageUrl: File) => {
-  const { data } = await axiosInstance.post(
+  console.log(imageUrl);
+  const { data } = await axios.post(
     `columns/${columnId}/card-image`,
     {
       image: imageUrl
     },
-    { headers: { 'Content-Type': 'multipart/form-data', Authorization } }
+    {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }
   );
   return data;
 };

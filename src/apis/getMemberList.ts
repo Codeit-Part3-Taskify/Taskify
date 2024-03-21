@@ -1,13 +1,9 @@
 import type { MemberList } from 'src/types/memberTypes';
-import axiosInstance from './axios';
-import { Authorization } from './readCardList';
+import axios from './axiosInstance';
 
 export const getMemberList = async (dashboardId: string) => {
-  const { data } = await axiosInstance.get<MemberList>(
-    `members?dashboardId=${Number(dashboardId)}`,
-    {
-      headers: { Authorization }
-    }
+  const { data } = await axios.get<MemberList>(
+    `members?dashboardId=${Number(dashboardId)}`
   );
   return data;
 };

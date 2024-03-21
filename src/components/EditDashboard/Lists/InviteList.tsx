@@ -1,24 +1,33 @@
 import Button from 'src/components/Buttons/Button';
+import { DashboardInvitation } from 'src/types/dashboardTypes';
 
 interface InviteListProps {
-  invitedUsers: string[];
+  invitations: DashboardInvitation[] | undefined;
+  handleDeleteButtonClick: (invitationId: number) => void;
 }
 
-export default function InviteList({ invitedUsers }: InviteListProps) {
+export default function InviteList({
+  invitations,
+  handleDeleteButtonClick
+}: InviteListProps) {
   return (
-    <>
-      {invitedUsers.map(user => (
-        <>
-          <div className="flex justify-between items-center px-[2.8rem] py-[1.6rem]">
-            <span>{user}</span>
+    <div>
+      {invitations?.map((invitation, index) => (
+        <div>
+          <div
+            key={invitation.id}
+            className="flex justify-between items-center px-[2.8rem] py-[1.6rem]"
+          >
+            <span>{invitation.invitee.email}</span>
             <Button
               variant="secondary"
               customStyles="px-[2.9rem] py-[0.7rem] rounded-[0.4rem] text-violet"
+              onClick={() => handleDeleteButtonClick(invitation.id)}
             >
               취소
             </Button>
           </div>
-          {user !== invitedUsers[invitedUsers.length - 1] && (
+          {index !== invitations.length - 1 && (
             <svg
               width="100%"
               height="1"
@@ -34,8 +43,8 @@ export default function InviteList({ invitedUsers }: InviteListProps) {
               />
             </svg>
           )}
-        </>
+        </div>
       ))}
-    </>
+    </div>
   );
 }
