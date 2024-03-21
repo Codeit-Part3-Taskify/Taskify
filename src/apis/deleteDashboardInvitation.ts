@@ -1,5 +1,5 @@
 import axiosInstance from 'src/apis/axiosInstance';
-import { DashboardInvitations } from 'src/types/api';
+import { DashboardInvitations } from 'src/types/dashboardTypes';
 
 const deleteDashboardInvitation = async (
   dashboardId: string | undefined,

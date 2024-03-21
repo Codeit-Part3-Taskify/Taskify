@@ -39,7 +39,11 @@ export default function InvitationSettings() {
               />
             }
             onClick={() =>
-              setModal(() => ({ name: 'inviteMember', status: true }))
+              setModal(prev => ({
+                ...prev,
+                name: 'inviteMember',
+                status: true
+              }))
             }
           >
             초대하기

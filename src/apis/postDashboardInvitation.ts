@@ -1,5 +1,5 @@
 import axiosInstance from 'src/apis/axiosInstance';
-import { Dashboard } from 'src/types/api';
+import { Dashboard } from 'src/types/dashboardTypes';
 
 const postDashboardInvitations = async (
   dashboardId: string | undefined,

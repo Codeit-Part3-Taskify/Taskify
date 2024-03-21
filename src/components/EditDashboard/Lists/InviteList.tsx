@@ -1,5 +1,5 @@
 import Button from 'src/components/Buttons/Button';
-import { DashboardInvitation } from 'src/types/api';
+import { DashboardInvitation } from 'src/types/dashboardTypes';
 
 interface InviteListProps {
   invitations: DashboardInvitation[] | undefined;

@@ -31,7 +31,11 @@ export default function useInviteMember() {
       return;
     }
     mutate({ email: inputValue });
-    setModal(() => ({ name: 'inviteMember', status: false }));
+    setModal(prev => ({
+      ...prev,
+      name: 'inviteMember',
+      status: false
+    }));
   };
 
   return { handleInputChange, handleFormSubmit };

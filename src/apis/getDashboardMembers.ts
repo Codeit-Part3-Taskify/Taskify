@@ -1,6 +1,6 @@
 import axiosInstance from 'src/apis/axiosInstance';
 import { PAGENATION_SIZE } from 'src/constants/pagenation';
-import { DashboardMembers } from 'src/types/api';
+import { DashboardMembers } from 'src/types/dashboardTypes';
 
 const getDashboardMembers = async (
   dashboardId: string | undefined,

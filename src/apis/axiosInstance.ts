@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { TEAM } from 'src/constants/common';
 import handleError from 'src/utils/handleError';
 

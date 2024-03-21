@@ -1,6 +1,6 @@
 import Profile from 'src/components/Profile/Profile';
 import Button from 'src/components/Buttons/Button';
-import { DashboardMember } from 'src/types/api';
+import { DashboardMember } from 'src/types/dashboardTypes';
 
 interface Props {
   members: DashboardMember[] | undefined;

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import crown from 'src/assets/images/crown.svg';
 import { COLOR_VARIANTS } from 'src/constants/colors';
-import { Dashboard } from '../../types/api';
+import { Dashboard } from '../../types/dashboardTypes';
 
 export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
   const navLinkStyled =
