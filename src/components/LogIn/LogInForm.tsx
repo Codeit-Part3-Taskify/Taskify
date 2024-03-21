@@ -37,6 +37,7 @@ export default function LogInForm() {
         type="email"
         className={`basicinput w-[52rem] border ${showEmailError ? 'border-red-500' : ''}`}
         onBlur={EmailError}
+        placeholder="이메일을 입력해주세요."
       />
       {showEmailError && (
         <div className="text-red-500 text-[1.4rem]">{showEmailError}</div>
@@ -61,6 +62,7 @@ export default function LogInForm() {
         className={`basicinput  w-[52rem] border ${showPasswordError ? 'border-red-500' : ''}`}
         onBlur={PasswordError}
         minLength={8}
+        placeholder="비밀번호를 입력해주세요."
       />
 
       {showPasswordError && (
