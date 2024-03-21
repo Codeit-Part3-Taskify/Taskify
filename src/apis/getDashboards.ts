@@ -1,5 +1,5 @@
 import axios from './axiosInstance';
-import { DashboardsResponse } from '../types/api';
+import { DashboardsResponse } from '../types/dashboardTypes';
 
 const getDashboards = async (
   page?: number,

@@ -6,10 +6,10 @@
 
 @layer components {
   .violetbutton {
-    @apply bg-violet text-white rounded-[0.4rem];
+    @apply bg-violet text-white rounded-[0.4rem] text-[1.4rem];
   }
   .basicinput {
-    @apply h-[4.8rem] rounded-[0.6rem] border-[0.1rem] border-gray_D9D9D9  px-[1.6rem];
+    @apply h-[4.8rem] rounded-[0.6rem]  text-[1.6rem] border-[0.1rem] border-gray_D9D9D9  px-[1.6rem];
   }
 }
 

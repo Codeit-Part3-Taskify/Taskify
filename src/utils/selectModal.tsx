@@ -1,4 +1,4 @@
-import AlertDeleteCard from 'src/components/Modal/Card/AlertDeleteCard';
+import AlertDeleteCard from 'src/components/Modal/Column/AlertDeleteCard';
 import AlertPassword from 'src/components/Modal/AlertPassword';
 import CardDetail from 'src/components/Modal/Card/CardDetail';
 import CreateCard from 'src/components/Modal/Card/CreateCard';

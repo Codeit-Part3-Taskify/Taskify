@@ -1,11 +1,6 @@
 import axiosInstance from './axiosInstance';
 
-interface Props {
-  queryKey: string | readonly unknown[];
-}
-
-const readColumnList = async ({ queryKey }: Props) => {
-  const boardId = queryKey[1];
+const readColumnList = async (boardId: string) => {
   const { data } = await axiosInstance.get(`columns?dashboardId=${boardId}`);
   return data;
 };

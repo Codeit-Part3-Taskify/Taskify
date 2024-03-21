@@ -1,12 +1,14 @@
 import axiosInstance from './axiosInstance';
 
-interface Props {
-  queryKey: string | readonly unknown[];
-}
+// 임시
+export const Authorization =
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI3NCwidGVhbUlkIjoiMy01IiwiaWF0IjoxNzEwNTA5OTgzLCJpc3MiOiJzcC10YXNraWZ5In0.bs7A-8tp8FT9PcL1uIvbSQEJJpKEesjHZc8z280ZtCk';
 
-const readCardList = async ({ queryKey }: Props) => {
-  const columnId = queryKey[1];
-  const { data } = await axiosInstance.get(`cards?columnId=${columnId}`);
+// react-query과 관련이 없도록 사용
+const readCardList = async (columnId: number) => {
+  const { data } = await axiosInstance.get(`cards?columnId=${columnId}`, {
+    headers: { Authorization }
+  });
   return data;
 };
 
