@@ -58,7 +58,6 @@ export default function CreateCard() {
   const onChangeImage = (event: BaseSyntheticEvent) => {
     setImageValue(URL.createObjectURL(event.target.files[0]));
     setValue('imageUrl', event.target.files[0]);
-    console.log(imageValue);
   };
 
   const submit = async (formData: PostCard) => {
@@ -66,13 +65,11 @@ export default function CreateCard() {
       modal.columnId,
       formData.imageUrl
     );
-    console.log(imageUrl);
-    // await createCardMutation({ ...formData, imageUrl });
-    // setModal(prev => ({ ...prev, status: false }));
+    await createCardMutation({ ...formData, imageUrl });
+    setModal(prev => ({ ...prev, status: false }));
   };
   return (
     <>
-      <h2 className="text-black_000000 text-8xl">{imageValue}</h2>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
         할 일 생성
       </h2>

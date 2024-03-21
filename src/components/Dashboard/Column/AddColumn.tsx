@@ -1,7 +1,6 @@
 import plusBtn from 'src/assets/images/plus.svg';
 import { useSetAtom } from 'jotai';
 import { modalAtom } from 'src/store/store';
-import { ColumnData } from 'src/types/columnTypes';
 import Button from '../../Buttons/Button';
 
 export default function AddColumn() {
