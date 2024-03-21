@@ -1,4 +1,4 @@
-export const COLOR_VARIANTS: Record<string, string> = {
+export const COLOR_VARIANTS = {
   '#7AC555': 'bg-green_7AC555',
   '#760DDE': 'bg-purple_760DDE',
   '#FFA500': 'bg-orange_FFA500',
