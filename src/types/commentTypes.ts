@@ -5,17 +5,19 @@ export interface CommentBody {
   dashboardId: number;
 }
 
-export interface PostComment {
-  comments: {
+export interface CommentData {
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  cardId: number;
+  author: {
+    profileImageUrl: string;
+    nickname: string;
     id: number;
-    content: string;
-    createdAt: string;
-    updatedAt: string;
-    cardId: number;
-    author: {
-      profileImageUrl: string;
-      nickname: string;
-      id: number;
-    };
-  }[];
+  };
+}
+
+export interface PostComment {
+  comments: CommentData[];
 }

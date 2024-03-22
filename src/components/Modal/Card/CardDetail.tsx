@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import type { CardData } from 'src/types/cardTypes';
 import readCardDetail from 'src/apis/readCardDetail';
 import Profile from 'src/components/Profile/Profile';
+import { useState } from 'react';
+import DropDown from './DropDown';
 import CommentBox from './CommentBox';
 
 export default function CardDetail() {
@@ -15,7 +17,7 @@ export default function CardDetail() {
     queryKey: ['readCardDetail', modal.cardId],
     queryFn: async () => readCardDetail(modal.cardId)
   });
-
+  const [isDropDownClicked, setIsDropDownClicked] = useState(false);
   return (
     <div className="w-[67.4rem] h-[70.3rem]">
       <div className="flex justify-between mb-[2.4rem]">
@@ -23,7 +25,12 @@ export default function CardDetail() {
           {cardInformation?.title}
         </span>
         <div className="flex gap-[2.4rem]">
-          <button type="button">
+          <button
+            className="relative"
+            type="button"
+            onClick={() => setIsDropDownClicked(prev => !prev)}
+          >
+            {isDropDownClicked && <DropDown />}
             <img src={kebab} alt="케밥버튼" className="w-[2.8rem] h-[2.8rem]" />
           </button>
           <button
@@ -63,10 +70,7 @@ export default function CardDetail() {
               className="h-[26.2rem] w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
             />
           </div>
-
-          {cardInformation?.id && (
-            <CommentBox cardInformation={cardInformation} />
-          )}
+          {cardInformation && <CommentBox cardInformation={cardInformation} />}
         </div>
         <div className="w-[20rem] h-[15.5rem] border border-[#D9D9D9] rounded-[0.8rem] p-[1.6rem] flex flex-col items-start">
           <span className="mb-[0.6rem] text-[#000] text-[1.2rem] font-semibold">

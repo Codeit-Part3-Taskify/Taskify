@@ -1,12 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import deleteComment from 'src/apis/deleteComment';
 import postComment from 'src/apis/postComment';
 import readCommentList from 'src/apis/readCommentList';
-import Profile from 'src/components/Profile/Profile';
 import { CardData } from 'src/types/cardTypes';
 import { CommentBody, PostComment } from 'src/types/commentTypes';
+import CommentList from './CommentList';
 
 export default function CommentBox({
   cardInformation
@@ -40,10 +39,14 @@ export default function CommentBox({
   });
 
   const deleteClick = (commentId: number) => {
-    console.log(commentId);
     deleteCommentMutate({ commentId });
   };
-  const { register, handleSubmit, setValue } = useForm<{ content: string }>();
+
+  const { register, handleSubmit, setValue } = useForm<{
+    content: string;
+    comment: number;
+  }>();
+
   const submit = (data: { content: string }) => {
     const body = {
       ...data,
@@ -75,37 +78,11 @@ export default function CommentBox({
       </form>
       <div className="w-[45rem] h-[8.5rem] overflow-y-scroll">
         {commentList?.comments.map(comment => (
-          <div key={comment.id}>
-            <div className="flex items-center gap-[0.8rem]">
-              <span className="flex justify-start">
-                <Profile
-                  size="smallSize"
-                  profileImgSrc={comment.author.profileImageUrl}
-                  userName={comment.author.nickname}
-                />
-              </span>
-              <span>
-                {comment.createdAt
-                  .slice(0, 16)
-                  .replace('T', ' ')
-                  .replaceAll('-', '.')}
-              </span>
-            </div>
-            <div className="ml-[4.4rem] flex flex-col gap-[1.2rem]">
-              <p className="text-[1.4rem]">{comment.content}</p>
-              <div className="flex gap-[1.2rem]">
-                <button className="text-[1.2rem] text-[#9FA6B2] underline">
-                  수정
-                </button>
-                <button
-                  onClick={() => deleteClick(comment.id)}
-                  className="text-[1.2rem] text-[#9FA6B2] underline"
-                >
-                  삭제
-                </button>
-              </div>
-            </div>
-          </div>
+          <CommentList
+            key={comment.id}
+            comment={comment}
+            deleteClick={deleteClick}
+          />
         ))}
       </div>
     </div>
