@@ -20,7 +20,7 @@ export default function Cards({ columnInfo }: Props) {
       {data?.cards?.map(
         (card: CardData) =>
           card?.columnId === columnInfo?.id && (
-            <Card key={card.id} cardData={card} />
+            <Card key={card.id} cardData={card} columnInfo={columnInfo} />
           )
       )}
     </section>

@@ -100,13 +100,17 @@ export default function updateCard() {
   };
 
   const submit = async (formData: PostCard) => {
-    console.log(formData);
-    const { imageUrl } = await uploadCardImage(
-      modal.columnId,
-      formData.imageUrl
-    );
-    const body = { ...formData, imageUrl };
-    await updateCardMutation({ cardId: modal.cardId, body });
+    if (!imageValue) {
+      const body = { ...formData, imageUrl: undefined };
+      await updateCardMutation({ cardId: modal.cardId, body });
+    } else {
+      const { imageUrl } = await uploadCardImage(
+        modal.columnId,
+        formData.imageUrl
+      );
+      const body = { ...formData, imageUrl };
+      await updateCardMutation({ cardId: modal.cardId, body });
+    }
     setModal(prev => ({ ...prev, status: false }));
   };
 

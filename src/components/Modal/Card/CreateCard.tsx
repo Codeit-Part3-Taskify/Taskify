@@ -37,7 +37,7 @@ export default function CreateCard() {
   const [tagList, setTagList] = useState<string[]>([]);
   const [tagValue, setTagValue] = useState<string>('');
   const handleChange = (dateChange: Date) => {
-    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD hh:mm'), {
+    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD HH:mm'), {
       shouldDirty: true
     });
     setSelectedDate(dateChange);
@@ -61,11 +61,18 @@ export default function CreateCard() {
   };
 
   const submit = async (formData: PostCard) => {
-    const { imageUrl } = await uploadCardImage(
-      modal.columnId,
-      formData.imageUrl
-    );
-    await createCardMutation({ ...formData, imageUrl });
+    if (!imageValue) {
+      await createCardMutation({ ...formData, imageUrl: undefined });
+    } else {
+      const { imageUrl } = await uploadCardImage(
+        modal.columnId,
+        formData.imageUrl
+      );
+      await createCardMutation({
+        ...formData,
+        imageUrl
+      });
+    }
     setModal(prev => ({ ...prev, status: false }));
   };
   return (
@@ -151,7 +158,7 @@ export default function CreateCard() {
                 timeCaption="time"
                 onChange={handleChange}
                 selected={selecTedDate}
-                dateFormat="yyyy-MM-dd hh:mm"
+                dateFormat="yyyy-MM-dd HH:mm"
               />
             )}
           />

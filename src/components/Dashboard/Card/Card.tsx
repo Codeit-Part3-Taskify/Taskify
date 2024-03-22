@@ -2,9 +2,11 @@ import { useSetAtom } from 'jotai';
 import calendar from 'src/assets/images/calendar.svg';
 import type { CardData } from 'src/types/cardTypes';
 import { modalAtom } from 'src/store/store';
+import { ColumnData } from 'src/types/columnTypes';
 
 interface Prop {
   cardData: CardData;
+  columnInfo: ColumnData;
 }
 
 const tagsColor = [
@@ -14,7 +16,7 @@ const tagsColor = [
   'text-blue-500 bg-blue-100'
 ];
 
-export default function Card({ cardData }: Prop) {
+export default function Card({ cardData, columnInfo }: Prop) {
   const setModal = useSetAtom(modalAtom);
   return (
     <button
@@ -22,10 +24,11 @@ export default function Card({ cardData }: Prop) {
       onClick={() =>
         setModal(prev => ({
           ...prev,
-          name: 'updateCard',
+          name: 'cardDetail',
           status: true,
           cardId: cardData.id,
-          columnId: cardData.columnId
+          columnId: cardData.columnId,
+          columnTitle: columnInfo.title
         }))
       }
     >
