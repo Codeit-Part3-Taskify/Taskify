@@ -1,4 +1,4 @@
-import axiosInstance from 'src/apis/axiosInstance';
+import axios from 'src/apis/axiosInstance';
 import { Dashboard } from 'src/types/dashboardTypes';
 
 const putDashboardTitle = async (
@@ -6,13 +6,10 @@ const putDashboardTitle = async (
   title: string,
   color: string
 ) => {
-  const { data } = await axiosInstance.put<Dashboard>(
-    `/dashboards/${dashboardId}`,
-    {
-      title,
-      color
-    }
-  );
+  const { data } = await axios.put<Dashboard>(`/dashboards/${dashboardId}`, {
+    title,
+    color
+  });
   return data;
 };
 

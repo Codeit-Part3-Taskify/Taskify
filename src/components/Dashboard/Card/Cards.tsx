@@ -14,14 +14,13 @@ export default function Cards({ columnInfo }: Props) {
     queryKey: ['readCardList', columnInfo.id],
     queryFn: () => readCardList(columnInfo.id)
   });
-
   return (
     <section className="flex flex-col gap-[1.6rem]">
-      <AddCard />
+      <AddCard columnInfo={columnInfo} />
       {data?.cards?.map(
         (card: CardData) =>
           card?.columnId === columnInfo?.id && (
-            <Card key={card.id} cardData={card} />
+            <Card key={card.id} cardData={card} columnInfo={columnInfo} />
           )
       )}
     </section>

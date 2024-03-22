@@ -4,12 +4,15 @@ interface ProfileProps {
   profileImgSrc?: string | null;
   email?: string;
   userName?: string;
+  isSmall?: boolean;
 }
-
+const basicSize = 'w-[3.8rem] h-[3.8rem]';
+const smallSize = 'w-[3.4rem] h-[3.4rem]';
 export default function Profile({
   profileImgSrc,
   email = 'Test@codeit.kr',
-  userName = '코드잇'
+  userName = '코드잇',
+  isSmall
 }: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
   const firstLetterOfEmail = email?.charAt(0).toUpperCase();
@@ -31,14 +34,14 @@ export default function Profile({
       <div className="relative">
         {profileImgSrc ? (
           <img
-            className="rounded-full w-[3.8rem] h-[3.8rem]"
+            className={`rounded-full ${isSmall ? smallSize : basicSize}`}
             src={profileImgSrc}
             alt="프로필 이미지"
           />
         ) : (
           <>
             <div
-              className={`${randomBgColor} rounded-full w-[3.8rem] h-[3.8rem]`}
+              className={`${randomBgColor} rounded-full  ${isSmall ? smallSize : basicSize}`}
             />
             <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-[1.6rem] font-semibold text-white">
               {firstLetterOfEmail}

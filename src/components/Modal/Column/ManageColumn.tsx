@@ -1,10 +1,11 @@
 import useManageColumn from 'src/hooks/useManageColumn';
 import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 import ModalResetButton from '../../Buttons/ModalResetButton';
-import LabelAndInput from '../LabelAndInput/LabelAndInput';
+
+const BasicStyle = `w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]`;
 
 export default function ManageColumn() {
-  const { inputValue, setInputValue, handleDeleteClick, handleSubmit } =
+  const { handleSubmit, submit, handleDeleteClick, register } =
     useManageColumn();
 
   return (
@@ -12,15 +13,21 @@ export default function ManageColumn() {
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
         컬럼 관리
       </h2>
-      <form className="flex flex-col" onSubmit={handleSubmit}>
-        <LabelAndInput
-          title="이름"
-          type="text"
-          id="name"
-          placeholder="Done"
-          value={inputValue}
-          setValue={setInputValue}
-        />
+      <form className="flex flex-col" onSubmit={handleSubmit(submit)}>
+        <div className="relative flex flex-col">
+          <label
+            className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
+            htmlFor="name"
+          >
+            이름
+          </label>
+          <input
+            className={BasicStyle}
+            id="name"
+            type="text"
+            {...register('title')}
+          />
+        </div>
         <div className="flex justify-between">
           <button
             type="button"

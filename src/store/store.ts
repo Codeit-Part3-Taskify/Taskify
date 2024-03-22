@@ -14,9 +14,11 @@ export const modalAtom = atom<{
   name: ModalType;
   columnId: number;
   columnTitle: ModalType | string;
+  cardId: number;
 }>({
   status: false,
   name: '',
   columnId: 0,
-  columnTitle: ''
+  columnTitle: '',
+  cardId: 0
 });

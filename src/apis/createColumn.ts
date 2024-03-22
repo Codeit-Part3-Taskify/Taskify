@@ -1,7 +1,7 @@
 import type { PostColumn } from 'src/types/columnTypes';
-import axiosInstance from './axiosInstance';
+import axios from './axiosInstance';
 
 export const createColumn = async (body: PostColumn) => {
-  const { data } = await axiosInstance.post('columns', body);
+  const { data } = await axios.post('columns', body);
   return data;
 };

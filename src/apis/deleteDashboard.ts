@@ -1,7 +1,7 @@
-import axiosInstance from 'src/apis/axiosInstance';
+import axios from 'src/apis/axiosInstance';
 
 const deleteDashboard = async (dashboardId: string | undefined) => {
-  const { data } = await axiosInstance.delete(`/dashboards/${dashboardId}`);
+  const { data } = await axios.delete(`/dashboards/${dashboardId}`);
   return data;
 };
 
