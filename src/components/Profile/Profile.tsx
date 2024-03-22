@@ -5,11 +5,11 @@ interface ProfileProps {
   userName?: string;
   isSmall?: boolean;
 }
-const basicSize = 'w-[3.8rem] h-[3.8rem]';
+const basicSize = 'tablet:w-[3.8rem] tablet:h-[3.8rem] w-[3.4rem] h-[3.4rem]';
 const smallSize = 'w-[3.4rem] h-[3.4rem]';
 export default function Profile({
   profileImgSrc,
-  userName = '코드잇',
+  userName,
   isSmall
 }: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
