@@ -20,6 +20,7 @@ export default function DashboardMemberList({
             className="flex justify-between items-center px-[2.8rem] py-[1.6rem]"
           >
             <Profile
+              size="basicSize"
               profileImgSrc={member.profileImageUrl}
               email={member.email}
               userName={member.nickname}

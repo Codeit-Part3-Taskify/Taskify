@@ -7,14 +7,15 @@ import { useQuery } from '@tanstack/react-query';
 import type { CardData } from 'src/types/cardTypes';
 import readCardDetail from 'src/apis/readCardDetail';
 import Profile from 'src/components/Profile/Profile';
+import CommentBox from './CommentBox';
 
 export default function CardDetail() {
   const [modal, setModal] = useAtom(modalAtom);
   const { data: cardInformation } = useQuery<CardData>({
     queryKey: ['readCardDetail', modal.cardId],
-    queryFn: () => readCardDetail(modal.cardId)
+    queryFn: async () => readCardDetail(modal.cardId)
   });
-  console.log(cardInformation);
+
   return (
     <div className="w-[67.4rem] h-[70.3rem]">
       <div className="flex justify-between mb-[2.4rem]">
@@ -51,7 +52,7 @@ export default function CardDetail() {
             </ul>
           </div>
 
-          <div className="text-[1.4rem] leading-[2.4rem] w-[45rem] h-[7.2rem] my-[1.6rem]">
+          <div className="text-[1.4rem] leading-[2.4rem] w-[45rem] h-[6.4rem] my-[1.6rem]">
             {cardInformation?.description}
           </div>
 
@@ -63,41 +64,26 @@ export default function CardDetail() {
             />
           </div>
 
-          <div className="relative w-[4.5rem] h-[14rem] flex gap-[1rem] flex-col mb-[2rem]">
-            <span className="text-[1.6rem] font-medium">댓글</span>
-            <textarea
-              className="p-[1.6rem] text-[1.4rem] w-[45rem] h-[11rem] placeholder:text-[#9FA6B2] resize-none border border-solid-[#D9D9D9] rounded-[0.6rem] outline-none"
-              placeholder="댓글 작성하기"
-            />
-            <button className="absolute bottom-[1.2rem] right-[-39rem] text-[1.2rem] font-medium text-[#5534DA] border border-solid-[#D9D9D9] rounded-[0.4rem] py-[0.9rem] px-[3.1rem]">
-              입력
-            </button>
-          </div>
-
-          <div className="flex justify-start">
-            <Profile />
-          </div>
+          {cardInformation?.id && (
+            <CommentBox cardInformation={cardInformation} />
+          )}
         </div>
         <div className="w-[20rem] h-[15.5rem] border border-[#D9D9D9] rounded-[0.8rem] p-[1.6rem] flex flex-col items-start">
           <span className="mb-[0.6rem] text-[#000] text-[1.2rem] font-semibold">
             담당자
           </span>
-          {true && (
-            <>
-              <Profile
-                isSmall
-                profileImgSrc={cardInformation?.assignee.profileImageUrl}
-                userName={cardInformation?.assignee.nickname}
-              />
-              <span className="mt-[2rem] text-[#000] text-[1.2rem] font-semibold">
-                마감일
-              </span>
-              <span className="text-[#333236] text-[1.4rem]">
-                {cardInformation?.dueDate &&
-                  cardInformation?.dueDate.replaceAll('-', '.')}
-              </span>
-            </>
-          )}
+          <Profile
+            size="smallSize"
+            profileImgSrc={cardInformation?.assignee.profileImageUrl}
+            userName={cardInformation?.assignee.nickname}
+          />
+          <span className="mt-[2rem] text-[#000] text-[1.2rem] font-semibold">
+            마감일
+          </span>
+          <span className="text-[#333236] text-[1.4rem]">
+            {cardInformation?.dueDate &&
+              cardInformation?.dueDate.replaceAll('-', '.')}
+          </span>
         </div>
       </div>
     </div>

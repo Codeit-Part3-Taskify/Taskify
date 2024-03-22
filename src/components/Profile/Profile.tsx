@@ -4,15 +4,21 @@ interface ProfileProps {
   profileImgSrc?: string | null;
   email?: string;
   userName?: string;
-  isSmall?: boolean;
+  size: 'basicSize' | 'smallSize';
 }
-const basicSize = 'w-[3.8rem] h-[3.8rem]';
-const smallSize = 'w-[3.4rem] h-[3.4rem]';
+const profile = {
+  basicSize: 'w-[3.8rem] h-[3.8rem]',
+  smallSize: 'w-[3.4rem] h-[3.4rem]'
+};
+const text = {
+  basicSize: 'text-[1.6rem]',
+  smallSize: 'text-[1.4rem]'
+};
 export default function Profile({
   profileImgSrc,
   email = 'Test@codeit.kr',
   userName = '코드잇',
-  isSmall
+  size = 'basicSize'
 }: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
   const firstLetterOfEmail = email?.charAt(0).toUpperCase();
@@ -34,16 +40,18 @@ export default function Profile({
       <div className="relative">
         {profileImgSrc ? (
           <img
-            className={`rounded-full ${isSmall ? smallSize : basicSize}`}
+            className={`rounded-full ${profile[size]}`}
             src={profileImgSrc}
             alt="프로필 이미지"
           />
         ) : (
           <>
             <div
-              className={`${randomBgColor} rounded-full  ${isSmall ? smallSize : basicSize}`}
+              className={`${randomBgColor} rounded-full  ${profile[size]}`}
             />
-            <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-[1.6rem] font-semibold text-white">
+            <span
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${text[size]} font-semibold text-white`}
+            >
               {firstLetterOfEmail}
             </span>
           </>
