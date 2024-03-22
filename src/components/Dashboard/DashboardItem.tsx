@@ -5,7 +5,7 @@ import { Dashboard } from '../../types/dashboardTypes';
 
 export default function DashboardItem({ dashboard }: { dashboard: Dashboard }) {
   const navLinkStyled =
-    'w-[4rem] h-[4rem] rounded-[0.4rem] flex justify-center items-center cursor-pointer tablet:gap-[1.6rem] tablet:w-[13.4rem] tablet:h-[4.3rem] tablet:justify-start tablet:pl-[1rem] desktop:w-[27.6rem] desktop:h-[4.5rem] desktop:pl-[1.2rem]';
+    'w-[4rem] h-[4rem] rounded-[0.4rem] flex justify-center items-center cursor-pointer tablet:gap-[1.6rem] tablet:w-[13.4rem] tablet:h-[4.3rem] tablet:justify-start tablet:pl-[1rem] desktop:w-[27.6rem] desktop:h-[4.5rem] desktop:pl-[1.2rem] hover:bg-violet_8';
 
   return (
     <NavLink
