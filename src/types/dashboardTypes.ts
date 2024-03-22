@@ -11,7 +11,6 @@ export interface Dashboard {
 export interface DashboardsResponse {
   dashboards?: Dashboard[];
   totalCount?: number;
-  cursorId?: number;
 }
 
 export interface DashboardMember {
