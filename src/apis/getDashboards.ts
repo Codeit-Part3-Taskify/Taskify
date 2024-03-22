@@ -1,18 +1,19 @@
-import axios from './axiosInstance';
+import { PAGENATION_SIZE } from 'src/constants/pagenation';
 import { DashboardsResponse } from '../types/dashboardTypes';
+import axios from './axiosInstance';
 
 const getDashboards = async (
-  page?: number,
-  size?: number,
-  navigationMethod: string = 'infiniteScroll'
+  page: number,
+  navigationMethod: string = 'pagination'
 ): Promise<DashboardsResponse> => {
-  let dashboardsURL = `dashboards?navigationMethod=${navigationMethod}`;
+  const dashboardsURL = `dashboards?navigationMethod=${navigationMethod}`;
 
-  if (page && size) {
-    dashboardsURL = `${dashboardsURL}&page=${page}&size=${size}`;
-  }
-
-  const { data } = await axios.get<DashboardsResponse>(dashboardsURL);
+  const { data } = await axios.get<DashboardsResponse>(dashboardsURL, {
+    params: {
+      size: PAGENATION_SIZE.DASHBOARD.SIDEBAR,
+      page
+    }
+  });
 
   return data;
 };
