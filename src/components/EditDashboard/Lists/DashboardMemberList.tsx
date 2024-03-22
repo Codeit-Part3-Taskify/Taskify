@@ -17,17 +17,16 @@ export default function DashboardMemberList({
         <div>
           <div
             key={member.id}
-            className="flex justify-between items-center px-[2.8rem] py-[1.6rem]"
+            className="flex justify-between items-center tablet:px-[2.8rem] px-[2rem] tablet:py-[1.6rem] py-[1.2rem]"
           >
             <Profile
               profileImgSrc={member.profileImageUrl}
-              email={member.email}
               userName={member.nickname}
             />
             <Button
               variant="secondary"
               type="button"
-              customStyles="px-[2.9rem] py-[0.7rem] rounded-[0.4rem] text-violet"
+              customStyles="tablet:px-[2.9rem] px-[0.9rem] py-[0.7rem] rounded-[0.4rem] text-violet tablet:text-[1.4rem] text-[1.2rem]"
               onClick={() => handleDeleteButtonClick(member.id)}
             >
               삭제

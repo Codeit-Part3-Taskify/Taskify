@@ -16,14 +16,14 @@ export default function PagenationButtons({
   handleForwardButtonClick
 }: PagenationButtonsProps) {
   return (
-    <div className="flex items-center gap-[1.6rem]">
-      <span className="text-[1.6rem]">
+    <div className="flex items-center tablet:gap-[1.6rem] gap-[1.2rem]">
+      <span className="tablet:text-[1.4rem] text-[1.2rem]">
         {allPage} 페이지 중 {nowPage}
       </span>
       <div className="flex items-center">
         <Button
           variant="secondary"
-          customStyles="w-[4rem] h-[4rem] rounded-l-[0.4rem]"
+          customStyles="tablet:w-[4rem] w-[3.6rem] tablet:h-[4rem] h-[3.6rem] rounded-l-[0.4rem]"
           type="button"
           onClick={handleBackwardButtonClick}
         >
@@ -31,7 +31,7 @@ export default function PagenationButtons({
         </Button>
         <Button
           variant="secondary"
-          customStyles="w-[4rem] h-[4rem] rounded-r-[0.4rem]"
+          customStyles="tablet:w-[4rem] w-[3.6rem] tablet:h-[4rem] h-[3.6rem] rounded-r-[0.4rem]"
           type="button"
           onClick={handleForwardButtonClick}
         >
