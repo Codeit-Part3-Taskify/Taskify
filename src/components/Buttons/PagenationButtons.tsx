@@ -7,23 +7,35 @@ interface PagenationButtonsProps {
   nowPage: number;
   handleBackwardButtonClick: () => void;
   handleForwardButtonClick: () => void;
+  isSidebar?: boolean;
 }
 
 export default function PagenationButtons({
   allPage,
   nowPage,
   handleBackwardButtonClick,
-  handleForwardButtonClick
+  handleForwardButtonClick,
+  isSidebar
 }: PagenationButtonsProps) {
+  const contatinerStyle = isSidebar
+    ? 'flex desktop:flex-row tablet:flex-col-reverse items-center desktop:gap-[1.6rem] tablet:gep-[1.4rem] gap-[1.2rem]'
+    : 'flex items-center tablet:gap-[1.6rem] gap-[1.2rem]';
+  const buttonStyle = isSidebar
+    ? 'tablet:w-[4rem] w-[2rem] tablet:h-[4rem] h-[2rem]'
+    : 'tablet:w-[4rem] w-[3.6rem] tablet:h-[4rem] h-[3.6rem]';
+  const spanStyle = isSidebar
+    ? 'tablet:text-[1.4rem] hidden tablet:block'
+    : 'tablet:text-[1.4rem] text-[1.2rem]';
+
   return (
-    <div className="flex items-center tablet:gap-[1.6rem] gap-[1.2rem]">
-      <span className="tablet:text-[1.4rem] text-[1.2rem]">
+    <div className={contatinerStyle}>
+      <span className={spanStyle}>
         {allPage} 페이지 중 {nowPage}
       </span>
       <div className="flex items-center">
         <Button
           variant="secondary"
-          customStyles="tablet:w-[4rem] w-[3.6rem] tablet:h-[4rem] h-[3.6rem] rounded-l-[0.4rem]"
+          customStyles={`${buttonStyle} rounded-l-[0.4rem]`}
           type="button"
           onClick={handleBackwardButtonClick}
         >
@@ -31,11 +43,11 @@ export default function PagenationButtons({
         </Button>
         <Button
           variant="secondary"
-          customStyles="tablet:w-[4rem] w-[3.6rem] tablet:h-[4rem] h-[3.6rem] rounded-r-[0.4rem]"
+          customStyles={`${buttonStyle} rounded-r-[0.4rem]`}
           type="button"
           onClick={handleForwardButtonClick}
         >
-          <img className="" src={ForwardIcon} alt="앞으로 가기 아이콘" />
+          <img src={ForwardIcon} alt="앞으로 가기 아이콘" />
         </Button>
       </div>
     </div>
