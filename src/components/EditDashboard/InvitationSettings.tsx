@@ -32,10 +32,10 @@ export default function InvitationSettings() {
           />
           <Button
             variant="primary"
-            customStyles="absolute top-[4.8rem] right-0 tablet:static tablet:gap-[0.8rem] gap-[0.6rem] tablet:px-[1.6rem] px-[1.2rem] tablet:py-[0.8rem] py-[0.7rem] tablet:text-[1.4rem] text-[1.2rem] rounded-[0.4rem] right-[2rem]"
+            customStyles="absolute right-0 top-[4.8rem] tablet:static tablet:gap-[0.8rem] gap-[0.6rem] tablet:px-[1.6rem] px-[1.2rem] tablet:py-[0.8rem] py-[0.7rem] tablet:text-[1.4rem] text-[1.2rem] rounded-[0.4rem]"
             prefix={
               <img
-                className="w-[1.6rem] h-[1.6rem]"
+                className="tablet:w-[1.6rem] tablet:h-[1.6rem] w-[1.4rem] h-[1.4rem]"
                 src={AddBoxIcon}
                 alt="추가하기 박스 아이콘"
               />
