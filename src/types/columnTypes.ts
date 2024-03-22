@@ -1,4 +1,3 @@
-
 export interface ColumnData {
   createdAt: string;
   dashboardId: number;

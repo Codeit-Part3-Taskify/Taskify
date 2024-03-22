@@ -1,16 +1,26 @@
 import { useSetAtom } from 'jotai';
 import plusBtn from 'src/assets/images/plus.svg';
 import { modalAtom } from 'src/store/store';
+import { ColumnData } from 'src/types/columnTypes';
 import Button from '../../Buttons/Button';
 
-export default function AddCard() {
+interface Props {
+  columnInfo: ColumnData;
+}
+
+export default function AddCard({ columnInfo }: Props) {
   const setModal = useSetAtom(modalAtom);
   return (
     <Button
       variant="secondary"
       customStyles="mt-[2.5rem] p-[0.9rem] rounded-[0.6rem]"
       onClick={() =>
-        setModal(prev => ({ ...prev, name: 'createCard', status: true }))
+        setModal(prev => ({
+          ...prev,
+          name: 'createCard',
+          status: true,
+          columnId: columnInfo.id
+        }))
       }
     >
       <img

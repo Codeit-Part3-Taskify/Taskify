@@ -3,7 +3,6 @@ import EditDashboardTitle from 'src/components/EditDashboard/EditDashboardTitle'
 import EditDashboardMembers from 'src/components/EditDashboard/EditDashboardMembers';
 import InvitationSettings from 'src/components/EditDashboard/InvitationSettings';
 import Button from 'src/components/Buttons/Button';
-import Modal from 'src/components/Layout/Modal';
 import useDeleteDashboard from 'src/hooks/useDeleteDashboard';
 
 export default function EditDashboardPage() {

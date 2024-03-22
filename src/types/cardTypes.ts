@@ -12,7 +12,7 @@ export interface CardData {
   description: string;
   dueDate: string;
   id: number;
-  imageUrl: string | null;
+  imageUrl: any | null;
   tags: string[];
   teamId: string;
   title: string;
@@ -25,7 +25,7 @@ export interface PostCard {
   columnId: number;
   title: string;
   description: string;
-  dueDate: string;
+  dueDate?: string;
   tags: string[];
-  imageUrl: string;
+  imageUrl?: any;
 }
