@@ -23,14 +23,16 @@ export default function DashboardMemberList({
               profileImgSrc={member.profileImageUrl}
               userName={member.nickname}
             />
-            <Button
-              variant="secondary"
-              type="button"
-              customStyles="tablet:px-[2.9rem] px-[0.9rem] py-[0.7rem] rounded-[0.4rem] text-violet tablet:text-[1.4rem] text-[1.2rem]"
-              onClick={() => handleDeleteButtonClick(member.id)}
-            >
-              삭제
-            </Button>
+            {index !== 0 ? (
+              <Button
+                variant="secondary"
+                type="button"
+                customStyles="tablet:px-[2.9rem] px-[0.9rem] py-[0.7rem] rounded-[0.4rem] text-violet tablet:text-[1.4rem] text-[1.2rem]"
+                onClick={() => handleDeleteButtonClick(member.id)}
+              >
+                삭제
+              </Button>
+            ) : null}
           </div>
           {index !== members.length - 1 && (
             <svg
