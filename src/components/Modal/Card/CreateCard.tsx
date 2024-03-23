@@ -186,13 +186,12 @@ export default function CreateCard() {
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
               // 타입 찾아야 함
-              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+              onKeyDown={(e: any) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
-                  const inputValue = e.currentTarget.value;
                   setTagList(prev => [...prev, tagValue]);
 
-                  const list = [...tagList, inputValue];
+                  const list = [...tagList, e.target.value];
                   setValue('tags', list);
                   setTagValue('');
                 }
