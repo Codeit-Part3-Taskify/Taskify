@@ -15,7 +15,7 @@ export default function Cards({ columnInfo }: Props) {
     queryFn: () => readCardList(columnInfo.id)
   });
   return (
-    <section className="flex flex-col gap-[1.6rem]">
+    <section className="flex flex-col gap-[1rem] tablet:gap-[1.6rem]">
       <AddCard columnInfo={columnInfo} />
       {data?.cards?.map(
         (card: CardData) =>
