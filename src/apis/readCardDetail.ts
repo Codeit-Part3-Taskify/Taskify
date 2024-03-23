@@ -1,9 +1,8 @@
+import { CardData } from 'src/types/cardTypes';
 import axios from './axiosInstance';
 
-// 임시
-// react-query과 관련이 없도록 사용
 const readCardDetail = async (cardId: number) => {
-  const { data } = await axios.get(`cards/${cardId}`);
+  const { data } = await axios.get<CardData>(`cards/${cardId}`);
   return data;
 };
 

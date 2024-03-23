@@ -16,10 +16,9 @@ import ReactDatePicker from 'react-datepicker';
 import calendar from 'src/assets/images/calendar.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import plusBtn from 'src/assets/images/plus.svg';
+import { BasicStyle } from 'src/constants/inputstyle';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
-
-const BasicStyle = `w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] p-[1.5rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]`;
 
 export default function updateCard() {
   const [modal, setModal] = useAtom(modalAtom);

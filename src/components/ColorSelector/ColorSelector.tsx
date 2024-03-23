@@ -1,20 +1,22 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import CheckIcon from 'src/assets/images/check.svg';
 import { COLOR_VARIANTS } from 'src/constants/colors';
 
 interface ColorSelectorProps {
   selectedColor: string;
   setSelectedColor: Dispatch<SetStateAction<string>>;
+  customStyle: string;
 }
 
 export default function ColorSelector({
   selectedColor,
-  setSelectedColor
+  setSelectedColor,
+  customStyle
 }: ColorSelectorProps) {
   const colors = ['#7AC555', '#760DDE', '#FFA500', '#76A5EA', '#E876EA'];
 
   return (
-    <div className="flex gap-4">
+    <div className={`${customStyle} gap-4`}>
       {colors.map(color => (
         <button
           key={color}
@@ -24,9 +26,9 @@ export default function ColorSelector({
           onClick={() => setSelectedColor(color)}
           type="button"
         >
-          {selectedColor === `${color}` ? (
+          {selectedColor === color && (
             <img width={24} height={24} src={CheckIcon} alt="체크 아이콘" />
-          ) : null}
+          )}
         </button>
       ))}
     </div>

@@ -1,8 +1,7 @@
+import { BasicStyle } from 'src/constants/inputstyle';
 import useCreateColumn from 'src/hooks/useCreateColumn';
 import ModalSubmitButton from 'src/components/Buttons/ModalSubmitButton';
 import ModalResetButton from '../../Buttons/ModalResetButton';
-
-const BasicStyle = `w-[48.4rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]`;
 
 export default function CreateColumn() {
   const { handleSubmit, submit, register, watch } = useCreateColumn();
