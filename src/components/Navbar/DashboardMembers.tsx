@@ -1,74 +1,36 @@
-import { Params, useParams } from 'react-router-dom';
-import getDashboardMembers from 'src/apis/getDashboardMembers';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import useCalcVisibleMembers from 'src/hooks/useCalcVisibleMembers';
 import Profile from '../Profile/Profile';
 
 export default function DashboardMemebers() {
-  const [visibleMembersCount, setVisibleMembersCount] = useState(4);
-  const [invisibleMembersCount, setInvisibleMembersCount] = useState(0);
-  const [isDesktopView, setIsDesktopView] = useState(true);
-  const { boardId } = useParams<Params>();
-
-  const { data } = useQuery({
-    queryKey: ['navDashboardMembers', boardId],
-    queryFn: () => getDashboardMembers(boardId)
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1200) {
-        // 데스크톱
-        setIsDesktopView(true);
-        setVisibleMembersCount(4);
-      } else {
-        // 태블릿, 모바일
-        setIsDesktopView(false);
-        setVisibleMembersCount(2);
-      }
-    };
-
-    // 컴포넌트 마운트 시 리사이즈 이벤트 리스너 추가
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    // 축약 멤버 수 결정
-    const totalCount = data?.totalCount ?? 1;
-    setInvisibleMembersCount(totalCount - visibleMembersCount);
-
-    // 컴포넌트 언마운트 시 리사이즈 이벤트 리스너 제거
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isDesktopView, data]);
+  const { data, visibleMembersCount, invisibleMembersCount } =
+    useCalcVisibleMembers();
 
   return (
-    <div className="flex items-center tablet:ml-[0.8rem] ml-[0.4rem] desktop:w-[15.7rem] tablet:w-[9.7rem] w-[8.5rem]">
-      {data?.members.map((member, index) => (
+    <div className="flex items-center justify-end tablet:ml-[0.8rem] ml-[0.4rem] z-5">
+      {data?.members.slice(0, visibleMembersCount).map((member, index) => (
         <div className="relative">
-          {index < visibleMembersCount ? (
-            <div
-              key={member.id}
-              className="relative"
-              style={{
-                left: `${index * -8}px`,
-                zIndex: index + 1
-              }}
-            >
-              <Profile
-                size="basicSize"
-                profileImgSrc={member.profileImageUrl}
-                userName={member.nickname}
-                border="white"
-                isNameVisible="invisible"
-              />
-            </div>
-          ) : null}
+          <div
+            key={member.id}
+            className="relative"
+            style={{
+              marginRight: `${index - 10}px`,
+              zIndex: index + 1
+            }}
+          >
+            <Profile
+              size="basicSize"
+              profileImgSrc={member.profileImageUrl}
+              userName={member.nickname}
+              border="white"
+              isNameVisible="invisible"
+            />
+          </div>
         </div>
       ))}
       {invisibleMembersCount > 0 ? (
         <div
           className="relative"
           style={{
-            left: `${visibleMembersCount * -8}px`,
             zIndex: visibleMembersCount + 1
           }}
         >

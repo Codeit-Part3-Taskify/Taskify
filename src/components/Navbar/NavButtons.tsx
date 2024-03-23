@@ -1,13 +1,21 @@
 import setting from 'src/assets/images/setting.svg';
 import addBox from 'src/assets/images/add-box.svg';
+import { useSetAtom } from 'jotai';
+import { modalAtom } from 'src/store/store';
+import { Params, useNavigate, useParams } from 'react-router-dom';
 import Button from '../Buttons/Button';
 
 export default function NavButtons() {
+  const setModal = useSetAtom(modalAtom);
+  const navigate = useNavigate();
+  const { boardId } = useParams<Params>();
+
   return (
     <div className="flex desktop:gap-[1.6rem] tablet:gap-[1.2rem] gap-[0.6rem] text-gray_787486">
       <Button
         variant="ghost"
         type="button"
+        onClick={() => navigate(`/dashboard/${boardId}/edit`)}
         prefix={
           <img src={setting} alt="톱니 이미지" className="hidden tablet:flex" />
         }
@@ -18,6 +26,13 @@ export default function NavButtons() {
       <Button
         variant="ghost"
         type="button"
+        onClick={() =>
+          setModal(prev => ({
+            ...prev,
+            name: 'inviteMember',
+            status: true
+          }))
+        }
         prefix={
           <img
             src={addBox}
