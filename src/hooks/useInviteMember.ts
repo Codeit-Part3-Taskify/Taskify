@@ -35,7 +35,6 @@ export default function useInviteMember() {
     },
 
     onError: error => {
-      console.log(error);
       if (axios.isAxiosError(error)) {
         setErrorMessage(error?.response?.data.message);
       }
