@@ -1,7 +1,12 @@
+import { useMutation } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 import { useState } from 'react';
-import Button from '../Buttons/Button';
+import { modalAtom } from 'src/store/store';
+import postSignUp from '../../apis/postSignUp';
 import eye from '../../assets/images/eye.svg';
 import noneEye from '../../assets/images/none-eye.svg';
+import Button from '../Buttons/Button';
+import Modal from '../Layout/Modal';
 
 export default function SignUpForm() {
   const [showEmailError, setShowEmailError] = useState<string | null>(null);
@@ -9,6 +14,8 @@ export default function SignUpForm() {
     null
   );
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showNicknameError, setShowNicknameError] = useState<string | null>(
     null
@@ -17,6 +24,7 @@ export default function SignUpForm() {
     string | null
   >(null);
   const [agree, setAgree] = useState(false);
+  const setModal = useSetAtom(modalAtom);
 
   const EmailError = (e: React.FocusEvent<HTMLInputElement>) => {
     if (e.target.validity.typeMismatch) {
@@ -49,9 +57,23 @@ export default function SignUpForm() {
       setShowConfirmPasswordError('');
     }
   };
+  const { mutate } = useMutation({
+    mutationFn: postSignUp as any,
+    onSuccess: () => {
+      alert('회원가입이 완료되었습니다.');
+    },
+    onError: () => {
+      alert('회원가입에 실패했습니다.');
+    }
+  });
 
   const handleAgree = () => {
     setAgree(!agree);
+  };
+  const handlePostSignUp = () => {
+    const user = { email, nickname, password };
+    mutate(user as any);
+    setModal(prev => ({ ...prev, status: true, name: 'signUpConfirm' }));
   };
 
   return (
@@ -64,6 +86,7 @@ export default function SignUpForm() {
         type="email"
         className={`basicinput w-[52rem] border ${showEmailError ? 'border-red-500' : ''}`}
         onBlur={EmailError}
+        onChange={e => setEmail(e.target.value)}
       />
       {showEmailError && (
         <div className="text-red-500 text-[1.4rem]">{showEmailError}</div>
@@ -77,6 +100,7 @@ export default function SignUpForm() {
         className={`basicinput w-[52rem] border ${showNicknameError ? 'border-red-500' : ''}`}
         placeholder="닉네임을 입력해주세요."
         onBlur={NicknameError}
+        onChange={e => setNickname(e.target.value)}
       />
       {showNicknameError && (
         <div className="text-red-500 text-[1.4rem]">{showNicknameError}</div>
@@ -153,9 +177,11 @@ export default function SignUpForm() {
           !!showConfirmPasswordError ||
           !agree
         }
+        onClick={handlePostSignUp}
       >
         가입하기
       </Button>
+      <Modal />
     </div>
   );
 }
