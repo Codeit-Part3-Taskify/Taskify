@@ -2,20 +2,26 @@ import { useEffect, useState } from 'react';
 
 interface ProfileProps {
   profileImgSrc?: string | null;
-  email?: string;
   userName?: string;
-  isSmall?: boolean;
+  size: 'basicSize' | 'smallSize';
 }
-const basicSize = 'w-[3.8rem] h-[3.8rem]';
-const smallSize = 'w-[3.4rem] h-[3.4rem]';
+
+const profile = {
+  basicSize: 'tablet:w-[3.8rem] tablet:h-[3.8rem] w-[3.4rem] h-[3.4rem]',
+  smallSize: 'w-[3.4rem] h-[3.4rem]'
+};
+const text = {
+  basicSize: 'tablet:text-[1.6rem] text-[1.4rem]',
+  smallSize: 'text-[1.4rem]'
+};
+
 export default function Profile({
   profileImgSrc,
-  email = 'Test@codeit.kr',
-  userName = '코드잇',
-  isSmall
+  userName,
+  size = 'basicSize'
 }: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
-  const firstLetterOfEmail = email?.charAt(0).toUpperCase();
+  const firstLetterOfNickName = userName?.charAt(0).toUpperCase();
 
   useEffect(() => {
     // profileImgSrc 없을 시 랜덤 배경색
@@ -30,26 +36,30 @@ export default function Profile({
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="flex items-center justify-center tablet:gap-[1.2rem] gap-[0.8rem]">
       <div className="relative">
         {profileImgSrc ? (
           <img
-            className={`rounded-full ${isSmall ? smallSize : basicSize}`}
+            className={`rounded-full ${profile[size]}`}
             src={profileImgSrc}
             alt="프로필 이미지"
           />
         ) : (
           <>
             <div
-              className={`${randomBgColor} rounded-full  ${isSmall ? smallSize : basicSize}`}
+              className={`${randomBgColor} rounded-full  ${profile[size]}`}
             />
-            <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-[1.6rem] font-semibold text-white">
-              {firstLetterOfEmail}
+            <span
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${text[size]} font-semibold text-white`}
+            >
+              {firstLetterOfNickName}
             </span>
           </>
         )}
       </div>
-      {userName ? <span className="text-[1.6rem]">{userName}</span> : null}
+      {userName ? (
+        <span className="tablet:text-[1.6rem] text-[1.4rem]">{userName}</span>
+      ) : null}
     </div>
   );
 }

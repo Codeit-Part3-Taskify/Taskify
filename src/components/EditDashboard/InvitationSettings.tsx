@@ -18,10 +18,12 @@ export default function InvitationSettings() {
   const setModal = useSetAtom(modalAtom);
 
   return (
-    <section className=" pt-[2.9rem] pb-[0.4rem] bg-white rounded-[0.8rem] w-[62rem] h-[50rem]">
-      <div className="flex items-center justify-between px-[2.8rem]">
-        <h1 className="text-[2.4rem] font-bold">초대 내역</h1>
-        <div className="flex gap-[1.6rem]">
+    <section className="tablet:pt-[2.8rem] pt-[2.4rem] pb-[0.4rem] bg-white rounded-[0.8rem]  desktop:w-[62rem] tablet:w-[54.4rem] mobile:w-[28.4rem] tablet:min-h-[20rem] min-h-[17rem]">
+      <div className="flex items-center justify-between tablet:px-[2.8rem] px-[2rem]">
+        <h1 className="tablet:text-[2.4rem] text-[2rem] font-bold">
+          초대 내역
+        </h1>
+        <div className="flex flex-row tablet:gap-[1.6rem] relative tablet:static">
           <PagenationButtons
             allPage={allPage}
             nowPage={nowPage}
@@ -30,10 +32,10 @@ export default function InvitationSettings() {
           />
           <Button
             variant="primary"
-            customStyles="gap-[0.8rem] px-[1.6rem] py-[0.8rem] text-[1.4rem] rounded-[0.4rem]"
+            customStyles="absolute right-0 top-[4.8rem] tablet:static tablet:gap-[0.8rem] gap-[0.6rem] tablet:px-[1.6rem] px-[1.2rem] tablet:py-[0.8rem] py-[0.7rem] tablet:text-[1.4rem] text-[1.2rem] rounded-[0.4rem]"
             prefix={
               <img
-                className="w-[1.6rem] h-[1.6rem]"
+                className="tablet:w-[1.6rem] tablet:h-[1.6rem] w-[1.4rem] h-[1.4rem]"
                 src={AddBoxIcon}
                 alt="추가하기 박스 아이콘"
               />
@@ -50,12 +52,20 @@ export default function InvitationSettings() {
           </Button>
         </div>
       </div>
-      <div className="text-[1.6rem] pt-[2.7rem] rounded-[0.4rem]">
-        <h2 className="px-[2.8rem] mb-[0.8rem] text-gray_9FA6B2">이름</h2>
-        <InviteList
-          invitations={data?.invitations}
-          handleDeleteButtonClick={handleDeleteButtonClick}
-        />
+      <div className="tablet:text-[1.6rem] text-[1.4rem] tablet:pt-[2.8rem] pt-[1.8rem] rounded-[0.4rem]">
+        <h2 className="tablet:px-[2.8rem] px-[2rem] mb-[0.8rem] text-gray_9FA6B2">
+          이메일
+        </h2>
+        {data?.invitations.length === 0 || !data ? (
+          <div className="w-[100%] text-center mt-[2.5rem] tablet:mt-0">
+            <p>초대 내역이 없습니다.</p>
+          </div>
+        ) : (
+          <InviteList
+            invitations={data?.invitations}
+            handleDeleteButtonClick={handleDeleteButtonClick}
+          />
+        )}
       </div>
     </section>
   );
