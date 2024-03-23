@@ -18,7 +18,7 @@ export default function InvitationSettings() {
   const setModal = useSetAtom(modalAtom);
 
   return (
-    <section className="tablet:pt-[2.8rem] pt-[2.4rem] pb-[0.4rem] bg-white rounded-[0.8rem]  desktop:w-[62rem] tablet:w-[54.4rem] mobile:w-[28.4rem] tablet:h-[48.1rem] h-[41rem]">
+    <section className="tablet:pt-[2.8rem] pt-[2.4rem] pb-[0.4rem] bg-white rounded-[0.8rem]  desktop:w-[62rem] tablet:w-[54.4rem] mobile:w-[28.4rem] tablet:h-[48.5rem] h-[41rem]">
       <div className="flex items-center justify-between tablet:px-[2.8rem] px-[2rem]">
         <h1 className="tablet:text-[2.4rem] text-[2rem] font-bold">
           초대 내역
