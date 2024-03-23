@@ -37,7 +37,7 @@ export default function Card({ cardData, columnInfo }: Prop) {
           <img
             src={cardData.imageUrl}
             alt="이미지"
-            className="w-[26rem] h-[15rem] mb-[1rem] rounded-[0.6rem] tablet:w-[9.1rem] tablet:h-[6.3rem] tablet:m-0 desktop:w-[27.4rem] desktop:h-[12.8rem]"
+            className="w-[26rem] h-[15rem] mb-[1rem] rounded-[0.6rem] tablet:w-[9.1rem] tablet:h-[6.3rem] tablet:m-0 desktop:w-[27.4rem] desktop:h-[16rem]"
           />
         </div>
       )}

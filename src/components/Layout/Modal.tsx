@@ -10,12 +10,13 @@ import InviteMember from 'src/components/Modal/InviteMember';
 import ManageColumn from 'src/components/Modal/Column/ManageColumn';
 import UpdateCard from 'src/components/Modal/Card/UpdateCard';
 import ModalContainer from '../Modal/Container/ModalContainer';
+import CardDetail from '../Modal/Card/CardDetail';
 
 const modalList = {
   '': '',
   alertDeleteCard: <AlertDeleteCard />,
   alertPassword: <AlertPassword />,
-  cardDetail: <CreateCard />,
+  cardDetail: <CardDetail />,
   createCard: <CreateCard />,
   createColumn: <CreateColumn />,
   createDashboard: <CreateDashBoard />,
