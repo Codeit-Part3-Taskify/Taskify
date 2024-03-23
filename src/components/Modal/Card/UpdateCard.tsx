@@ -102,13 +102,15 @@ export default function updateCard() {
     if (!imageValue) {
       const body = { ...formData, imageUrl: undefined };
       await updateCardMutation({ cardId: modal.cardId, body });
+    } else if (typeof formData.imageUrl === 'string') {
+      updateCardMutation({ cardId: modal.cardId, body: formData });
     } else {
       const { imageUrl } = await uploadCardImage(
         modal.columnId,
         formData.imageUrl
       );
       const body = { ...formData, imageUrl };
-      await updateCardMutation({ cardId: modal.cardId, body });
+      updateCardMutation({ cardId: modal.cardId, body });
     }
     setModal(prev => ({ ...prev, status: false }));
   };
@@ -240,12 +242,12 @@ export default function updateCard() {
               placeholder="입력 후 엔터."
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
-              // 타입 찾아야 함
-              onKeyDown={(e: any) => {
+              onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
                 if (e.key === 'Enter') {
+                  const inputElement = e.target as HTMLInputElement;
                   e.preventDefault();
-                  setTagList(prev => [...(prev as any), tagValue]);
-                  const list = [...(tagList as any), e.target.value];
+                  setTagList(prev => [...(prev as string[]), tagValue]);
+                  const list = [...(tagList as string[]), inputElement.value];
                   setValue('tags', list);
                   setTagValue('');
                 }
@@ -275,6 +277,7 @@ export default function updateCard() {
             </label>
           )}
           <input
+            accept="image/*"
             type="file"
             id="image"
             className="hidden"
