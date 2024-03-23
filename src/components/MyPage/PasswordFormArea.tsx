@@ -34,18 +34,13 @@ export default function PasswordFormArea() {
 
   const { mutate } = useMutation({
     mutationFn: postPassword,
-    onSuccess: () => {
-      alert('비밀번호가 변경되었습니다.');
-    },
-    onError: () => {
-      alert('비밀번호 변경에 실패했습니다.');
-    }
+    onSuccess: () => {},
+    onError: () => {}
   });
   const handlePostPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (newPassword !== confirmNewPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
       return;
     }
     console.log(mutate);

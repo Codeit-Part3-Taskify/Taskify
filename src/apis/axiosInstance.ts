@@ -4,8 +4,6 @@ import axios from 'axios';
 import { TEAM } from 'src/constants/common';
 import handleError from 'src/utils/handleError';
 
-const accessToken = localStorage.getItem('accessToken');
-
 // 임시 토큰
 // localStorage.getItem('accessToken');
 
@@ -17,6 +15,7 @@ const axiosInstance = axios.create({
 // 요청 인터셉터 추가
 axiosInstance.interceptors.request.use(
   config => {
+    const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
       console.log(accessToken);
