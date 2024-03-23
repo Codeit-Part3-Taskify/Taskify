@@ -187,6 +187,7 @@ export default function CreateCard() {
               onChange={e => setTagValue(e.target.value)}
               // 타입 찾아야 함
               onKeyDown={(e: any) => {
+                if (e.nativeEvent.isComposing) return;
                 if (e.key === 'Enter') {
                   e.preventDefault();
                   setTagList(prev => [...prev, tagValue]);
