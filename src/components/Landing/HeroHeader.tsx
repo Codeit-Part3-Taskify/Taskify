@@ -8,12 +8,12 @@ export default function HeroHeader() {
   const navigate = useNavigate();
 
   return (
-    <header className="text-white mb-[18.4rem]">
+    <header className="text-white tablet:mb-[18.4rem] mb-[8rem]">
       <LandingNavBar />
       <div className="flex flex-col items-center justify-center w-screen">
         <img
           src={landing}
-          className="w-screen mt-[9.4rem] mb-[4.82rem] desktop:w-[72.2rem] tablet:w-[53.7rem] tablet:px-0 px-[4.4rem] max-w-[62.5rem] tablet:max-w-none"
+          className="w-screen mt-[9.4rem] tablet:mb-[4.82rem] mb-[2.6rem] desktop:w-[72.2rem] tablet:w-[53.7rem] tablet:px-0 px-[4.4rem] max-w-[62.5rem] tablet:max-w-none"
           alt="랜딩 이미지"
         />
         <div className="flex tablet:flex-row flex-col items-center desktop:gap-[2.8rem] tablet:gap-[2.4rem] gap-[0.5rem]">
@@ -26,13 +26,13 @@ export default function HeroHeader() {
             className="desktop:w-[32.7rem] tablet:w-[25.3rem] w-[15rem]"
           />
         </div>
-        <p className="mt-[2.4rem] mb-[6.6rem] text-[1.8rem]">
+        <p className="tablet:mt-[2.4rem] mt-[1.8rem] tablet:mb-[6.6rem] mb-[7rem] text-[1.8rem]">
           서비스의 메인 설명 들어갑니다.
         </p>
         <Button
           variant="primary"
           type="button"
-          customStyles="text-[1.8rem] font-medium w-[28rem] py-[1.5rem] rounded-[0.8rem]"
+          customStyles="desktop:text-[1.8rem] tablet:text-[1.6rem] text-[1.4rem] font-medium w-[28rem] tablet:py-[1.5rem] py-[1.3rem] rounded-[0.8rem]"
           onClick={() => navigate('/login')}
         >
           로그인하기

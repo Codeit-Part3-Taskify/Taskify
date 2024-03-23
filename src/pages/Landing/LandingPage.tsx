@@ -4,7 +4,7 @@ import MainArticle from 'src/components/Landing/MainArticle';
 
 export default function LandingPage() {
   return (
-    <div className="w-screen h-[100%] bg-black">
+    <div className="w-[100%] h-[100%] bg-black">
       <HeroHeader />
       <MainArticle />
       <Footer />
