@@ -1,23 +1,20 @@
-import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { modalAtom } from 'src/store/store';
 import { createColumn } from 'src/apis/createColumn';
-import readColumnList from 'src/apis/readColumnList';
 import { ColumnData } from 'src/types/columnTypes';
-import { Params, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import checkColumnName from 'src/utils/checkColumnName';
 
 export default function useCreateColumn() {
-  const [value, setValue] = useState('');
-  const { boardId } = useParams<Params>();
+  const { register, watch, handleSubmit } = useForm<{ title: string }>({
+    mode: 'onSubmit'
+  });
   const queryClient = useQueryClient();
   const setModalState = useSetAtom(modalAtom);
-
-  const { data } = useQuery({
-    queryKey: ['readColumnList', boardId],
-    queryFn: () => readColumnList(boardId as string)
-  });
-
+  const { boardId } = useParams();
+  const data = checkColumnName(boardId);
   const { mutateAsync: createColumnMutation } = useMutation<
     void,
     Error,
@@ -32,14 +29,12 @@ export default function useCreateColumn() {
     }
   });
 
-  const handleSubmit = (e: React.BaseSyntheticEvent) => {
-    e.preventDefault();
-    const title = e.target['name'].value;
+  const submit = (formData: { title: string }) => {
     const result = data.data.some(
-      (column: ColumnData) => title === column.title
+      (column: ColumnData) => formData.title === column.title
     );
     const body = {
-      title,
+      title: formData.title,
       dashboardId: Number(boardId)
     };
 
@@ -52,5 +47,5 @@ export default function useCreateColumn() {
     }
   };
 
-  return { handleSubmit, value, setValue };
+  return { handleSubmit, submit, register, watch };
 }

@@ -3,19 +3,16 @@ import { atom } from 'jotai';
 import { ModalType } from 'src/types/modalTypes';
 import getDashboards from '../apis/getDashboards';
 
-export const dashboardsAtom = atomWithQuery(() => ({
-  queryKey: ['dashboards'],
-  queryFn: () => getDashboards()
-}));
-
 export const modalAtom = atom<{
   status: boolean;
   name: ModalType;
   columnId: number;
   columnTitle: ModalType | string;
+  cardId: number;
 }>({
   status: false,
   name: '',
   columnId: 0,
-  columnTitle: ''
+  columnTitle: '',
+  cardId: 0
 });

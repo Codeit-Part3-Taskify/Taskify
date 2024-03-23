@@ -1,10 +1,7 @@
 import { PostCard } from 'src/types/cardTypes';
-import axiosInstance from './axiosInstance';
-import { Authorization } from './readCardList';
+import axios from './axiosInstance';
 
 export const createCard = async (body: PostCard) => {
-  const { data } = await axiosInstance.post('cards', body, {
-    headers: { Authorization }
-  });
+  const { data } = await axios.post('cards', body);
   return data;
 };
