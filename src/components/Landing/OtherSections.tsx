@@ -4,7 +4,7 @@ import editDashboardMembers from 'src/assets/images/edit-members.png';
 
 export default function OtherSections() {
   return (
-    <div className="flex flex-col gap-[3.6rem] desktop:max-w-[120rem] desktop:min-w-[100rem] desktop:w-[calc(100vw-72rem)] desktop:h-[60rem] tablet:max-w-[10rem] tablet:w-[calc(100vw-8rem)]">
+    <div className="flex flex-col gap-[3.6rem] desktop:max-w-[120rem] desktop:min-w-[100rem] desktop:w-[calc(100vw-72rem)] desktop:h-[60rem] tablet:max-w-[100rem] tablet:w-[calc(100vw-8rem)]">
       <h1 className="text-[2.8rem] font-bold">
         생산성을 높이는 다양한 설정 ⚡️
       </h1>
