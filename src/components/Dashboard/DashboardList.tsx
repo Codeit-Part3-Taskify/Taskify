@@ -24,6 +24,7 @@ export default function DashboardList() {
         nowPage={nowPage}
         handleBackwardButtonClick={handleBackwardButtonClick}
         handleForwardButtonClick={handleForwardButtonClick}
+        isSidebar
       />
     </div>
   );

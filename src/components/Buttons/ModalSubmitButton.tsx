@@ -15,7 +15,7 @@ export default function ModalSubmitButton({
     <Button
       variant="primary"
       type="submit"
-      customStyles="w-[12rem] h-[4.8rem] rounded-[0.8rem] font-medium text-[1.6rem]"
+      customStyles="tablet:w-[12rem] tablet:h-[4.8rem] w-[13.8rem] h-[4.2rem] rounded-[0.8rem] font-medium tablet:text-[1.6rem] text-[1.4rem]"
       disabled={disabled}
       onClick={onClick}
     >
