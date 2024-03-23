@@ -8,8 +8,8 @@ export default function OtherSections() {
       <h1 className="desktop:text-start text-center tablet:text-[2.8rem] text-[2.2rem] font-bold">
         생산성을 높이는 다양한 설정 ⚡️
       </h1>
-      <div className="flex flex-col items-center desktop:flex-row desktop:justify-between desktop:gap-[1.5rem] tablet:gap-[4.8rem] gap-[4.05rem] desktop:max-w-[120rem] desktop:min-w-[100rem] desktop:w-[calc(100vw-72rem)] w-[calc(100vw-3.2rem)]">
-        <section className="bg-black_171717 rounded-[0.8rem] w-[37.8rem] overflow-hidden">
+      <div className="flex flex-col items-center desktop:flex-row desktop:justify-between desktop:gap-[1.5rem] tablet:gap-[4.8rem] gap-[4.05rem] desktop:max-w-[120rem] desktop:min-w-[100rem] desktop:w-[calc(100vw-72rem)]">
+        <section className="bg-black_171717 rounded-[0.8rem] max-w-[37.8rem] w-[calc(100vw-3.2rem)] overflow-hidden">
           <div className="flex justify-center items-center bg-black_4B4B4B h-[26rem]">
             <img
               src={editDashboardTitle}
@@ -24,7 +24,7 @@ export default function OtherSections() {
             </p>
           </div>
         </section>
-        <section className="bg-black_171717 rounded-[0.8rem] w-[37.8rem] overflow-hidden">
+        <section className="bg-black_171717 rounded-[0.8rem] max-w-[37.8rem] w-[calc(100vw-3.2rem)] overflow-hidden">
           <div className="flex justify-center items-center bg-black_4B4B4B h-[26rem]">
             <img
               src={invitationSettins}
@@ -37,7 +37,7 @@ export default function OtherSections() {
             <p className="text-[1.6rem]">새로운 팀원을 초대할 수 있어요.</p>
           </div>
         </section>
-        <section className="bg-black_171717 rounded-[0.8rem] w-[37.8rem] overflow-hidden">
+        <section className="bg-black_171717 rounded-[0.8rem] max-w-[37.8rem] w-[calc(100vw-3.2rem)] overflow-hidden">
           <div className="flex justify-center items-center bg-black_4B4B4B h-[26rem]">
             <img
               src={editDashboardMembers}
