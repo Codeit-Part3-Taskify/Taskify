@@ -1,6 +1,7 @@
 import envelope from 'src/assets/images/envelope.svg';
 import facebook from 'src/assets/images/facebook.svg';
 import instagram from 'src/assets/images/instagram.svg';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -11,21 +12,27 @@ export default function Footer() {
         <p>FAQ</p>
       </div>
       <div className="flex gap-[1.4rem]">
-        <img
-          src={envelope}
-          alt="메일 아이콘"
-          className="tablet:w-[2rem] tablet:h-[2rem] w-[1.8rem] h-[1.8rem]"
-        />
-        <img
-          src={facebook}
-          alt="페이스북 아이콘"
-          className="tablet:w-[2rem] tablet:h-[2rem] w-[1.8rem] h-[1.8rem]"
-        />
-        <img
-          src={instagram}
-          alt="인스타그램 아이콘"
-          className="tablet:w-[2rem] tablet:h-[2rem] w-[1.8rem] h-[1.8rem]"
-        />
+        <a href="mailto:Taskify@codeit.com">
+          <img
+            src={envelope}
+            alt="메일 아이콘"
+            className="tablet:w-[2rem] tablet:h-[2rem] w-[1.8rem] h-[1.8rem]"
+          />
+        </a>
+        <Link to="https://www.facebook.com/">
+          <img
+            src={facebook}
+            alt="페이스북 아이콘"
+            className="tablet:w-[2rem] tablet:h-[2rem] w-[1.8rem] h-[1.8rem]"
+          />
+        </Link>
+        <Link to="https://www.instagram.com/">
+          <img
+            src={instagram}
+            alt="인스타그램 아이콘"
+            className="tablet:w-[2rem] tablet:h-[2rem] w-[1.8rem] h-[1.8rem]"
+          />
+        </Link>
       </div>
     </footer>
   );
