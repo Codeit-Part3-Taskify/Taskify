@@ -4,7 +4,25 @@ interface ProfileProps {
   profileImgSrc?: string | null;
   userName?: string;
   size: 'basicSize' | 'smallSize';
+  border: 'white' | 'none';
+  isNameVisible?:
+    | 'visible'
+    | 'invisible'
+    | 'mobileInvisible'
+    | 'tabletInvisible';
 }
+
+const userNameVisible = {
+  visible: '',
+  invisible: 'hidden',
+  mobileInvisible: 'hidden tablet:flex',
+  tabletInvisible: 'hidden desktop:flex'
+};
+
+const borderColor = {
+  white: 'border border-[0.2rem] border-white',
+  none: ''
+};
 
 const profile = {
   basicSize: 'tablet:w-[3.8rem] tablet:h-[3.8rem] w-[3.4rem] h-[3.4rem]',
@@ -18,7 +36,9 @@ const text = {
 export default function Profile({
   profileImgSrc,
   userName,
-  size = 'basicSize'
+  size = 'basicSize',
+  border = 'none',
+  isNameVisible = 'visible'
 }: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
   const firstLetterOfNickName = userName?.charAt(0).toUpperCase();
@@ -40,14 +60,14 @@ export default function Profile({
       <div className="relative">
         {profileImgSrc ? (
           <img
-            className={`rounded-full ${profile[size]}`}
+            className={`rounded-full ${profile[size]} ${borderColor[border]}`}
             src={profileImgSrc}
             alt="프로필 이미지"
           />
         ) : (
           <>
             <div
-              className={`${randomBgColor} rounded-full  ${profile[size]}`}
+              className={`${randomBgColor} rounded-full  ${profile[size]}  ${borderColor[border]}`}
             />
             <span
               className={`absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${text[size]} font-semibold text-white`}
@@ -57,9 +77,11 @@ export default function Profile({
           </>
         )}
       </div>
-      {userName ? (
-        <span className="tablet:text-[1.6rem] text-[1.4rem]">{userName}</span>
-      ) : null}
+      <span
+        className={`tablet:text-[1.6rem] text-[1.4rem] ${userNameVisible[isNameVisible]}`}
+      >
+        {userName}
+      </span>
     </div>
   );
 }

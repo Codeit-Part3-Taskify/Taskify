@@ -21,10 +21,11 @@ export default function DashboardMemberList({
           >
             <Profile
               size="basicSize"
+              border="none"
               profileImgSrc={member.profileImageUrl}
               userName={member.nickname}
             />
-            {index !== 0 ? (
+            {member.isOwner ? null : (
               <Button
                 variant="secondary"
                 type="button"
@@ -33,7 +34,7 @@ export default function DashboardMemberList({
               >
                 삭제
               </Button>
-            ) : null}
+            )}
           </div>
           {index !== members.length - 1 && (
             <svg

@@ -13,7 +13,8 @@ export const usePagenationDashboardMembers = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ['dashboardMembers', boardId, nowPage],
-    queryFn: () => getDashboardMembers(boardId, nowPage)
+    queryFn: () =>
+      getDashboardMembers(boardId, nowPage, PAGENATION_SIZE.DASHBOARD.MEMBERS)
   });
 
   const { mutate, isPending } = useMutation({
@@ -23,6 +24,9 @@ export const usePagenationDashboardMembers = () => {
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ['dashboardMembers', boardId, nowPage]
+      });
+      queryClient.refetchQueries({
+        queryKey: ['navDashboardMembers', boardId]
       });
     }
   });
