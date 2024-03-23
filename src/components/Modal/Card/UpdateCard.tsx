@@ -1,119 +1,32 @@
-import { BaseSyntheticEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getMemberList } from 'src/apis/getMemberList';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import readCardDetail from 'src/apis/readCardDetail';
-import { Controller, useForm } from 'react-hook-form';
-import moment from 'moment';
-import type { CardData, PostCard } from 'src/types/cardTypes';
-import { modalAtom } from 'src/store/store';
-import { uploadCardImage } from 'src/apis/uploadCardImage';
-import { useAtom } from 'jotai';
-import { updateCardData } from 'src/apis/updateCardData';
+import { Controller } from 'react-hook-form';
 import type { ColumnData } from 'src/types/columnTypes';
-import readColumnList from 'src/apis/readColumnList';
 import ReactDatePicker from 'react-datepicker';
 import calendar from 'src/assets/images/calendar.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import plusBtn from 'src/assets/images/plus.svg';
 import { BasicStyle } from 'src/constants/inputstyle';
+import useUpdateCard from 'src/hooks/useUpdateCard';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
 
 export default function updateCard() {
-  const [modal, setModal] = useAtom(modalAtom);
-  const { boardId } = useParams();
-
-  const { register, setValue, control, handleSubmit, getValues } =
-    useForm<PostCard>({
-      mode: 'onSubmit'
-    });
-  const [tagList, setTagList] = useState<PostCard['tags']>([]);
-  const [imageValue, setImageValue] = useState<PostCard['imageUrl']>();
-
-  useQuery<CardData>({
-    queryKey: ['readCardDetail', modal.cardId],
-    queryFn: async () => {
-      const cardData = await readCardDetail(modal.cardId);
-      for (const [key, value] of Object.entries(cardData) as any) {
-        if (
-          key === 'title' ||
-          key === 'description' ||
-          key === 'dueDate' ||
-          key === 'imageUrl' ||
-          key === 'tags'
-        ) {
-          setValue(key, value);
-          if (key === 'imageUrl') {
-            setImageValue(value);
-          }
-          if (key === 'tags') {
-            setTagList(value);
-          }
-        } else if (key === 'assignee') {
-          setValue('assigneeUserId', value.id);
-        } else if (key === 'columnId') {
-          setValue(key, value);
-        }
-      }
-      return cardData;
-    }
-  });
-
-  const query = useQuery({
-    queryKey: ['readColumnList', boardId],
-    queryFn: () => readColumnList(boardId as string)
-  });
-
-  const queryClient = useQueryClient();
-
-  const { data } = useQuery({
-    queryKey: ['memberList', boardId],
-    queryFn: () => getMemberList(boardId as string)
-  });
-
-  const [selecTedDate, setSelectedDate] = useState(new Date());
-
-  const [tagValue, setTagValue] = useState<string>('');
-
-  const handleChange = (dateChange: Date) => {
-    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD hh:mm'));
-    setSelectedDate(dateChange);
-  };
-
-  const { mutateAsync: updateCardMutation } = useMutation<
-    void,
-    Error,
-    { cardId: number; body: PostCard }
-  >({
-    mutationFn: ({ cardId, body }) => updateCardData(cardId, body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['readCardList'] });
-    }
-  });
-
-  const onChangeImage = (event: BaseSyntheticEvent) => {
-    const imgUrl = URL.createObjectURL(event.target.files[0]);
-    setImageValue(imgUrl);
-    setValue('imageUrl', event.target.files[0]);
-  };
-
-  const submit = async (formData: PostCard) => {
-    if (!imageValue) {
-      const body = { ...formData, imageUrl: undefined };
-      await updateCardMutation({ cardId: modal.cardId, body });
-    } else if (typeof formData.imageUrl === 'string') {
-      updateCardMutation({ cardId: modal.cardId, body: formData });
-    } else {
-      const { imageUrl } = await uploadCardImage(
-        modal.columnId,
-        formData.imageUrl
-      );
-      const body = { ...formData, imageUrl };
-      updateCardMutation({ cardId: modal.cardId, body });
-    }
-    setModal(prev => ({ ...prev, status: false }));
-  };
+  const {
+    handleSubmit,
+    submit,
+    register,
+    query,
+    memberListQeury,
+    control,
+    handleChange,
+    selecTedDate,
+    tagList,
+    setTagValue,
+    tagValue,
+    imageValue,
+    handleChangeImage,
+    setTagList,
+    setValue
+  } = useUpdateCard();
 
   return (
     <>
@@ -153,7 +66,7 @@ export default function updateCard() {
               className="w-[21.7rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]"
               {...register('assigneeUserId', { valueAsNumber: true })}
             >
-              {data?.members.map(member => (
+              {memberListQeury?.members.map(member => (
                 <option key={member.userId} value={member.userId}>
                   {member.nickname}
                 </option>
@@ -242,7 +155,7 @@ export default function updateCard() {
               placeholder="입력 후 엔터."
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
-              onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
                 if (e.key === 'Enter') {
                   const inputElement = e.target as HTMLInputElement;
                   e.preventDefault();
@@ -282,7 +195,7 @@ export default function updateCard() {
             id="image"
             className="hidden"
             {...register('imageUrl')}
-            onChange={onChangeImage}
+            onChange={handleChangeImage}
           />
         </div>
         <div className="flex justify-end gap-[1.2rem]">

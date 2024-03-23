@@ -1,79 +1,30 @@
-import { BaseSyntheticEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getMemberList } from 'src/apis/getMemberList';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Controller, useForm } from 'react-hook-form';
-import moment from 'moment';
-import { createCard } from 'src/apis/createCard';
-import type { PostCard } from 'src/types/cardTypes';
-import { modalAtom } from 'src/store/store';
-import { uploadCardImage } from 'src/apis/uploadCardImage';
-import { useAtom } from 'jotai';
+import { Controller } from 'react-hook-form';
 import ReactDatePicker from 'react-datepicker';
 import calendar from 'src/assets/images/calendar.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import plusBtn from 'src/assets/images/plus.svg';
 import { BasicStyle } from 'src/constants/inputstyle';
+import useCreateCard from 'src/hooks/useCreateCard';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
 
 export default function CreateCard() {
-  const [modal, setModal] = useAtom(modalAtom);
-  const queryClient = useQueryClient();
-  const { boardId } = useParams();
-  const { register, setValue, control, handleSubmit } = useForm<PostCard>({
-    mode: 'onSubmit',
-    defaultValues: {
-      dashboardId: Number(boardId),
-      columnId: modal.columnId
-    }
-  });
-  const { data } = useQuery({
-    queryKey: ['memberList', boardId],
-    queryFn: () => getMemberList(boardId as string)
-  });
-  const [selecTedDate, setSelectedDate] = useState(new Date());
-  const [tagList, setTagList] = useState<string[]>([]);
-  const [tagValue, setTagValue] = useState<string>('');
-  const handleChange = (dateChange: Date) => {
-    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD HH:mm'), {
-      shouldDirty: true
-    });
-    setSelectedDate(dateChange);
-  };
-  const { mutateAsync: createCardMutation } = useMutation<
-    void,
-    Error,
-    PostCard
-  >({
-    mutationFn: body => createCard(body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['readCardList'] });
-    }
-  });
-
-  const [imageValue, setImageValue] = useState('');
-
-  const onChangeImage = (event: BaseSyntheticEvent) => {
-    setImageValue(URL.createObjectURL(event.target.files[0]));
-    setValue('imageUrl', event.target.files[0]);
-  };
-
-  const submit = async (formData: PostCard) => {
-    if (!imageValue) {
-      await createCardMutation({ ...formData, imageUrl: undefined });
-    } else {
-      const { imageUrl } = await uploadCardImage(
-        modal.columnId,
-        formData.imageUrl
-      );
-      await createCardMutation({
-        ...formData,
-        imageUrl
-      });
-    }
-    setModal(prev => ({ ...prev, status: false }));
-  };
+  const {
+    handleSubmit,
+    submit,
+    register,
+    memberListQeury,
+    control,
+    handleChange,
+    selecTedDate,
+    tagList,
+    setTagValue,
+    tagValue,
+    imageValue,
+    handleChangeImage,
+    setTagList,
+    setValue
+  } = useCreateCard();
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
@@ -94,7 +45,7 @@ export default function CreateCard() {
           <option value="" hidden>
             선택해주세요.
           </option>
-          {data?.members.map(member => (
+          {memberListQeury?.members.map(member => (
             <option
               key={member.userId}
               value={member.userId}
@@ -186,11 +137,12 @@ export default function CreateCard() {
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
               // 타입 찾아야 함
-              onKeyUp={(e: any) => {
-                e.preventDefault();
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
                 if (e.key === 'Enter') {
-                  setTagList(prev => [...prev, tagValue]);
-                  const list = [...tagList, e.target.value];
+                  const inputElement = e.target as HTMLInputElement;
+                  e.preventDefault();
+                  setTagList(prev => [...(prev as string[]), tagValue]);
+                  const list = [...(tagList as string[]), inputElement.value];
                   setValue('tags', list);
                   setTagValue('');
                 }
@@ -224,7 +176,7 @@ export default function CreateCard() {
             id="image"
             className="hidden"
             {...register('imageUrl')}
-            onChange={onChangeImage}
+            onChange={handleChangeImage}
           />
         </div>
         <div className="flex justify-end gap-[1.2rem]">
