@@ -8,7 +8,7 @@ export default function AddDashboard() {
   return (
     <Button
       variant="secondary"
-      customStyles="rounded-[0.6rem] gap-[1.2rem] w-[33.2rem] h-[7rem]"
+      customStyles="rounded-[0.6rem] gap-[1.2rem] hover:bg-violet_8 w-[26rem] h-[5.8rem] desktop:w-[33.2rem] desktop:h-[7rem] "
       appendix={
         <img
           src={plusBtn}
@@ -24,7 +24,9 @@ export default function AddDashboard() {
         }))
       }
     >
-      <span className="text-[1.6rem] font-bold">새로운 대시보드</span>
+      <span className="text-[1.4rem] font-bold tablet:text-[1.6rem]">
+        새로운 대시보드
+      </span>
     </Button>
   );
 }

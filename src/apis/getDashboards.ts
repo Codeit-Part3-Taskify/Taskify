@@ -4,13 +4,14 @@ import axios from './axiosInstance';
 
 const getDashboards = async (
   page: number,
+  pageSize: number,
   navigationMethod: string = 'pagination'
 ): Promise<DashboardsResponse> => {
   const dashboardsURL = `dashboards?navigationMethod=${navigationMethod}`;
 
   const { data } = await axios.get<DashboardsResponse>(dashboardsURL, {
     params: {
-      size: PAGENATION_SIZE.DASHBOARD.SIDEBAR,
+      size: pageSize,
       page
     }
   });
