@@ -6,8 +6,13 @@ import MyDashboardPage from '../pages/Dashboard/MyDashboardPage';
 import EditDashboardPage from '../pages/EditDashboard/EditDashboardPage';
 import LogIn from '../pages/LogIn/LogIn';
 import SignUp from '../pages/SignUp/SignUp';
+import LandingPage from '../pages/Landing/LandingPage';
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LandingPage />
+  },
   {
     path: '/',
     element: <Layout />,
