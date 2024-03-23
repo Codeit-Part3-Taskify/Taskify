@@ -32,7 +32,7 @@ export default function HeroHeader() {
         <Button
           variant="primary"
           type="button"
-          customStyles="desktop:text-[1.8rem] tablet:text-[1.6rem] text-[1.4rem] font-medium w-[28rem] tablet:py-[1.5rem] py-[1.3rem] rounded-[0.8rem]"
+          customStyles="desktop:text-[1.8rem] tablet:text-[1.6rem] text-[1.4rem] font-medium tablet:w-[28rem] w-[23.5rem] tablet:py-[1.5rem] py-[1.3rem] rounded-[0.8rem]"
           onClick={() => navigate('/login')}
         >
           로그인하기
