@@ -19,13 +19,15 @@ export default function DashboardList() {
       {dashboards.map((dashboard: Dashboard) => (
         <DashboardItem key={dashboard.id} dashboard={dashboard} />
       ))}
-      <PagenationButtons
-        allPage={allPage}
-        nowPage={nowPage}
-        handleBackwardButtonClick={handleBackwardButtonClick}
-        handleForwardButtonClick={handleForwardButtonClick}
-        isSidebar
-      />
+      <div className="fixed desktop:top-[65rem] tablet:top-[63rem] top-[58rem]">
+        <PagenationButtons
+          allPage={allPage}
+          nowPage={nowPage}
+          handleBackwardButtonClick={handleBackwardButtonClick}
+          handleForwardButtonClick={handleForwardButtonClick}
+          isSidebar
+        />
+      </div>
     </div>
   );
 }
