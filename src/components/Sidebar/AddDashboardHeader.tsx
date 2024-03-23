@@ -18,9 +18,7 @@ export default function AddDashboardHeader() {
           setModal(prev => ({
             ...prev,
             name: 'createDashboard',
-            status: true,
-            columnId: 0,
-            columnTitle: ''
+            status: true
           }))
         }
         role="presentation"

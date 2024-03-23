@@ -35,6 +35,7 @@ export default function CreateDashBoard() {
         <ColorSelector
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
+          customStyle="flex"
         />
         <div className="flex justify-end gap-[1.2rem] mt-[2.8rem]">
           <ModalResetButton>취소</ModalResetButton>

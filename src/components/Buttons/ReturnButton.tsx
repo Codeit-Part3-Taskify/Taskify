@@ -11,12 +11,12 @@ export default function ReturnButton() {
 
   return (
     <button
-      className="flex items-center text-[1.6rem] font-medium"
+      className="flex items-center desktop:text-[1.6rem] mobile:text-[1.4rem] font-medium"
       type="button"
       onClick={handleButtonClick}
     >
       <img
-        className="w-[2rem] h-[2rem]"
+        className="tablet:w-[2rem] tablet:h-[2rem] w-[1.8rem] h-[1.8rem]"
         src={BackwardIcon}
         alt="뒤로가기 아이콘"
       />
