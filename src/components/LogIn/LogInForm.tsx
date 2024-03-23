@@ -1,7 +1,14 @@
+import { useMutation } from '@tanstack/react-query';
+// import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useState } from 'react';
-import Button from '../Buttons/Button';
+import { useNavigate } from 'react-router-dom';
+import { modalAtom, userEmailAtom } from 'src/store/store';
+import postLogIn from '../../apis/postLogIn';
 import eye from '../../assets/images/eye.svg';
 import noneEye from '../../assets/images/none-eye.svg';
+import Button from '../Buttons/Button';
+import Modal from '../Layout/Modal';
 
 export default function LogInForm() {
   const [showEmailError, setShowEmailError] = useState<string | null>(null);
@@ -9,7 +16,15 @@ export default function LogInForm() {
     null
   );
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  // const setUserEmail = useSetAtom(userEmailAtom);
+  const setModal = useSetAtom(modalAtom);
+  //  const userEmail = useAtomValue(userEmailAtom);
+  const [userEmail, setUserEmail] = useAtom(userEmailAtom as any);
+  // const [userEmail, setUserEmail] = useAtom('' as any);
+
   const EmailError = (e: React.FocusEvent<HTMLInputElement>) => {
     if (e.target.validity.typeMismatch) {
       setShowEmailError('이메일 형식으로 작성해주세요.');
@@ -27,6 +42,25 @@ export default function LogInForm() {
   const handleEye = () => {
     setShowPassword(!showPassword);
   };
+  const { mutate } = useMutation({
+    mutationKey: ['user'],
+    mutationFn: postLogIn as any,
+    onSuccess: (data: any) => {
+      console.log(data.accessToken);
+
+      navigate('/mydashboard');
+    },
+    onError: (error: any) => {
+      setModal(prev => ({ ...prev, status: true, name: 'alertPassword' }));
+    }
+  });
+
+  const handlePostLogIn = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setUserEmail('가나다라');
+    console.log(userEmail);
+    console.log(email);
+    mutate({ email, password } as any);
+  };
   return (
     <div className="flex flex-col mt-[3.8rem]">
       <label htmlFor="email" className="text-[1.6rem]">
@@ -38,6 +72,7 @@ export default function LogInForm() {
         className={`basicinput w-[52rem] border ${showEmailError ? 'border-red-500' : ''}`}
         onBlur={EmailError}
         placeholder="이메일을 입력해주세요."
+        onChange={e => setEmail(e.target.value)}
       />
       {showEmailError && (
         <div className="text-red-500 text-[1.4rem]">{showEmailError}</div>
@@ -63,6 +98,7 @@ export default function LogInForm() {
         onBlur={PasswordError}
         minLength={8}
         placeholder="비밀번호를 입력해주세요."
+        onChange={e => setPassword(e.target.value)}
       />
 
       {showPasswordError && (
@@ -72,9 +108,12 @@ export default function LogInForm() {
         variant="primary"
         type="button"
         customStyles="w-[52rem] h-[5rem] text-[1.8rem] rounded-[0.4rem] mb-[2rem] mt-[2rem]"
+        disabled={!email || !password}
+        onClick={handlePostLogIn}
       >
         로그인
       </Button>
+      <Modal />
     </div>
   );
 }

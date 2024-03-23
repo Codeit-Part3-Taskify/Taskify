@@ -8,4 +8,5 @@ export type ModalType =
   | 'createDashboard'
   | 'inviteMember'
   | 'manageColumn'
-  | 'updateCard';
+  | 'updateCard'
+  | 'signUpConfirm';

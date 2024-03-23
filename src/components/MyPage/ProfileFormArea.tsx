@@ -1,9 +1,12 @@
+import { useAtomValue } from 'jotai';
 import { useState } from 'react';
+import { userEmailAtom } from 'src/store/store';
 import Button from '../Buttons/Button';
 
 export default function ProfileFormArea() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
+  const email = useAtomValue(userEmailAtom);
+  console.log(email);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files?.length) {
@@ -50,7 +53,7 @@ export default function ProfileFormArea() {
             className="basicinput w-[36.6rem] mb-[2rem]"
             type="text"
             readOnly
-            value="수정할내용"
+            value={email}
           />
           <label
             htmlFor="NicknameInput"
