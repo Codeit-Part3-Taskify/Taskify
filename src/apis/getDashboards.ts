@@ -1,4 +1,3 @@
-import { PAGENATION_SIZE } from 'src/constants/pagenation';
 import { DashboardsResponse } from '../types/dashboardTypes';
 import axios from './axiosInstance';
 
