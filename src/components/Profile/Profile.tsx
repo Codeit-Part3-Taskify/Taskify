@@ -3,14 +3,22 @@ import { useEffect, useState } from 'react';
 interface ProfileProps {
   profileImgSrc?: string | null;
   userName?: string;
-  isSmall?: boolean;
+  size: 'basicSize' | 'smallSize';
 }
-const basicSize = 'tablet:w-[3.8rem] tablet:h-[3.8rem] w-[3.4rem] h-[3.4rem]';
-const smallSize = 'w-[3.4rem] h-[3.4rem]';
+
+const profile = {
+  basicSize: 'tablet:w-[3.8rem] tablet:h-[3.8rem] w-[3.4rem] h-[3.4rem]',
+  smallSize: 'w-[3.4rem] h-[3.4rem]'
+};
+const text = {
+  basicSize: 'tablet:text-[1.6rem] text-[1.4rem]',
+  smallSize: 'text-[1.4rem]'
+};
+
 export default function Profile({
   profileImgSrc,
   userName,
-  isSmall
+  size = 'basicSize'
 }: ProfileProps) {
   const [randomBgColor, setRandomBgColor] = useState('');
   const firstLetterOfNickName = userName?.charAt(0).toUpperCase();
@@ -32,18 +40,18 @@ export default function Profile({
       <div className="relative">
         {profileImgSrc ? (
           <img
-            className={`rounded-full ${isSmall ? smallSize : basicSize}`}
+            className={`rounded-full ${profile[size]}`}
             src={profileImgSrc}
             alt="프로필 이미지"
           />
         ) : (
           <>
             <div
-              className={`${randomBgColor} rounded-full  ${
-                isSmall ? smallSize : basicSize
-              }`}
+              className={`${randomBgColor} rounded-full  ${profile[size]}`}
             />
-            <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 tablet:text-[1.6rem] text-[1.4rem] font-semibold text-white">
+            <span
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${text[size]} font-semibold text-white`}
+            >
               {firstLetterOfNickName}
             </span>
           </>
