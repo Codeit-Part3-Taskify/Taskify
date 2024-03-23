@@ -1,11 +1,13 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
+
 import { TEAM } from 'src/constants/common';
 import handleError from 'src/utils/handleError';
 
+const accessToken = localStorage.getItem('accessToken');
+
 // 임시 토큰
-const accessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTI3NCwidGVhbUlkIjoiMy01IiwiaWF0IjoxNzEwNTA5OTgzLCJpc3MiOiJzcC10YXNraWZ5In0.bs7A-8tp8FT9PcL1uIvbSQEJJpKEesjHZc8z280ZtCk';
+// localStorage.getItem('accessToken');
 
 const axiosInstance = axios.create({
   baseURL: `https://sp-taskify-api.vercel.app/${TEAM}/`,
@@ -17,6 +19,7 @@ axiosInstance.interceptors.request.use(
   config => {
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
+      console.log(accessToken);
     }
     return config;
   },

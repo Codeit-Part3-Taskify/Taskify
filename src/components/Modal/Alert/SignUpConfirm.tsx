@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import ModalSubmitButton from '../Buttons/ModalSubmitButton';
+import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
 
 export default function SignUpConfirm() {
   return (

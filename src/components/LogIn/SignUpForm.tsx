@@ -60,10 +60,10 @@ export default function SignUpForm() {
   const { mutate } = useMutation({
     mutationFn: postSignUp as any,
     onSuccess: () => {
-      alert('회원가입이 완료되었습니다.');
+      setModal(prev => ({ ...prev, status: true, name: 'signUpConfirm' }));
     },
     onError: () => {
-      alert('회원가입에 실패했습니다.');
+      setModal(prev => ({ ...prev, status: true, name: 'alertEmail' as any }));
     }
   });
 
@@ -73,7 +73,6 @@ export default function SignUpForm() {
   const handlePostSignUp = () => {
     const user = { email, nickname, password };
     mutate(user as any);
-    setModal(prev => ({ ...prev, status: true, name: 'signUpConfirm' }));
   };
 
   return (

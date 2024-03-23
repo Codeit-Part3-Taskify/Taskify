@@ -1,10 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 // import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { modalAtom } from 'src/store/store';
 import postLogIn from '../../apis/postLogIn';
 import eye from '../../assets/images/eye.svg';
 import noneEye from '../../assets/images/none-eye.svg';
 import Button from '../Buttons/Button';
+import Modal from '../Layout/Modal';
 
 export default function LogInForm() {
   const [showEmailError, setShowEmailError] = useState<string | null>(null);
@@ -14,6 +18,8 @@ export default function LogInForm() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const setModal = useSetAtom(modalAtom);
 
   // const [userEmail, setUserEmail] = useAtom('' as any);
 
@@ -39,13 +45,16 @@ export default function LogInForm() {
     mutationFn: postLogIn as any,
     onSuccess: (data: any) => {
       console.log(data.accessToken);
+      navigate('/mydashboard');
+    },
+    onError: (error: any) => {
+      setModal(prev => ({ ...prev, status: true, name: 'alertPassword' }));
     }
   });
 
   const handlePostLogIn = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     mutate({ email, password } as any);
-    // setUserEmail(email);
   };
   return (
     <div className="flex flex-col mt-[3.8rem]">
@@ -99,6 +108,7 @@ export default function LogInForm() {
       >
         로그인
       </Button>
+      <Modal />
     </div>
   );
 }
