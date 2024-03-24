@@ -9,7 +9,6 @@ export default function CommentBox({
 }) {
   const { handleSubmit, submit, register, commentList, deleteClick } =
     useCommentBox(cardInformation);
-  console.log(commentList);
   return (
     <div>
       {commentList && (

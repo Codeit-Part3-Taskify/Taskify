@@ -48,7 +48,6 @@ export default function PasswordFormArea() {
     if (newPassword !== confirmNewPassword) {
       return;
     }
-    console.log(mutate);
     mutate({ password, newPassword } as any);
   };
 
