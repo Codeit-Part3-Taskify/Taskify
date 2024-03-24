@@ -11,11 +11,10 @@ export default function Dashboard() {
     queryKey: ['readColumnList', boardId],
     queryFn: () => readColumnList(boardId as string)
   });
+
   return (
-    <main className="flex flex-col desktop:flex-row w-[100%]">
-      {data?.data?.map((column: ColumnData) => (
-        <Column key={column.id} columnInfo={column} />
-      ))}
+    <main className="flex flex-col desktop:h-full desktop:flex-row">
+      {data?.data?.map((column: ColumnData) => <Column columnInfo={column} />)}
       <AddColumn />
     </main>
   );
