@@ -4,7 +4,7 @@ import stroke from 'src/assets/images/stroke.svg';
 import kebab from 'src/assets/images/kebab.svg';
 import purpleCircle from 'src/assets/images/purple-circle.svg';
 import closeBtn from 'src/assets/images/close.svg';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import type { CardData } from 'src/types/cardTypes';
 import readCardDetail from 'src/apis/readCardDetail';
 import Profile from 'src/components/Profile/Profile';
@@ -20,12 +20,19 @@ const tagsColor = [
 ];
 
 export default function CardDetail() {
+  const queryClient = useQueryClient();
   const [modal, setModal] = useAtom(modalAtom);
   const { data: cardInformation } = useQuery<CardData>({
     queryKey: ['readCardDetail', modal.cardId],
     queryFn: async () => readCardDetail(modal.cardId)
   });
   const [isDropDownClicked, setIsDropDownClicked] = useState(false);
+
+  // 모달 닫을시 답변 리스트 초기화
+  const resetCommentList = () =>
+    queryClient.resetQueries({
+      queryKey: ['readCommentList']
+    });
   return (
     <div className="flex flex-col gap-[1.6rem] tablet:gap-[2.4rem]">
       <div className="flex justify-between">
@@ -43,7 +50,10 @@ export default function CardDetail() {
           </button>
           <button
             type="button"
-            onClick={() => setModal(prev => ({ ...prev, status: false }))}
+            onClick={() => {
+              resetCommentList();
+              setModal(prev => ({ ...prev, status: false }));
+            }}
           >
             <img
               src={closeBtn}
@@ -87,12 +97,12 @@ export default function CardDetail() {
             <img
               src={cardInformation?.imageUrl}
               alt="카드이미지"
-              className="h-[26.2rem] w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
+              className="w-[28.7rem] h-[26.2rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
             />
           </div>
           {cardInformation && <CommentBox cardInformation={cardInformation} />}
         </div>
-        <div className="tablet:w-[20rem] tablet:h-[15.5rem] border border-[#D9D9D9] rounded-[0.8rem] p-[1.6rem] items-start flex flex-row tablet:flex-col tablet:gap-[2rem]">
+        <div className="w-[28.7rem] tablet:w-[20rem] tablet:h-[15.5rem] border border-[#D9D9D9] rounded-[0.8rem] p-[1.6rem] items-start flex flex-row tablet:flex-col tablet:gap-[2rem]">
           <div className="flex flex-col items-start flex-1">
             <span className="mb-[0.6rem] text-[#000] text-[1.2rem] font-semibold">
               담당자

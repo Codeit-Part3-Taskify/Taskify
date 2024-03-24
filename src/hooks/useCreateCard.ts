@@ -90,6 +90,7 @@ export default function useCreateCard() {
     handleChangeImage,
     setTagList,
     setValue,
-    handleTagDelete
+    handleTagDelete,
+    setImageValue
   };
 }

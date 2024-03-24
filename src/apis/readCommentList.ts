@@ -1,7 +1,9 @@
 import axios from './axiosInstance';
 
-const readCommentList = async (cardId: number) => {
-  const { data } = await axios.get(`comments?cardId=${cardId}`);
+const readCommentList = async (cardId: number, pageParam: number = 0) => {
+  const { data } = await axios.get(
+    `comments?cardId=${cardId}&size=${2}&${pageParam && `cursorId=${pageParam}`}`
+  );
   return data;
 };
 
