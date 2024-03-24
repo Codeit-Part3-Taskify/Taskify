@@ -23,8 +23,10 @@ export default function ColumnInfo({ columnInfo }: Props) {
           alt="보라색 원 이미지"
           className="w-[0.8rem] h-[0.8rem]"
         />
-        <h2 className="text-[1.8rem] font-bold">{columnInfo?.title}</h2>
-        <span className="flex items-center justify-center rounded-[0.4rem] text-[1.2rem] font-medium text-[#787486] ml-[0.4rem] bg-[#EEE] w-[2rem] h-[2rem]">
+        <h2 className="text-[1.6rem] font-bold tablet:text-[1.8rem]">
+          {columnInfo?.title}
+        </h2>
+        <span className="flex items-center justify-center rounded-[0.4rem] text-[1.2rem] tablet:text-[1.8rem] font-medium text-[#787486] ml-[0.4rem] bg-[#EEE] w-[2rem] h-[2rem]">
           {data?.totalCount}
         </span>
       </div>
@@ -39,7 +41,11 @@ export default function ColumnInfo({ columnInfo }: Props) {
           }))
         }
       >
-        <img src={setting} alt="톱니 이미지" className="cursor-pointer" />
+        <img
+          src={setting}
+          alt="톱니 이미지"
+          className="cursor-pointer h-[2.2rem] w-[2.2rem] tablet:h-[2.4rem] tablet:w-[2.4rem]"
+        />
       </button>
     </section>
   );
