@@ -19,7 +19,6 @@
 
 ## 🫂 팀원 소개
 
-<div align="center">
 
 <table>
     <tr>
@@ -41,7 +40,6 @@
 </div>
 
 <br>
-<div>
 
 <br/>
 
