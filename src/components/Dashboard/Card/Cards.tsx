@@ -8,7 +8,8 @@ interface Props {
 }
 
 export default function Cards({ columnInfo }: Props) {
-  const { cardList } = useInfiniteScrollCards(columnInfo);
+  const { cardList, cardContainer, handleScroll } =
+    useInfiniteScrollCards(columnInfo);
 
   const renderCard = (card: any) => {
     if (card?.columnId !== columnInfo?.id) return null;
@@ -18,9 +19,15 @@ export default function Cards({ columnInfo }: Props) {
   const renderCardsFromPage = (page: any) => page?.cards?.map(renderCard) ?? [];
 
   return (
-    <section className="flex flex-col gap-[1rem] tablet:gap-[1.6rem]">
+    <section className="flex flex-col gap-[1rem] tablet:gap-[1.6rem] h-full max-h-screen">
       <AddCard columnInfo={columnInfo} />
-      {cardList?.pages?.map(renderCardsFromPage)}
+      <div
+        className="overflow-y-scroll flex flex-col gap-[1rem] tablet:gap-[1.6rem] scrollbar-hide"
+        ref={cardContainer}
+        onScroll={handleScroll}
+      >
+        {cardList?.pages?.map(renderCardsFromPage)}
+      </div>
     </section>
   );
 }

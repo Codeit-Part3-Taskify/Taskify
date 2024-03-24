@@ -20,7 +20,7 @@ export default function Card({ cardData, columnInfo }: Prop) {
   const setModal = useSetAtom(modalAtom);
   return (
     <button
-      className="p-[1.2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer tablet:flex tablet:gap-[2rem] tablet:p-[2rem] desktop:flex-col desktop:gap-[1.2rem]"
+      className="p-[1.2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer tablet:flex tablet:gap-[2rem] tablet:p-[2rem] desktop:flex-col desktop:gap-[1.2rem] w-full"
       onClick={() =>
         setModal(prev => ({
           ...prev,
