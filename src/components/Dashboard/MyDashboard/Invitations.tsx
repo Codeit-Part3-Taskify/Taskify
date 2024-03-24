@@ -10,14 +10,14 @@ export default function Invitations() {
   const invitations = data?.invitations ?? [];
 
   return (
-    <article className="flex flex-col	w-[26rem] min-h-[40rem] tablet:w-[50.4rem] desktop:w-[102.2rem] bg-white my-[4rem]">
-      <header className="text-[2.4rem] font-bold pt-[3.2rem] pl-[1.6rem]">
+    <article className="flex flex-col	w-[26rem] min-h-[40rem] tablet:w-[50.7rem] desktop:w-[102.2rem] bg-white my-[4rem]">
+      <header className="text-[2.4rem] font-bold pt-[3.2rem] pl-[1.6rem] tablet:pl-[2.8rem]">
         초대받은 대시보드
       </header>
 
-      {invitations ? (
+      {invitations.length ? (
         <>
-          <div className="flex items-center w-[22.8rem] h-[3.6rem] border-solid border-[0.1rem] rounded-[0.6rem] ml-[1.6rem] mt-[2rem] px-[1.2rem]">
+          <div className="flex items-center w-[22.8rem] h-[3.6rem] border-solid border-[0.1rem] rounded-[0.6rem] ml-[1.6rem] mt-[2rem] px-[1.2rem] tablet:ml-[2.8rem] tablet:w-[44.8rem] tablet:h-[4rem]">
             <img src={search} alt="돋보기" className="w-[2.2rem] h-[2.2rem]" />
             <input
               type="text"

@@ -1,3 +1,5 @@
+import putInvitations from 'src/apis/putInvitations';
+import usePutMyInvations from 'src/hooks/usePutMyInvations';
 import { Invitation } from 'src/types/invitationsTypes';
 
 interface InvitationsItemProps {
@@ -5,6 +7,9 @@ interface InvitationsItemProps {
 }
 
 export default function InvitationsItem({ invitation }: InvitationsItemProps) {
+  const acceptInvitation = usePutMyInvations(invitation.id, true);
+  const rejectInvitation = usePutMyInvations(invitation.id, false);
+
   return (
     <section className="mt-[0.8rem]">
       <div className="border-b-[0.1rem]">
@@ -19,10 +24,16 @@ export default function InvitationsItem({ invitation }: InvitationsItemProps) {
           </div>
         </div>
         <div className="p-[1.6rem] flex gap-[1rem] text-[1.2rem]">
-          <button className="w-[10.9rem] h-[2.8rem] bg-violet rounded-[0.4rem] text-white">
+          <button
+            onClick={acceptInvitation}
+            className="w-[10.9rem] h-[2.8rem] bg-violet rounded-[0.4rem] text-white"
+          >
             수락
           </button>
-          <button className="w-[10.9rem] h-[2.8rem] bg-white rounded-[0.4rem] text-violet border-solid border-[0.1rem]">
+          <button
+            onClick={rejectInvitation}
+            className="w-[10.9rem] h-[2.8rem] bg-white rounded-[0.4rem] text-violet border-solid border-[0.1rem]"
+          >
             거절
           </button>
         </div>
