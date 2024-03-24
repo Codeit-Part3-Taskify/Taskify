@@ -18,7 +18,7 @@ export default function PagenationButtons({
   isSidebar
 }: PagenationButtonsProps) {
   const contatinerStyle = isSidebar
-    ? 'flex desktop:flex-row tablet:flex-col-reverse items-center desktop:gap-[1.6rem] tablet:gep-[1.4rem] gap-[1.2rem]'
+    ? 'flex tablet:flex-col-reverse items-center desktop:gap-[1.6rem] tablet:gep-[1.4rem] gap-[1.2rem]'
     : 'flex items-center tablet:gap-[1.6rem] gap-[1.2rem]';
   const buttonStyle = isSidebar
     ? 'tablet:w-[4rem] w-[2rem] tablet:h-[4rem] h-[2rem]'

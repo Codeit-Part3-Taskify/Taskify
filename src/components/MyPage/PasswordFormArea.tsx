@@ -1,13 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 import { useState } from 'react';
-import postPassword from '../../apis/postPassword';
+import { modalAtom } from 'src/store/store';
+import putPassword from '../../apis/putPassword';
 import Button from '../Buttons/Button';
 
 export default function PasswordFormArea() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [currentPassword, setCurrentPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [showError, setShowError] = useState<string | null>(null);
+  const setModal = useSetAtom(modalAtom);
 
   const handleBlur = () => {
     if (newPassword !== confirmNewPassword) {
@@ -29,27 +32,24 @@ export default function PasswordFormArea() {
   const handleCurrentPassword = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setCurrentPassword(event.target.value);
+    setPassword(event.target.value);
   };
 
   const { mutate } = useMutation({
-    mutationFn: postPassword,
-    onSuccess: () => {
-      alert('비밀번호가 변경되었습니다.');
-    },
-    onError: () => {
-      alert('비밀번호 변경에 실패했습니다.');
+    mutationFn: putPassword,
+    onSuccess: () => {},
+    onError: (error: any) => {
+      setModal(prev => ({ ...prev, status: true, name: 'alertPassword' }));
     }
   });
   const handlePostPassword = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (newPassword !== confirmNewPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
       return;
     }
     console.log(mutate);
-    mutate(newPassword as any);
+    mutate({ password, newPassword } as any);
   };
 
   return (
@@ -106,6 +106,7 @@ export default function PasswordFormArea() {
           customStyles="w-[8.4rem] h-[3.2rem] text-[1.4rem] rounded-[0.4rem] ml-auto mb-[2rem]"
           type="button"
           onClick={handlePostPassword}
+          disabled={!password || !newPassword || !confirmNewPassword}
         >
           변경
         </Button>

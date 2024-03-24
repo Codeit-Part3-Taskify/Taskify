@@ -35,6 +35,7 @@ export default function CommentList({
         <span className="flex justify-start">
           <Profile
             size="smallSize"
+            border="none"
             profileImgSrc={comment.author.profileImageUrl}
             userName={comment.author.nickname}
           />

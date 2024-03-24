@@ -3,7 +3,6 @@ import axios from 'axios';
 export default function handleError(error: unknown) {
   if (axios.isAxiosError(error)) {
     console.log(error.message);
-    alert(error.response?.data?.message);
     throw error;
   }
   if (error instanceof Error) {

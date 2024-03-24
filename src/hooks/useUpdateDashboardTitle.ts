@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import getDashboardDetails from 'src/apis/getDashboardDetails';
 import putDashboardTitle from 'src/apis/putDashboardTitle';
+import { usePagenationDashboardList } from './usePagenationDashboardList';
 
 export const useUpdateDashboardTitle = (boardId: string | undefined) => {
   const queryClient = useQueryClient();
@@ -21,8 +22,11 @@ export const useUpdateDashboardTitle = (boardId: string | undefined) => {
     }) => putDashboardTitle(dashboardId, title, color),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ['dashboards']
+      });
+      queryClient.refetchQueries({
+        queryKey: ['dashboardDetails', boardId]
       });
     },
 

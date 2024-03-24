@@ -1,4 +1,6 @@
+import { useSetAtom } from 'jotai';
 import { PropsWithChildren } from 'react';
+import { modalAtom } from 'src/store/store';
 import Button from './Button';
 
 interface ModalSubmitButtonProp {
@@ -11,6 +13,7 @@ export default function ModalSubmitButton({
   disabled,
   onClick
 }: PropsWithChildren<ModalSubmitButtonProp>) {
+  const setModal = useSetAtom(modalAtom);
   return (
     <Button
       variant="primary"
