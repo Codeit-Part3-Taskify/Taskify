@@ -12,7 +12,7 @@ export default function Dashboard() {
     queryFn: () => readColumnList(boardId as string)
   });
   return (
-    <main className="flex">
+    <main className="flex flex-col desktop:flex-row w-[100%]">
       {data?.data?.map((column: ColumnData) => (
         <Column key={column.id} columnInfo={column} />
       ))}
