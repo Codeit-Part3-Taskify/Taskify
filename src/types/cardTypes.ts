@@ -19,13 +19,16 @@ export interface CardData {
   updatedAt: string;
 }
 
-export interface PostCard {
+export interface PutCard {
   assigneeUserId: number;
-  dashboardId: number;
   columnId: number;
   title: string;
   description: string;
   dueDate?: string;
   tags: string[];
   imageUrl?: any;
+}
+
+export interface PostCard extends PutCard {
+  dashboardId: number;
 }
