@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-// import { useAtom } from 'jotai';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { modalAtom, userEmailAtom } from 'src/store/store';
@@ -19,11 +18,14 @@ export default function LogInForm() {
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  // const setUserEmail = useSetAtom(userEmailAtom);
+  const setUserEmail = useSetAtom(userEmailAtom);
   const setModal = useSetAtom(modalAtom);
-  //  const userEmail = useAtomValue(userEmailAtom);
-  const [userEmail, setUserEmail] = useAtom(userEmailAtom as any);
-  // const [userEmail, setUserEmail] = useAtom('' as any);
+
+  // const [userEmail, setUserEmail] = useAtom(userEmailAtom);
+
+  if (localStorage.getItem('accessToken')) {
+    navigate('/mydashboard');
+  }
 
   const EmailError = (e: React.FocusEvent<HTMLInputElement>) => {
     if (e.target.validity.typeMismatch) {
@@ -46,8 +48,8 @@ export default function LogInForm() {
     mutationKey: ['user'],
     mutationFn: postLogIn as any,
     onSuccess: (data: any) => {
-      console.log(data.accessToken);
-
+      localStorage.setItem('accessToken', data.accessToken);
+      setUserEmail(email);
       navigate('/mydashboard');
     },
     onError: (error: any) => {
@@ -56,9 +58,6 @@ export default function LogInForm() {
   });
 
   const handlePostLogIn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setUserEmail('가나다라');
-    console.log(userEmail);
-    console.log(email);
     mutate({ email, password } as any);
   };
   return (
