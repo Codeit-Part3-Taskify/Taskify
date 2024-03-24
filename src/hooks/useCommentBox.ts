@@ -70,17 +70,15 @@ export default function useCommentBox(cardInformation: CardData) {
   };
 
   const handleScroll = useCallback(() => {
-    throttle(() => {
-      const container = commentContainer.current;
-      if (container) {
-        const { scrollHeight, scrollTop, clientHeight } = container;
+    const container = commentContainer.current;
+    if (container) {
+      const { scrollHeight, scrollTop, clientHeight } = container;
 
-        const scrollBottom = scrollHeight - scrollTop - clientHeight;
-        if (scrollBottom < 200 && hasNextPage) {
-          fetchNextPage();
-        }
+      const scrollBottom = scrollHeight - scrollTop - clientHeight;
+      if (scrollBottom < 200 && hasNextPage) {
+        fetchNextPage();
       }
-    }, 200);
+    }
   }, [commentContainer, fetchNextPage, hasNextPage]);
   return {
     handleSubmit,
