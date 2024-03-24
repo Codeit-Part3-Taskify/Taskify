@@ -26,12 +26,13 @@ export default function updateCard() {
     handleChangeImage,
     setTagList,
     setValue,
-    handleTagDelete
+    handleTagDelete,
+    setImageValue
   } = useUpdateCard();
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
-        할 일 생성
+        할 일 수정
       </h2>
       <form className="flex flex-col" onSubmit={handleSubmit(submit)}>
         <div className="flex gap-[1.6rem]">
@@ -166,8 +167,7 @@ export default function updateCard() {
               placeholder="입력 후 엔터."
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
-              // 타입 찾아야 함
-              onKeyDown={(e: any) => {
+              onKeyDown={e => {
                 if (e.nativeEvent.isComposing) return;
                 if (e.key === 'Enter') {
                   const inputElement = e.target as HTMLInputElement;
@@ -195,7 +195,9 @@ export default function updateCard() {
                   className="w-[7.6rem] h-[7.6rem] rounded-md"
                 />
               </label>
-              <button type="button">X</button>
+              <button type="button" onClick={() => setImageValue('')}>
+                X
+              </button>
             </div>
           ) : (
             <label

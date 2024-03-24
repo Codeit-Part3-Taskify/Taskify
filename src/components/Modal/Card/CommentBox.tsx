@@ -7,15 +7,21 @@ export default function CommentBox({
 }: {
   cardInformation: CardData;
 }) {
-  const { handleSubmit, submit, register, commentList, deleteClick } =
-    useCommentBox(cardInformation);
-  console.log(commentList);
+  const {
+    handleSubmit,
+    commentContainer,
+    handleScroll,
+    submit,
+    register,
+    commentList,
+    deleteClick
+  } = useCommentBox(cardInformation);
   return (
     <div>
       {commentList && (
         <>
           <form
-            className="relative w-[45rem] h-[14rem] flex gap-[1rem] flex-col mb-[2rem]"
+            className="relative w-[100%] tablet:w-[45rem] h-[14rem] flex gap-[1rem] flex-col mb-[2rem]"
             onSubmit={handleSubmit(submit)}
           >
             <label htmlFor="content" className="text-[1.6rem] font-medium">
@@ -23,7 +29,7 @@ export default function CommentBox({
             </label>
             <textarea
               id="content"
-              className="p-[1.6rem] text-[1.4rem] w-[45rem] h-[11rem] placeholder:text-[#9FA6B2] resize-none border border-solid-[#D9D9D9] rounded-[0.6rem] outline-none"
+              className="p-[1.6rem] text-[1.4rem] w-[28.7rem] tablet:w-[45rem] h-[11rem] placeholder:text-[#9FA6B2] resize-none border border-solid-[#D9D9D9] rounded-[0.6rem] outline-none"
               placeholder="댓글 작성하기"
               {...register('content')}
             />
@@ -31,14 +37,20 @@ export default function CommentBox({
               입력
             </button>
           </form>
-          <div className="w-[45rem] h-[8.5rem] overflow-y-scroll">
-            {commentList?.comments.map(comment => (
-              <CommentList
-                key={comment.id}
-                comment={comment}
-                deleteClick={deleteClick}
-              />
-            ))}
+          <div
+            ref={commentContainer}
+            onScroll={handleScroll}
+            className="w-[28.7rem] tablet:w-[45rem] h-[8.5rem] overflow-y-scroll"
+          >
+            {commentList?.pages?.map(page =>
+              page?.comments?.map((comment: any) => (
+                <CommentList
+                  key={comment.id}
+                  comment={comment}
+                  deleteClick={deleteClick}
+                />
+              ))
+            )}
           </div>
         </>
       )}
