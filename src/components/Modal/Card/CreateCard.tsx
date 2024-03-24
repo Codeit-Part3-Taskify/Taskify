@@ -24,7 +24,8 @@ export default function CreateCard() {
     handleChangeImage,
     setTagList,
     setValue,
-    handleTagDelete
+    handleTagDelete,
+    setImageValue
   } = useCreateCard();
   return (
     <>
@@ -169,13 +170,18 @@ export default function CreateCard() {
             이미지
           </h2>
           {imageValue ? (
-            <label htmlFor="image">
-              <img
-                src={imageValue}
-                alt="imageValue"
-                className="w-[7.6rem] h-[7.6rem]"
-              />
-            </label>
+            <div className="flex">
+              <label htmlFor="image">
+                <img
+                  src={imageValue}
+                  alt="imageValue"
+                  className="w-[7.6rem] h-[7.6rem]"
+                />
+              </label>
+              <button type="button" onClick={() => setImageValue('')}>
+                X
+              </button>
+            </div>
           ) : (
             <label
               htmlFor="image"

@@ -92,10 +92,9 @@ export default function useUpdateCard() {
     setValue('imageUrl', event.target.files[0]);
   };
 
-  const handleImageDelete = () => {};
   const submit = async (formData: PutCard) => {
     if (!imageValue) {
-      const body = { ...formData, imageUrl: undefined };
+      const body = { ...formData, imageUrl: null };
       await updateCardMutation({ cardId: modal.cardId, body });
     } else if (typeof formData.imageUrl === 'string') {
       updateCardMutation({ cardId: modal.cardId, body: formData });
@@ -126,6 +125,7 @@ export default function useUpdateCard() {
     handleChangeImage,
     setTagList,
     setValue,
-    handleTagDelete
+    handleTagDelete,
+    setImageValue
   };
 }
