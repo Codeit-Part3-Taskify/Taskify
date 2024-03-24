@@ -2,10 +2,10 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
 import getUserInfo from 'src/apis/getUserInfo';
+import postImage from 'src/apis/postImage';
 import putUserInfo from 'src/apis/putUserInfo';
 import { userEmailAtom } from 'src/store/store';
 import Button from '../Buttons/Button';
-import postImage from 'src/apis/postImage';
 
 export default function ProfileFormArea() {
   const { data, isLoading } = useQuery({
