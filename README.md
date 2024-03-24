@@ -66,7 +66,7 @@
 
 ### [React Query](https://tanstack.com/query/latest/docs/framework/react/overview)
 - 서버 상태를 집중적으로 관리하기 위해 도입했고, 서버 상태를 전역적으로 간편하게 관리할 수 있어 좋았음.
-- 특정 데이터를 refetch하고 싶을 때 키 값을 사용할 수 있어서 쉽게 구현이 가능한 점이 좋았고, onSuccess 시 로직을 바로 작성해 줄 수 있어서 편리했음.
+- 특정 데이터를 refetch하고 싶을 때 키 값을 사용할 수 있어서 쉽게 구현이 가능한 점이 좋았고, onSuccess&onError 시 로직을 바로 작성해 줄 수 있어서 편리했음.
 
 
 ### [Jotai](https://jotai.org/)
