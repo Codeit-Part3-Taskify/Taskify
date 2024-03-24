@@ -49,14 +49,18 @@ export default function Card({ cardData, columnInfo }: Prop) {
           {cardData?.tags.map(tag => (
             <span
               key={tag}
-              className={`rounded-[0.4rem] text-[1rem] px-[0.6rem] py-[0.4rem] tablet:text-[1.2rem] ${tagsColor[tag.length % 4]}`}
+              className={`rounded-[0.4rem] text-[1rem] px-[0.6rem] py-[0.4rem] tablet:text-[1.2rem] ${
+                tagsColor[tag.length % 4]
+              }`}
             >
               {tag}
             </span>
           ))}
         </div>
         <div
-          className={`flex items-center ${cardData.dueDate ? 'justify-between' : 'justify-end'} tablet:row-start-2 table:flex-2`}
+          className={`flex items-center ${
+            cardData.dueDate ? 'justify-between' : 'justify-end'
+          } tablet:row-start-2 table:flex-2`}
         >
           {cardData.dueDate && (
             <div className="flex gap-[0.6rem]">

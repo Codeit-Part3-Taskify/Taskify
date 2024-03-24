@@ -42,14 +42,15 @@ export default function CommentBox({
             onScroll={handleScroll}
             className="w-[28.7rem] tablet:w-[45rem] h-[8.5rem] overflow-y-scroll"
           >
-            {commentList?.pages?.map(page =>
-              page?.comments?.map((comment: any) => (
-                <CommentList
-                  key={comment.id}
-                  comment={comment}
-                  deleteClick={deleteClick}
-                />
-              ))
+            {commentList?.pages?.map(
+              page =>
+                page?.comments?.map((comment: any) => (
+                  <CommentList
+                    key={comment.id}
+                    comment={comment}
+                    deleteClick={deleteClick}
+                  />
+                ))
             )}
           </div>
         </>

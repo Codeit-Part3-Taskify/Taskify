@@ -11,6 +11,7 @@ import postComment from 'src/apis/postComment';
 import readCommentList from 'src/apis/readCommentList';
 import { CardData } from 'src/types/cardTypes';
 import { CommentBody, PostComment } from 'src/types/commentTypes';
+import { throttle } from 'lodash';
 
 export default function useCommentBox(cardInformation: CardData) {
   const queryClient = useQueryClient();
@@ -69,15 +70,17 @@ export default function useCommentBox(cardInformation: CardData) {
   };
 
   const handleScroll = useCallback(() => {
-    const container = commentContainer.current;
-    if (container) {
-      const { scrollHeight, scrollTop, clientHeight } = container;
+    throttle(() => {
+      const container = commentContainer.current;
+      if (container) {
+        const { scrollHeight, scrollTop, clientHeight } = container;
 
-      const scrollBottom = scrollHeight - scrollTop - clientHeight;
-      if (scrollBottom < 200 && hasNextPage) {
-        fetchNextPage();
+        const scrollBottom = scrollHeight - scrollTop - clientHeight;
+        if (scrollBottom < 200 && hasNextPage) {
+          fetchNextPage();
+        }
       }
-    }
+    }, 200);
   }, [commentContainer, fetchNextPage, hasNextPage]);
   return {
     handleSubmit,
