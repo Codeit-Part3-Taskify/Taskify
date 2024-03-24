@@ -64,6 +64,7 @@ export const usePagenationDashboardMembers = () => {
     mutate,
     boardId,
     data,
+    isLoading,
     allPage,
     nowPage,
     setNowPage,

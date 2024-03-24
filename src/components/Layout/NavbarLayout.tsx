@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMyInfo } from 'src/apis/getMyInfo';
+import { Link } from 'react-router-dom';
 import stroke from 'src/assets/images/stroke.svg';
 import DashboardMemebers from '../Navbar/DashboardMembers';
 import DashboardTitle from '../Navbar/DashboardTitle';
@@ -24,13 +25,15 @@ export default function Navbar() {
             alt="세로 줄"
             className="tablet:h-[3.8rem] h-[3.4rem]"
           />
-          <Profile
-            size="basicSize"
-            border="white"
-            userName={data?.nickname}
-            profileImgSrc={data?.profileImageUrl}
-            isNameVisible="mobileInvisible"
-          />
+          <Link to="/mypage">
+            <Profile
+              size="basicSize"
+              border="white"
+              userName={data?.nickname}
+              profileImgSrc={data?.profileImageUrl}
+              isNameVisible="mobileInvisible"
+            />
+          </Link>
         </div>
       </div>
     </div>

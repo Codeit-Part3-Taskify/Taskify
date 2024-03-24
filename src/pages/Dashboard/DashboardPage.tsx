@@ -14,7 +14,9 @@ export default function Dashboard() {
 
   return (
     <main className="flex flex-col desktop:h-full desktop:flex-row">
-      {data?.data?.map((column: ColumnData) => <Column columnInfo={column} />)}
+      {data?.data?.map((column: ColumnData) => (
+        <Column key={column.id} columnInfo={column} />
+      ))}
       <AddColumn />
     </main>
   );

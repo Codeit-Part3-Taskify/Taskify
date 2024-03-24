@@ -7,7 +7,7 @@ interface Props {
 }
 export default function Column({ columnInfo }: Props) {
   return (
-    <section className="p-[1.2rem] border-r border-b border-r-[#EEEEEE] w-[calc(100vw-16rem)] tablet:p-[2rem] desktop:w-[35.4rem] shrink-0 h-full">
+    <section className="p-[1.2rem] border-r border-b border-r-[#EEEEEE] w-[calc(100vw-16rem)] tablet:p-[2rem] desktop:w-[35.4rem] shrink-0">
       <ColumnInfo columnInfo={columnInfo} />
       <Cards columnInfo={columnInfo} />
     </section>
