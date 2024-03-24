@@ -149,7 +149,7 @@ export default function CreateCard() {
               placeholder="입력 후 엔터."
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
-              onKeyDown={(e) => {
+              onKeyDown={e => {
                 if (e.nativeEvent.isComposing) return;
                 if (e.key === 'Enter') {
                   const inputElement = e.target as HTMLInputElement;
