@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { usePagenationDashboardMembers } from 'src/hooks/usePagenationDashboardMembers';
 import PagenationButtons from '../Buttons/PagenationButtons';
 import DashboardMemberList from './Lists/DashboardMemberList';
@@ -5,12 +6,21 @@ import DashboardMemberList from './Lists/DashboardMemberList';
 export default function EditDashboardMembers() {
   const {
     data,
+    isLoading,
     allPage,
     nowPage,
     handleBackwardButtonClick,
     handleForwardButtonClick,
     handleDeleteButtonClick
   } = usePagenationDashboardMembers();
+
+  const [displayData, setDisplayData] = useState(data);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setDisplayData(data);
+    }
+  }, [data, isLoading]);
 
   return (
     <section className="pt-[2.2rem] tablet:pt-[2.6rem] pb-[0.4rem] bg-white rounded-[0.8rem] desktop:w-[62rem] tablet:w-[54.4rem] mobile:w-[28.4rem] tablet:h-[42rem] h-[35rem]">
@@ -28,7 +38,7 @@ export default function EditDashboardMembers() {
           이름
         </h2>
         <DashboardMemberList
-          members={data?.members}
+          members={displayData?.members}
           handleDeleteButtonClick={handleDeleteButtonClick}
         />
       </div>

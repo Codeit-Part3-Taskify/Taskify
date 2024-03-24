@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { usePagenationDashboardInvitations } from 'src/hooks/usePagenationDashboardInvitations';
 import { modalAtom } from 'src/store/store';
 import { useSetAtom } from 'jotai';
@@ -9,6 +10,7 @@ import Button from '../Buttons/Button';
 export default function InvitationSettings() {
   const {
     data,
+    isLoading,
     allPage,
     nowPage,
     handleBackwardButtonClick,
@@ -16,6 +18,13 @@ export default function InvitationSettings() {
     handleDeleteButtonClick
   } = usePagenationDashboardInvitations();
   const setModal = useSetAtom(modalAtom);
+  const [displayData, setDisplayData] = useState(data);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setDisplayData(data);
+    }
+  }, [data, isLoading]);
 
   return (
     <section className="tablet:pt-[2.8rem] pt-[2.4rem] pb-[0.4rem] bg-white rounded-[0.8rem]  desktop:w-[62rem] tablet:w-[54.4rem] mobile:w-[28.4rem] tablet:h-[48.5rem] h-[41rem]">
@@ -56,13 +65,13 @@ export default function InvitationSettings() {
         <h2 className="tablet:px-[2.8rem] px-[2rem] mb-[0.8rem] text-gray_9FA6B2">
           이메일
         </h2>
-        {data?.invitations.length === 0 || !data ? (
+        {data?.invitations.length === 0 ? (
           <div className="w-[100%] h-[30rem] flex justify-center items-center tablet:mt-0">
             <p>초대 내역이 없습니다.</p>
           </div>
         ) : (
           <InviteList
-            invitations={data?.invitations}
+            invitations={displayData?.invitations}
             handleDeleteButtonClick={handleDeleteButtonClick}
           />
         )}
