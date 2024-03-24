@@ -1,25 +1,40 @@
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
+import getUserInfo from 'src/apis/getUserInfo';
+import putUserInfo from 'src/apis/putUserInfo';
 import { userEmailAtom } from 'src/store/store';
 import Button from '../Buttons/Button';
 
 export default function ProfileFormArea() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { data, isLoading } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: getUserInfo
+  });
+  const [nickname, setNickname] = useState(data?.nickname || '');
+
   const email = useAtomValue(userEmailAtom);
-  console.log(email);
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files?.length) {
       // 파일이 존재하는 경우에만 처리
       // files는 null이 아니며, length 속성이 존재함
       const file = files[0];
-      setSelectedImage(URL.createObjectURL(file));
+      setProfileImageUrl(URL.createObjectURL(file));
       // 파일 처리 로직
-    } else {
-      // 파일이 선택되지 않은 경우에 대한 처리
-      // files가 null이거나 length가 0인 경우
-      console.log('파일을 선택하세요.');
     }
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: putUserInfo,
+    onSuccess: () => {}
+  });
+
+  const handlePutUserInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    mutate({ nickname, profileImageUrl } as any);
   };
 
   return (
@@ -29,6 +44,13 @@ export default function ProfileFormArea() {
       </div>
       <div className="flex flex-row relative">
         <div className="w-[18.2rem] h-[18.2rem] bg-[#F5F5F5] relative " />
+        {profileImageUrl && (
+          <img
+            src={profileImageUrl || ''}
+            alt="profile"
+            className="w-[18.2rem] h-[18.2rem] absolute z-50"
+          />
+        )}
         <label
           htmlFor="file"
           className="absolute left-[7.5rem] top-[7.5rem]  file-selector-button: bg-[url('./assets/images/cross-button.svg')] bg-cover w-[3rem] h-[3rem]"
@@ -53,7 +75,7 @@ export default function ProfileFormArea() {
             className="basicinput w-[36.6rem] mb-[2rem]"
             type="text"
             readOnly
-            value={email}
+            value={data?.email || email}
           />
           <label
             htmlFor="NicknameInput"
@@ -65,6 +87,8 @@ export default function ProfileFormArea() {
             id="NicknameInput"
             className="basicinput w-[36.6rem]"
             type="text"
+            defaultValue={data?.nickname || ''}
+            onChange={e => setNickname(e.target.value)}
           />
         </div>
       </div>
@@ -72,6 +96,7 @@ export default function ProfileFormArea() {
         variant="primary"
         type="button"
         customStyles="w-[8.4rem] h-[3.2rem] text-[1.4rem] rounded-[0.4rem] ml-auto mb-[2rem]"
+        onClick={handlePutUserInfo}
       >
         저장
       </Button>

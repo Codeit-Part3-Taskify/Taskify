@@ -20,7 +20,7 @@ export default function ModalSubmitButton({
       type="submit"
       customStyles="tablet:w-[12rem] tablet:h-[4.8rem] w-[13.8rem] h-[4.2rem] rounded-[0.8rem] font-medium tablet:text-[1.6rem] text-[1.4rem]"
       disabled={disabled}
-      onClick={() => setModal(prev => ({ ...prev, status: false }))}
+      onClick={onClick}
     >
       {children}
     </Button>

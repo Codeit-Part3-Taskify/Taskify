@@ -1,11 +1,16 @@
 import axios from './axiosInstance';
 
-const postPassword = async (newPassword: string) => {
-  const res = await axios.put('auth/password', { newPassword });
+interface PutPasswordData {
+  password: string;
+  newPassword: string;
+}
+
+const putPassword = async ({ password, newPassword }: PutPasswordData) => {
+  const res = await axios.put('auth/password', { password, newPassword });
   return res.data;
 };
 
-export default postPassword;
+export default putPassword;
 
 // import axios from './axiosInstance';
 
