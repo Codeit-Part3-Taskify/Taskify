@@ -60,6 +60,7 @@ export const usePagenationDashboardInvitations = () => {
     mutate,
     boardId,
     data,
+    isLoading,
     allPage,
     nowPage,
     setNowPage,

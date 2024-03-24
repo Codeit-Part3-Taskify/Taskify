@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
 import getUserInfo from 'src/apis/getUserInfo';
+import postImage from 'src/apis/postImage';
 import putUserInfo from 'src/apis/putUserInfo';
 import { userEmailAtom } from 'src/store/store';
 import Button from '../Buttons/Button';
@@ -11,7 +12,9 @@ export default function ProfileFormArea() {
     queryKey: ['userInfo'],
     queryFn: getUserInfo
   });
-  const [nickname, setNickname] = useState(data?.nickname || '');
+
+  const [nickname, setNickname] = useState(data?.nickname);
+  const [fileData, setFileData] = useState<File | null>(null);
 
   const email = useAtomValue(userEmailAtom);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
@@ -23,6 +26,10 @@ export default function ProfileFormArea() {
       // files는 null이 아니며, length 속성이 존재함
       const file = files[0];
       setProfileImageUrl(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      setFileData(file);
+
       // 파일 처리 로직
     }
   };
@@ -34,7 +41,14 @@ export default function ProfileFormArea() {
 
   const handlePutUserInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    mutate({ nickname, profileImageUrl } as any);
+    useMutation({
+      mutationFn: postImage,
+      onSuccess: () => {
+        mutate({ nickname, fileData } as any);
+      }
+    });
+
+    mutate({ nickname, fileData } as any);
   };
 
   return (
