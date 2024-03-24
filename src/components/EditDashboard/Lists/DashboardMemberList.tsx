@@ -1,5 +1,6 @@
 import Profile from 'src/components/Profile/Profile';
 import Button from 'src/components/Buttons/Button';
+import crown from 'src/assets/images/crown.svg';
 import { DashboardMember } from 'src/types/dashboardTypes';
 
 interface Props {
@@ -21,10 +22,17 @@ export default function DashboardMemberList({
           >
             <Profile
               size="basicSize"
+              border="none"
               profileImgSrc={member.profileImageUrl}
               userName={member.nickname}
             />
-            {index !== 0 ? (
+            {member.isOwner ? (
+              <img
+                src={crown}
+                alt="왕관 아이콘"
+                className="tablet:w-[4rem] tablet:h-[4rem] tablet:mr-[2rem] w-[3rem] h-[3rem] mr-[0.5rem]"
+              />
+            ) : (
               <Button
                 variant="secondary"
                 type="button"
@@ -33,7 +41,7 @@ export default function DashboardMemberList({
               >
                 삭제
               </Button>
-            ) : null}
+            )}
           </div>
           {index !== members.length - 1 && (
             <svg

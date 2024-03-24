@@ -14,3 +14,5 @@ export const modalAtom = atom<{
   columnTitle: '',
   cardId: 0
 });
+
+export const userEmailAtom = atom<string>('');

@@ -4,7 +4,7 @@ import { DashboardInvitations } from 'src/types/dashboardTypes';
 
 const getDashboardInvitations = async (
   dashboardId: string | undefined,
-  page: number
+  page?: number
 ) => {
   const { data } = await axios.get<DashboardInvitations>(
     `/dashboards/${dashboardId}/invitations`,

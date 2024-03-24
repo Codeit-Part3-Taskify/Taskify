@@ -13,7 +13,7 @@ export default function EditDashboardMembers() {
   } = usePagenationDashboardMembers();
 
   return (
-    <section className="pt-[2.2rem] tablet:pt-[2.6rem] pb-[0.4rem] bg-white rounded-[0.8rem] desktop:w-[62rem] tablet:w-[54.4rem] mobile:w-[28.4rem] min-h-[15rem]">
+    <section className="pt-[2.2rem] tablet:pt-[2.6rem] pb-[0.4rem] bg-white rounded-[0.8rem] desktop:w-[62rem] tablet:w-[54.4rem] mobile:w-[28.4rem] tablet:h-[42rem] h-[35rem]">
       <div className="flex items-center justify-between tablet:px-[2.8rem] px-[2rem]">
         <h1 className="tablet:text-[2.4rem] text-[2rem] font-bold">구성원</h1>
         <PagenationButtons

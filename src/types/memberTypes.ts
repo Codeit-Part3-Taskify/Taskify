@@ -1,12 +1,12 @@
 export interface MemberData {
   id: number;
-  userId: number;
+  userId?: number;
   email: string;
   nickname: string;
   profileImageUrl: string;
   createdAt: Date;
   updatedAt: Date;
-  isOwner: boolean;
+  isOwner?: boolean;
 }
 
 export interface MemberList {

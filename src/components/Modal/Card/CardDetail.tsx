@@ -78,6 +78,7 @@ export default function CardDetail() {
           </span>
           <Profile
             size="smallSize"
+            border="none"
             profileImgSrc={cardInformation?.assignee.profileImageUrl}
             userName={cardInformation?.assignee.nickname}
           />

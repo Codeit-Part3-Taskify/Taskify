@@ -35,7 +35,9 @@ module.exports = {
         skyblue_9DD7ED: '#9DD7ED',
         yellow_FDD446: '#FDD446',
         yellow_FFC85A: '#FFC85A',
-        khaki_A3C4A2: '#A3C4A2'
+        khaki_A3C4A2: '#A3C4A2',
+        pink_F4D7DA: '#F4D7DA',
+        red_D25B68: '#D25B68'
       }
     }
   },
