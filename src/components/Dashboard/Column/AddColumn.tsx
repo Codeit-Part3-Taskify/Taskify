@@ -6,10 +6,10 @@ import Button from '../../Buttons/Button';
 export default function AddColumn() {
   const setModal = useSetAtom(modalAtom);
   return (
-    <div className="flex justify-center border-r border-r-[#EEEEEE]">
+    <div className="flex justify-center">
       <Button
         variant="secondary"
-        customStyles="m-[1.2rem] p-[2rem] rounded-[0.6rem] gap-[1.2rem] min-w-[28.4rem] w-[calc(100%-2.4rem)] tablet: tablet:w-[calc(100%-4rem)] tablet:m-[2rem] tablet:p-[2.45rem] desktop:h-[7rem]"
+        customStyles="m-[1.2rem] p-[2rem] rounded-[0.6rem] gap-[1.2rem] min-w-[28.4rem] w-[calc(100%-2.4rem)] tablet:w-[calc(100%-4rem)] tablet:m-[2rem] tablet:p-[2.45rem] desktop:w-[35.4rem] desktop:h-[7rem] desktop:mt-[6.8rem]"
         appendix={
           <img
             src={plusBtn}
