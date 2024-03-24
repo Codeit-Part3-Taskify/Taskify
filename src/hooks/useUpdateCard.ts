@@ -80,12 +80,19 @@ export default function useUpdateCard() {
     }
   });
 
+  const handleTagDelete = (item: string) => {
+    const newAry = tagList.filter(tag => tag !== item);
+    setValue('tags', newAry);
+    setTagList(newAry);
+  };
+
   const handleChangeImage = (event: BaseSyntheticEvent) => {
     const imgUrl = URL.createObjectURL(event.target.files[0]);
     setImageValue(imgUrl);
     setValue('imageUrl', event.target.files[0]);
   };
 
+  const handleImageDelete = () => {};
   const submit = async (formData: PutCard) => {
     if (!imageValue) {
       const body = { ...formData, imageUrl: undefined };
@@ -100,7 +107,7 @@ export default function useUpdateCard() {
       const body = { ...formData, imageUrl };
       updateCardMutation({ cardId: modal.cardId, body });
     }
-    setModal(prev => ({ ...prev, status: false }));
+    setModal(prev => ({ ...prev, name: 'cardDetail' }));
   };
 
   return {
@@ -118,6 +125,7 @@ export default function useUpdateCard() {
     imageValue,
     handleChangeImage,
     setTagList,
-    setValue
+    setValue,
+    handleTagDelete
   };
 }

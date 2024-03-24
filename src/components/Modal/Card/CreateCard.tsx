@@ -23,7 +23,8 @@ export default function CreateCard() {
     imageValue,
     handleChangeImage,
     setTagList,
-    setValue
+    setValue,
+    handleTagDelete
   } = useCreateCard();
   return (
     <>
@@ -127,7 +128,18 @@ export default function CreateCard() {
               {tagList &&
                 tagList.map(item => {
                   const key = Math.random();
-                  return <li key={key}>{item}</li>;
+                  return (
+                    <li key={key}>
+                      {item}
+                      <button
+                        type="button"
+                        className="bg-[black] text-white p-2 rounded-[0.6rem]"
+                        onClick={() => handleTagDelete(item)}
+                      >
+                        x
+                      </button>
+                    </li>
+                  );
                 })}
             </ul>
             <input

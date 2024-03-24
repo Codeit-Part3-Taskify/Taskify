@@ -53,6 +53,12 @@ export default function useCreateCard() {
     setValue('imageUrl', event.target.files[0]);
   };
 
+  const handleTagDelete = (item: string) => {
+    const newAry = tagList.filter(tag => tag !== item);
+    setValue('tags', newAry);
+    setTagList(newAry);
+  };
+
   const submit = async (formData: PostCard) => {
     if (!imageValue) {
       await createCardMutation({ ...formData, imageUrl: undefined });
@@ -83,6 +89,7 @@ export default function useCreateCard() {
     imageValue,
     handleChangeImage,
     setTagList,
-    setValue
+    setValue,
+    handleTagDelete
   };
 }

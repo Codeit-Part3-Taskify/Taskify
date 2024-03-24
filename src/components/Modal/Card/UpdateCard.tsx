@@ -25,9 +25,9 @@ export default function updateCard() {
     imageValue,
     handleChangeImage,
     setTagList,
-    setValue
+    setValue,
+    handleTagDelete
   } = useUpdateCard();
-
   return (
     <>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
@@ -127,7 +127,7 @@ export default function updateCard() {
                 timeCaption="time"
                 onChange={handleChange}
                 selected={selecTedDate}
-                dateFormat="yyyy-MM-dd hh:mm"
+                dateFormat="yyyy-MM-dd HH:mm"
               />
             )}
           />
@@ -146,7 +146,18 @@ export default function updateCard() {
               {tagList &&
                 tagList.map(item => {
                   const key = Math.random();
-                  return <li key={key}>{item}</li>;
+                  return (
+                    <li key={key}>
+                      {item}
+                      <button
+                        type="button"
+                        className="bg-[black] text-white p-2 rounded-[0.6rem]"
+                        onClick={() => handleTagDelete(item)}
+                      >
+                        x
+                      </button>
+                    </li>
+                  );
                 })}
             </ul>
             <input
@@ -174,13 +185,16 @@ export default function updateCard() {
             이미지
           </h2>
           {imageValue ? (
-            <label htmlFor="image">
-              <img
-                src={imageValue}
-                alt="imageValue"
-                className="w-[7.6rem] h-[7.6rem]"
-              />
-            </label>
+            <div className="flex">
+              <label htmlFor="image">
+                <img
+                  src={imageValue}
+                  alt="imageValue"
+                  className="w-[7.6rem] h-[7.6rem] rounded-md"
+                />
+              </label>
+              <button type="button">X</button>
+            </div>
           ) : (
             <label
               htmlFor="image"
