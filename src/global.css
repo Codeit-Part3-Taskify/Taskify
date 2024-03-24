@@ -27,3 +27,19 @@ body {
   box-sizing: border-box;
   height: max-content;
 }
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(247, 247, 247);
+  border-radius: 0.6rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #F1EFFD;
+  border-radius: 0.6rem;
+}
