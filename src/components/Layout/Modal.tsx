@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom';
 import { useAtomValue } from 'jotai';
 import { modalAtom } from 'src/store/store';
 import AlertDeleteCard from 'src/components/Modal/Column/AlertDeleteCard';
-import AlertPassword from 'src/components/Modal/AlertPassword';
 import CreateCard from 'src/components/Modal/Card/CreateCard';
 import CreateColumn from 'src/components/Modal/Column/CreateColumn';
 import CreateDashBoard from 'src/components/Modal/CreateDashboard';
@@ -11,6 +10,8 @@ import ManageColumn from 'src/components/Modal/Column/ManageColumn';
 import UpdateCard from 'src/components/Modal/Card/UpdateCard';
 import ModalContainer from '../Modal/Container/ModalContainer';
 import CardDetail from '../Modal/Card/CardDetail';
+import SignUpConfirm from '../Modal/Alert/SignUpConfirm';
+import AlertPassword from '../Modal/Alert/AlertPassword';
 
 const modalList = {
   '': '',
@@ -22,7 +23,8 @@ const modalList = {
   createDashboard: <CreateDashBoard />,
   inviteMember: <InviteMember />,
   manageColumn: <ManageColumn />,
-  updateCard: <UpdateCard />
+  updateCard: <UpdateCard />,
+  signUpConfirm: <SignUpConfirm />
 };
 
 export default function Modal() {
