@@ -52,7 +52,7 @@ export default function PasswordFormArea() {
   };
 
   return (
-    <form className="flex flex-col ml-[1.7rem] w-[620px] h-[454px] bg-white rounded-lg justify-center align-center px-[2.8rem] justify-around  ">
+    <form className="mobile:w-[28.4rem] tablet:w-[54.4rem] flex flex-col ml-[1.7rem] w-[62rem] h-[45rem] bg-white rounded-lg justify-center align-center px-[2.8rem] justify-around  ">
       <div className="text-zinc-800 text-[2.4rem] font-bold font-['Pretendard']">
         비밀번호 변경
       </div>
@@ -65,7 +65,7 @@ export default function PasswordFormArea() {
         </label>
         <input
           id="CurrentPassword"
-          className=" w-[56.4rem] basicinput mb-[2rem]"
+          className="  basicinput mb-[2rem]"
           type="password"
           placeholder="현재 비밀번호 입력"
           onChange={handleCurrentPassword}
@@ -78,7 +78,7 @@ export default function PasswordFormArea() {
         </label>
         <input
           id="NewPassword"
-          className=" w-[56.4rem] basicinput placeholder-gray-400 mb-[2rem]"
+          className=" basicinput placeholder-gray-400 mb-[2rem]"
           type="password"
           placeholder="새 비밀번호 입력"
           onChange={handleNewPasswordChange}
@@ -91,7 +91,7 @@ export default function PasswordFormArea() {
         </label>
         <input
           id="NewPasswordConfirm"
-          className=" w-[56.4rem] basicinput text-gray-400 font-['Pretendard'] mb-[2rem]"
+          className=" basicinput text-gray-400 font-['Pretendard'] mb-[2rem]"
           type="password"
           placeholder="새 비밀번호 입력"
           onChange={handleConfirmNewPasswordChange}

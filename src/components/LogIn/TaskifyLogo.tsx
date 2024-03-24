@@ -3,7 +3,7 @@ import Taskify from '../../assets/images/Taskify.svg';
 
 export default function TaskifyLogo() {
   return (
-    <div className="w-[20rem] h-[27.9rem] flex flex-col mb-[3.8rem]">
+    <div className="w-[20rem] h-[27.9rem] flex flex-col mb-[3.8rem] mobile:w-[12rem]">
       <a href="/">
         <img
           src={Logo}
@@ -13,7 +13,7 @@ export default function TaskifyLogo() {
         <img
           src={Taskify}
           alt="Taskify"
-          className="w-[19.4rem] h-[ left-[0.01px] top-[-0.05px] mt-[3rem]"
+          className="w-[19.4rem] h-[ left-[0.01px] top-[-0.05px] mt-[3rem] mobile:mt-[0rem]"
         />
       </a>
       <div className="text-center text-zinc-800 text-[2rem] font-medium font-['Pretendard']">

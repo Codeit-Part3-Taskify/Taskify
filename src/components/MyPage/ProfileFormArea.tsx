@@ -6,6 +6,7 @@ import postImage from 'src/apis/postImage';
 import putUserInfo from 'src/apis/putUserInfo';
 import { userEmailAtom } from 'src/store/store';
 import Button from '../Buttons/Button';
+import crossbutton from '../../assets/images/cross-button.svg';
 
 export default function ProfileFormArea() {
   const { data, isLoading } = useQuery({
@@ -15,69 +16,68 @@ export default function ProfileFormArea() {
 
   const [nickname, setNickname] = useState(data?.nickname);
   const [fileData, setFileData] = useState<File | null>(null);
-
   const email = useAtomValue(userEmailAtom);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
+  const { mutate: mutate1 } = useMutation({
+    mutationFn: postImage,
+    onSuccess: url => {
+      setProfileImageUrl(url.profileImageUrl);
+    }
+  });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files?.length) {
-      // 파일이 존재하는 경우에만 처리
-      // files는 null이 아니며, length 속성이 존재함
       const file = files[0];
       setProfileImageUrl(URL.createObjectURL(file));
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      setFileData(file);
 
+      setFileData(file);
+      mutate1(file as any);
       // 파일 처리 로직
     }
   };
 
-  const { mutate } = useMutation({
+  const { mutate: mutate2 } = useMutation({
     mutationFn: putUserInfo,
     onSuccess: () => {}
   });
 
   const handlePutUserInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    useMutation({
-      mutationFn: postImage,
-      onSuccess: () => {
-        mutate({ nickname, fileData } as any);
-      }
-    });
-
-    mutate({ nickname, fileData } as any);
+    mutate2({ nickname, profileImageUrl } as any);
   };
 
   return (
-    <form className="w-[620px] h-[355px] bg-white rounded-lg flex flex-col mb-[1.2rem] ml-[1.7rem] justify-around px-[2.8rem]">
+    <form className="mobile:w-[28.4rem] mobile:h-[42.2rem]  tablet:w-[54.4rem] w-[620px] h-[355px] bg-white rounded-lg flex flex-col mb-[1.2rem] ml-[1.7rem] justify-around px-[2.8rem]">
       <div className="text-zinc-800 text-[2.4rem] font-bold font-['Pretendard']">
         프로필
       </div>
-      <div className="flex flex-row relative">
-        <div className="w-[18.2rem] h-[18.2rem] bg-[#F5F5F5] relative " />
-        {profileImageUrl && (
-          <img
-            src={profileImageUrl || ''}
-            alt="profile"
-            className="w-[18.2rem] h-[18.2rem] absolute z-50"
+      <div className="flex flex-row mobile:flex-col">
+        <div className="w-[18.2rem] h-[18.2rem] bg-[#F5F5F5] mobile:w-[10rem] mobile:h-[10rem] ">
+          <label
+            htmlFor="file"
+            className="relative bg-cover w-[18.2rem] h-[18.2rem] z-10"
+          >
+            {' '}
+            {profileImageUrl && (
+              <img
+                src={profileImageUrl || ''}
+                alt="profile"
+                className="w-[18.2rem] h-[18.2rem] absolute z-40"
+              />
+            )}{' '}
+            <img src={crossbutton} alt="cross" className="w-[100%] h-[100%]" />
+          </label>
+          <input
+            id="file"
+            type="file"
+            className="hidden z-50"
+            accept="image/*"
+            onChange={handleFileChange}
           />
-        )}
-        <label
-          htmlFor="file"
-          className="absolute left-[7.5rem] top-[7.5rem]  file-selector-button: bg-[url('./assets/images/cross-button.svg')] bg-cover w-[3rem] h-[3rem]"
-        />
-        <input
-          id="file"
-          type="file"
-          className="hidden"
-          accept="image/*"
-          onChange={handleFileChange}
-        />
+        </div>
 
-        <div className="flex flex-col ml-[1.6rem]">
+        <div className="flex flex-col ml-[1.6rem] w-[36.6rem] mobile:w-[22.4rem] mobile:ml-0 ">
           <label
             htmlFor="EmailInput"
             className="text-zinc-800 text-[1.8rem] font-medium font-['Pretendard']"
@@ -86,7 +86,7 @@ export default function ProfileFormArea() {
           </label>
           <input
             id="EmailInput"
-            className="basicinput w-[36.6rem] mb-[2rem]"
+            className="basicinput mb-[2rem]"
             type="text"
             readOnly
             value={data?.email || email}
@@ -99,7 +99,7 @@ export default function ProfileFormArea() {
           </label>
           <input
             id="NicknameInput"
-            className="basicinput w-[36.6rem]"
+            className="basicinput"
             type="text"
             defaultValue={data?.nickname || ''}
             onChange={e => setNickname(e.target.value)}
