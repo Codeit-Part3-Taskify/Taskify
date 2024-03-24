@@ -11,7 +11,7 @@ export default function Column({ columnInfo }: Props) {
 
   return (
     <section
-      className="p-[1.2rem] border-r border-b  w-[calc(100vw-16rem)] tablet:p-[2rem] desktop:w-[35.4rem] shrink-0 h-screen overflow-y-scroll"
+      className="p-[1.2rem] border-r border-b  w-[calc(100vw-16rem)] tablet:p-[2rem] desktop:w-[35.4rem] shrink-0 h-screen overflow-y-scroll scrollbar-hide"
       ref={cardContainer}
       onScroll={handleScroll}
     >
