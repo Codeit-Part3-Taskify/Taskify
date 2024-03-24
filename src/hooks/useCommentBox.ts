@@ -53,7 +53,12 @@ export default function useCommentBox(cardInformation: CardData) {
     deleteCommentMutate({ commentId });
   };
 
-  const { register, handleSubmit, setValue } = useForm<{
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors }
+  } = useForm<{
     content: string;
     comment: number;
   }>();
@@ -89,6 +94,7 @@ export default function useCommentBox(cardInformation: CardData) {
     fetchNextPage,
     commentContainer,
     handleScroll,
-    isLoading
+    isLoading,
+    errors
   };
 }

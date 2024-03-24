@@ -25,10 +25,18 @@ export default function CreateCard() {
     setTagList,
     setValue,
     handleTagDelete,
-    setImageValue
+    setImageValue,
+    errors
   } = useCreateCard();
   return (
     <>
+      <div className="flex items-center justify-center">
+        <p className="absolute text-red-500 text-[1.2rem]">
+          {errors.assigneeUserId?.message ||
+            errors.title?.message ||
+            errors.description?.message}
+        </p>
+      </div>
       <h2 className="text-[#333236] mb-[3.2rem] text-[2.4rem] font-bold">
         할 일 생성
       </h2>
@@ -42,7 +50,10 @@ export default function CreateCard() {
         <select
           id="assigner"
           className="w-[21.7rem] h-[4.8rem] border border-[#D9D9D9] bg-[#FFF] rounded-[0.6rem] px-[1.6rem] mb-[2.8rem] text-[#333236] outline-none text-[1.6rem]"
-          {...register('assigneeUserId', { valueAsNumber: true })}
+          {...register('assigneeUserId', {
+            valueAsNumber: true,
+            required: { value: true, message: '담당자를 선택해주세요.' }
+          })}
         >
           <option value="" hidden>
             선택해주세요.
@@ -57,7 +68,6 @@ export default function CreateCard() {
             </option>
           ))}
         </select>
-
         <div className="relative flex flex-col">
           <label
             className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
@@ -69,7 +79,9 @@ export default function CreateCard() {
             className={BasicStyle}
             id="title"
             placeholder="제목을 입력해 주세요."
-            {...register('title')}
+            {...register('title', {
+              required: { value: true, message: '제목을 입력해 주세요.' }
+            })}
           />
         </div>
 
@@ -84,7 +96,9 @@ export default function CreateCard() {
             className={`${BasicStyle} h-[9.6rem] resize-none`}
             id="description"
             placeholder="설명을 입력해 주세요."
-            {...register('description')}
+            {...register('description', {
+              required: { value: true, message: '설명을 입력해 주세요.' }
+            })}
           />
         </div>
 

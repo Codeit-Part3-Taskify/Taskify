@@ -40,7 +40,7 @@ export default function CardDetail() {
   }
 
   return (
-    <div className="flex flex-col gap-[1.6rem] tablet:gap-[2.4rem]">
+    <div className="relative flex flex-col gap-[1.6rem] tablet:gap-[2.4rem]">
       <div className="flex justify-between">
         <span className="text-[#333236] text-[2.4rem] font-bold">
           {cardInformation?.title}
