@@ -20,4 +20,5 @@ export interface CommentData {
 
 export interface PostComment {
   comments: CommentData[];
+  cursorId: number;
 }

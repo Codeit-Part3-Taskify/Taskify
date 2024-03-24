@@ -1,4 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient
+} from '@tanstack/react-query';
+import { useCallback, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import deleteComment from 'src/apis/deleteComment';
 import postComment from 'src/apis/postComment';
@@ -8,9 +14,18 @@ import { CommentBody, PostComment } from 'src/types/commentTypes';
 
 export default function useCommentBox(cardInformation: CardData) {
   const queryClient = useQueryClient();
-  const { data: commentList } = useQuery<PostComment>({
+  const commentContainer = useRef<HTMLDivElement>(null);
+
+  // 무한스크롤
+  const {
+    data: commentList,
+    fetchNextPage,
+    hasNextPage
+  } = useInfiniteQuery({
     queryKey: ['readCommentList', cardInformation.id],
-    queryFn: () => readCommentList(cardInformation.id)
+    queryFn: ({ pageParam }) => readCommentList(cardInformation.id, pageParam),
+    initialPageParam: 0,
+    getNextPageParam: lastPage => lastPage.cursorId
   });
 
   const { mutate: createCommentMutate } = useMutation<void, Error, CommentBody>(
@@ -53,5 +68,25 @@ export default function useCommentBox(cardInformation: CardData) {
     setValue('content', '');
   };
 
-  return { handleSubmit, submit, register, commentList, deleteClick };
+  const handleScroll = useCallback(() => {
+    const container = commentContainer.current;
+    if (container) {
+      const { scrollHeight, scrollTop, clientHeight } = container;
+
+      const scrollBottom = scrollHeight - scrollTop - clientHeight;
+      if (scrollBottom < 200 && hasNextPage) {
+        fetchNextPage();
+      }
+    }
+  }, [commentContainer, fetchNextPage, hasNextPage]);
+  return {
+    handleSubmit,
+    submit,
+    register,
+    deleteClick,
+    commentList,
+    fetchNextPage,
+    commentContainer,
+    handleScroll
+  };
 }
