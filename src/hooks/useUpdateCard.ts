@@ -77,6 +77,7 @@ export default function useUpdateCard() {
     mutationFn: ({ cardId, body }) => updateCardData(cardId, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['readCardList'] });
+      queryClient.invalidateQueries({ queryKey: ['cardList'] });
     }
   });
 
