@@ -167,8 +167,7 @@ export default function updateCard() {
               placeholder="입력 후 엔터."
               value={tagValue}
               onChange={e => setTagValue(e.target.value)}
-              // 타입 찾아야 함
-              onKeyDown={(e: any) => {
+              onKeyDown={(e) => {
                 if (e.nativeEvent.isComposing) return;
                 if (e.key === 'Enter') {
                   const inputElement = e.target as HTMLInputElement;
