@@ -1,8 +1,11 @@
+import DashboardList from 'src/components/Dashboard/DashboardList';
+import Invitations from 'src/components/Dashboard/MyDashboard/Invitations';
+
 export default function MyDashboardPage() {
   return (
-    <>
-      <div>초대받은 대시보드</div>
-      <div>아직 초대받은 대시보드가 없어요</div>
-    </>
+    <main className="p-[4rem]">
+      <DashboardList MyDashboardPage="MyDashboardPage" />
+      <Invitations />
+    </main>
   );
 }
