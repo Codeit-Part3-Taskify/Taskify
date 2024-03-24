@@ -25,4 +25,5 @@ body {
   font-family: 'Pretendard';
   background-color: #fafafa;
   box-sizing: border-box;
+  height: max-content;
 }
