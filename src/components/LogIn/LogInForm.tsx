@@ -61,7 +61,7 @@ export default function LogInForm() {
     mutate({ email, password } as any);
   };
   return (
-    <div className="flex flex-col mt-[3.8rem] w-[52rem] mobile:w-[35.1rem]">
+    <div className="flex flex-col mt-[3.8rem] tablet:w-[52rem] mobile:w-[35.1rem]">
       <label htmlFor="email" className="text-[1.6rem]">
         이메일
       </label>
