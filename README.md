@@ -202,17 +202,6 @@ src
 ### 💡 해결 
 - data를 state에 담아준 후 해당 state로 ui를 표시하도록 변경해주었음. isLoading 중에는 이전의 data를 사용하도록 해주었음
 
-```jsx
-if(!imgValue)
-{ 이미지 값이 존재 하지 않을때 처리 }
-
-else if(typeof imgValue === "string")
-{ 이미지 값 존재하고, 이전에 생성된 이미지의 값이 존재 할 때 처리 }
-
-else if(typeof imgValue === "Object")
-{ 이미지 값 존재하고, 새롭게 들어온 이미지의 값이 존재 할 때 처리 }
-```
-
 <br/>
 
 ## 🗒️ 팀 회고
