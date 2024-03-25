@@ -1,14 +1,15 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
 import getUserInfo from 'src/apis/getUserInfo';
 import postImage from 'src/apis/postImage';
 import putUserInfo from 'src/apis/putUserInfo';
 import { userEmailAtom } from 'src/store/store';
-import Button from '../Buttons/Button';
 import crossbutton from '../../assets/images/cross-button.svg';
+import Button from '../Buttons/Button';
 
 export default function ProfileFormArea() {
+  const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ['userInfo'],
     queryFn: getUserInfo
@@ -39,7 +40,9 @@ export default function ProfileFormArea() {
 
   const { mutate: mutate2 } = useMutation({
     mutationFn: putUserInfo,
-    onSuccess: () => {}
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myInfo'] });
+    }
   });
 
   const handlePutUserInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,8 +55,8 @@ export default function ProfileFormArea() {
       <div className="text-zinc-800 text-[2.4rem] font-bold font-['Pretendard']">
         프로필
       </div>
-      <div className="flex flex-row mobile:flex-col">
-        <div className="w-[18.2rem] h-[18.2rem] bg-[#F5F5F5] mobile:w-[10rem] mobile:h-[10rem] ">
+      <div className="flex flex-row mobile:flex-col tablet:flex-row">
+        <div className="tablet:w-[18.2rem] tablet:h-[18.2rem] bg-[#F5F5F5] mobile:w-[10rem] mobile:h-[10rem] ">
           <label
             htmlFor="file"
             className="relative bg-cover w-[18.2rem] h-[18.2rem] z-10"
@@ -77,7 +80,7 @@ export default function ProfileFormArea() {
           />
         </div>
 
-        <div className="flex flex-col ml-[1.6rem] w-[36.6rem] mobile:w-[22.4rem] mobile:ml-0 ">
+        <div className="flex flex-col tablet:ml-[1.6rem] w-[36.6rem] mobile:w-[22.4rem] mobile:ml-0 ">
           <label
             htmlFor="EmailInput"
             className="text-zinc-800 text-[1.8rem] font-medium font-['Pretendard']"
