@@ -137,7 +137,7 @@ export default function CreateCard() {
             태그
           </label>
           <div
-            className={`${BasicStyle} flex overflow-x-scroll overflow-y-hidden items-center`}
+            className={`${BasicStyle} flex overflow-x-auto overflow-y-hidden items-center`}
           >
             <ul className="flex gap-[1rem] overflow-hidden shrink-0">
               {tagList &&
