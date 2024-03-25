@@ -18,7 +18,6 @@ export default function useDeleteDashboard(boardId: string | undefined) {
   });
 
   const handleDashboardDeleteButtonClick = () => {
-    console.log('aasdas');
     mutate(boardId);
   };
 
