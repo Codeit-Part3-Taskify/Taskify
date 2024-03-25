@@ -1,6 +1,5 @@
 import { BaseSyntheticEvent } from 'react';
-import { getMemberList } from 'src/apis/getMemberList';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { createCard } from 'src/apis/createCard';
@@ -24,20 +23,25 @@ export default function useCreateCard() {
     imageValue,
     setImageValue
   } = useCardCommon();
-  const { register, setValue, control, handleSubmit } = useForm<PostCard>({
+  const {
+    register,
+    setValue,
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<PostCard>({
     mode: 'onSubmit',
     defaultValues: {
       dashboardId: Number(boardId),
       columnId: modal.columnId
     }
   });
-
   const handleChange = (dateChange: Date) => {
     setValue('dueDate', moment(dateChange).format('yyyy-MM-DD HH:mm'));
     setSelectedDate(dateChange);
   };
 
-  const { mutateAsync: createCardMutation } = useMutation<
+  const { mutateAsync: createCardMutation, isError } = useMutation<
     void,
     Error,
     PostCard
@@ -58,21 +62,20 @@ export default function useCreateCard() {
     setValue('tags', newAry);
     setTagList(newAry);
   };
-
   const submit = async (formData: PostCard) => {
     if (!imageValue) {
-      await createCardMutation({ ...formData, imageUrl: undefined });
+      createCardMutation({ ...formData, imageUrl: undefined });
     } else {
       const { imageUrl } = await uploadCardImage(
         modal.columnId,
         formData.imageUrl
       );
-      await createCardMutation({
+      createCardMutation({
         ...formData,
         imageUrl
       });
     }
-    setModal(prev => ({ ...prev, status: false }));
+    if (!isError) setModal(prev => ({ ...prev, status: false }));
   };
 
   return {
@@ -91,6 +94,7 @@ export default function useCreateCard() {
     setTagList,
     setValue,
     handleTagDelete,
-    setImageValue
+    setImageValue,
+    errors
   };
 }

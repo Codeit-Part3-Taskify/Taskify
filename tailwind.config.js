@@ -7,8 +7,8 @@ module.exports = {
   safelist: ['bg-green', 'bg-purple', 'bg-orange', 'bg-blue', 'bg-pink'],
   theme: {
     screens: {
-      mobile: { min: '0px', max: '767px' },
-      tablet: { min: '768px', max: '1199px' }, // { min: '768px', max: '1023px'
+      mobile: '0px',
+      tablet: '768px', // { min: '768px', max: '1023px'
       desktop: '1200px'
     },
     extend: {

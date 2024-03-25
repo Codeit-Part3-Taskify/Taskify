@@ -23,6 +23,9 @@ export default function CommentList({
     mutationFn: ({ commentId, content }) => updateComment(commentId, content),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['readCommentList'] });
+    },
+    onError: () => {
+      alert('댓글을 입력해 주세요.');
     }
   });
 
@@ -51,6 +54,7 @@ export default function CommentList({
         <div>
           {isEditing ? (
             <input
+              className="text-[1.4rem] outline-double"
               value={commentValue}
               onChange={e => setCommentValue(e.target.value)}
             />

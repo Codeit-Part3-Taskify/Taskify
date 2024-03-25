@@ -13,7 +13,7 @@ export default function AddCard({ columnInfo }: Props) {
   return (
     <Button
       variant="secondary"
-      customStyles="mt-[1.8rem] p-[0.6rem] rounded-[0.6rem] tablet:mt-[2.5rem] tablet:p-[0.9rem]"
+      customStyles="mt-[1.8rem] p-[0.6rem] rounded-[0.6rem] min-w-[28.4rem] tablet:mt-[2.5rem] tablet:p-[0.9rem]"
       onClick={() =>
         setModal(prev => ({
           ...prev,

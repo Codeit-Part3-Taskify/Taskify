@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import stroke from 'src/assets/images/stroke.svg';
 import kebab from 'src/assets/images/kebab.svg';
 import purpleCircle from 'src/assets/images/purple-circle.svg';
+import logo from 'src/assets/images/logo.svg';
 import closeBtn from 'src/assets/images/close.svg';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import type { CardData } from 'src/types/cardTypes';
@@ -22,7 +23,7 @@ const tagsColor = [
 export default function CardDetail() {
   const queryClient = useQueryClient();
   const [modal, setModal] = useAtom(modalAtom);
-  const { data: cardInformation } = useQuery<CardData>({
+  const { data: cardInformation, isLoading } = useQuery<CardData>({
     queryKey: ['readCardDetail', modal.cardId],
     queryFn: async () => readCardDetail(modal.cardId)
   });
@@ -33,8 +34,13 @@ export default function CardDetail() {
     queryClient.resetQueries({
       queryKey: ['readCommentList']
     });
+
+  if (isLoading) {
+    return <div>loading중...</div>;
+  }
+
   return (
-    <div className="flex flex-col gap-[1.6rem] tablet:gap-[2.4rem]">
+    <div className="relative flex flex-col gap-[1.6rem] tablet:gap-[2.4rem]">
       <div className="flex justify-between">
         <span className="text-[#333236] text-[2.4rem] font-bold">
           {cardInformation?.title}
@@ -94,11 +100,22 @@ export default function CardDetail() {
           </div>
 
           <div>
-            <img
-              src={cardInformation?.imageUrl}
-              alt="카드이미지"
-              className="w-[28.7rem] h-[26.2rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
-            />
+            {cardInformation?.imageUrl ? (
+              <img
+                src={cardInformation?.imageUrl}
+                alt="카드 이미지"
+                className="w-[28.7rem] h-[26.2rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
+              />
+            ) : (
+              <div className="flex flex-col-reverse items-center">
+                <img
+                  src={logo}
+                  alt="카드 이미지"
+                  className="w-[10rem] h-[10rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
+                />
+                이미지가 없습니다.
+              </div>
+            )}
           </div>
           {cardInformation && <CommentBox cardInformation={cardInformation} />}
         </div>
