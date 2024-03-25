@@ -1,3 +1,4 @@
+/* eslint-diabled no-console */
 import axios from 'axios';
 
 export default function handleError(error: unknown) {
