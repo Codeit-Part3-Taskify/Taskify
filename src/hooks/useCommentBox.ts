@@ -21,7 +21,8 @@ export default function useCommentBox(cardInformation: CardData) {
   const {
     data: commentList,
     fetchNextPage,
-    hasNextPage
+    hasNextPage,
+    isLoading
   } = useInfiniteQuery({
     queryKey: ['readCommentList', cardInformation.id],
     queryFn: ({ pageParam }) => readCommentList(cardInformation.id, pageParam),
@@ -53,7 +54,12 @@ export default function useCommentBox(cardInformation: CardData) {
     deleteCommentMutate({ commentId });
   };
 
-  const { register, handleSubmit, setValue } = useForm<{
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors }
+  } = useForm<{
     content: string;
     comment: number;
   }>();
@@ -88,6 +94,8 @@ export default function useCommentBox(cardInformation: CardData) {
     commentList,
     fetchNextPage,
     commentContainer,
-    handleScroll
+    handleScroll,
+    isLoading,
+    errors
   };
 }

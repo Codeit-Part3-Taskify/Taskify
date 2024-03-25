@@ -12,6 +12,7 @@ import ModalContainer from '../Modal/Container/ModalContainer';
 import CardDetail from '../Modal/Card/CardDetail';
 import SignUpConfirm from '../Modal/Alert/SignUpConfirm';
 import AlertPassword from '../Modal/Alert/AlertPassword';
+import AlertEmail from '../Modal/Alert/AlertEmail';
 
 const modalList = {
   '': '',
@@ -24,7 +25,8 @@ const modalList = {
   inviteMember: <InviteMember />,
   manageColumn: <ManageColumn />,
   updateCard: <UpdateCard />,
-  signUpConfirm: <SignUpConfirm />
+  signUpConfirm: <SignUpConfirm />,
+  alertEmail: <AlertEmail />
 };
 
 export default function Modal() {

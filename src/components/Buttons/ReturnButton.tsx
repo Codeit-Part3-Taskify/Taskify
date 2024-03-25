@@ -3,10 +3,9 @@ import BackwardIcon from 'src/assets/images/arrow-backward-black.svg';
 
 export default function ReturnButton() {
   const navigate = useNavigate();
-  const { boardId } = useParams<Params>();
 
   const handleButtonClick = () => {
-    navigate(`/dashboard/${boardId}`);
+    navigate(-1); // 바로 이전 페이지로 이동
   };
 
   return (

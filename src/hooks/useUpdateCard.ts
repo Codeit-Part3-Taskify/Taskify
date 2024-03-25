@@ -26,7 +26,13 @@ export default function useUpdateCard() {
     setImageValue
   } = useCardCommon();
 
-  const { register, setValue, control, handleSubmit } = useForm<PutCard>({
+  const {
+    register,
+    setValue,
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<PutCard>({
     mode: 'onSubmit'
   });
 
@@ -127,6 +133,7 @@ export default function useUpdateCard() {
     setTagList,
     setValue,
     handleTagDelete,
-    setImageValue
+    setImageValue,
+    errors
   };
 }

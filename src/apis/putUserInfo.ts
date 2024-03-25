@@ -2,14 +2,11 @@ import axios from './axiosInstance';
 
 interface PutUserInfoData {
   nickname: string;
-  fileData: File;
+  profileImageUrl: string;
 }
 
-const putUserInfo = async ({ nickname, fileData }: PutUserInfoData) => {
-  const formData = new FormData();
-  formData.append('profileImageUrl', fileData);
-  formData.append('nickname', nickname);
-  const res = await axios.put('users/me', formData);
+const putUserInfo = async ({ nickname, profileImageUrl }: PutUserInfoData) => {
+  const res = await axios.put('users/me', { nickname, profileImageUrl });
   return res.data;
 };
 

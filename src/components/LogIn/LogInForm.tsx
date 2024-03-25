@@ -61,14 +61,14 @@ export default function LogInForm() {
     mutate({ email, password } as any);
   };
   return (
-    <div className="flex flex-col mt-[3.8rem]">
+    <div className="flex flex-col mt-[3.8rem] w-[52rem] mobile:w-[35.1rem]">
       <label htmlFor="email" className="text-[1.6rem]">
         이메일
       </label>
       <input
         id="email"
         type="email"
-        className={`basicinput w-[52rem] border ${showEmailError ? 'border-red-500' : ''}`}
+        className={`basicinput border ${showEmailError ? 'border-red-500' : ''}`}
         onBlur={EmailError}
         placeholder="이메일을 입력해주세요."
         onChange={e => setEmail(e.target.value)}
@@ -93,7 +93,7 @@ export default function LogInForm() {
       <input
         id="password"
         type={showPassword ? 'text' : 'password'}
-        className={`basicinput  w-[52rem] border ${showPasswordError ? 'border-red-500' : ''}`}
+        className={`basicinput  border ${showPasswordError ? 'border-red-500' : ''}`}
         onBlur={PasswordError}
         minLength={8}
         placeholder="비밀번호를 입력해주세요."
@@ -106,7 +106,7 @@ export default function LogInForm() {
       <Button
         variant="primary"
         type="button"
-        customStyles="w-[52rem] h-[5rem] text-[1.8rem] rounded-[0.4rem] mb-[2rem] mt-[2rem]"
+        customStyles=" h-[5rem] text-[1.8rem] rounded-[0.4rem] mb-[2rem] mt-[2rem] w-full"
         disabled={!email || !password}
         onClick={handlePostLogIn}
       >
