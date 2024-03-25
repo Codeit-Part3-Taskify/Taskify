@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMyInfo } from 'src/apis/getMyInfo';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,7 +7,6 @@ import DashboardMemebers from '../Navbar/DashboardMembers';
 import DashboardTitle from '../Navbar/DashboardTitle';
 import NavButtons from '../Navbar/NavButtons';
 import Profile from '../Profile/Profile';
-import { useEffect } from 'react';
 
 export default function Navbar() {
   const navigate = useNavigate();
