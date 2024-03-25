@@ -76,14 +76,14 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="flex flex-col mt-[3.8rem]">
+    <div className="flex flex-col mt-[3.8rem] w-[52rem] mobile:w-[35.1rem]">
       <label htmlFor="email" className="text-[1.6rem]">
         이메일
       </label>
       <input
         id="email"
         type="email"
-        className={`basicinput w-[52rem] border ${showEmailError ? 'border-red-500' : ''}`}
+        className={`basicinput  border ${showEmailError ? 'border-red-500' : ''}`}
         onBlur={EmailError}
         onChange={e => setEmail(e.target.value)}
       />
@@ -96,7 +96,7 @@ export default function SignUpForm() {
       <input
         id="nickname"
         type="text"
-        className={`basicinput w-[52rem] border ${showNicknameError ? 'border-red-500' : ''}`}
+        className={`basicinput border ${showNicknameError ? 'border-red-500' : ''}`}
         placeholder="닉네임을 입력해주세요."
         onBlur={NicknameError}
         onChange={e => setNickname(e.target.value)}
@@ -121,7 +121,7 @@ export default function SignUpForm() {
       <input
         id="password"
         type={showPassword ? 'text' : 'password'}
-        className={`basicinput  w-[52rem] border ${showPasswordError ? 'border-red-500' : ''}`}
+        className={`basicinput   border ${showPasswordError ? 'border-red-500' : ''}`}
         onChange={e => setPassword(e.target.value)}
         onBlur={PasswordError}
         minLength={8}
@@ -151,7 +151,7 @@ export default function SignUpForm() {
       <input
         id="confirmPassword"
         type={showPassword ? 'text' : 'password'}
-        className={`basicinput  w-[52rem] border ${showPasswordError ? 'border-red-500' : ''}`}
+        className={`basicinput  border ${showPasswordError ? 'border-red-500' : ''}`}
         onBlur={confirmPasswordError}
         placeholder="비밀번호를 한번 더 입력해주세요."
       />
@@ -168,7 +168,7 @@ export default function SignUpForm() {
       <Button
         variant="primary"
         type="button"
-        customStyles="w-[52rem] h-[5rem] text-[1.8rem] rounded-[0.4rem] mb-[2rem] mt-[2rem]"
+        customStyles=" h-[5rem] text-[1.8rem] rounded-[0.4rem] mb-[2rem] mt-[2rem]"
         disabled={
           !!showEmailError ||
           !!showPasswordError ||
