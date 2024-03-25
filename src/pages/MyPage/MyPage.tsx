@@ -5,7 +5,9 @@ import ReturnButton from 'src/components/Buttons/ReturnButton';
 export default function MyPage() {
   return (
     <div>
-      <ReturnButton />
+      <div className="m-5">
+        <ReturnButton />
+      </div>
       <ProfileFormArea />
       <PasswordFormArea />
     </div>
