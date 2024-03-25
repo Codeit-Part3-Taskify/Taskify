@@ -7,8 +7,7 @@ import useDeleteDashboard from 'src/hooks/useDeleteDashboard';
 import { Params, useParams } from 'react-router-dom';
 
 export default function EditDashboardPage() {
-  const { boardId } = useParams<Params>();
-  const { handleDashboardDeleteButtonClick } = useDeleteDashboard(boardId);
+  const { handleDashboardDeleteButtonClick } = useDeleteDashboard();
 
   return (
     <main className="tablet:mt-[2rem] tablet:ml-[2rem] mt-[1.7rem] ml-[1.2rem]">
