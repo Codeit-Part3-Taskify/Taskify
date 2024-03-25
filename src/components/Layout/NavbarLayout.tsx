@@ -1,17 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMyInfo } from 'src/apis/getMyInfo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import stroke from 'src/assets/images/stroke.svg';
 import DashboardMemebers from '../Navbar/DashboardMembers';
 import DashboardTitle from '../Navbar/DashboardTitle';
 import NavButtons from '../Navbar/NavButtons';
 import Profile from '../Profile/Profile';
+import { useEffect } from 'react';
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const { data } = useQuery({
     queryKey: ['myInfo'],
     queryFn: () => getMyInfo()
   });
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      navigate('/login');
+    }
+  }, []);
 
   return (
     <div className="flex items-center w-screen tablet:h-[7rem] h-[6rem] bg-white desktop:pl-[34rem] desktop:pr-[8rem] tablet:pr-[4rem] pr-[1.2rem] border border-b-gray_D9D9D9">

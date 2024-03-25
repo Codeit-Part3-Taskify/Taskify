@@ -49,6 +49,7 @@ export default function useCreateCard() {
     mutationFn: body => createCard(body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['readCardList'] });
+      queryClient.refetchQueries({ queryKey: ['cardList'] });
     }
   });
 

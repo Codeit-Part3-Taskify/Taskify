@@ -4,9 +4,11 @@ import EditDashboardMembers from 'src/components/EditDashboard/EditDashboardMemb
 import InvitationSettings from 'src/components/EditDashboard/InvitationSettings';
 import Button from 'src/components/Buttons/Button';
 import useDeleteDashboard from 'src/hooks/useDeleteDashboard';
+import { Params, useParams } from 'react-router-dom';
 
 export default function EditDashboardPage() {
-  const { handleDashboardDeleteButtonClick } = useDeleteDashboard();
+  const { boardId } = useParams<Params>();
+  const { handleDashboardDeleteButtonClick } = useDeleteDashboard(boardId);
 
   return (
     <main className="tablet:mt-[2rem] tablet:ml-[2rem] mt-[1.7rem] ml-[1.2rem]">

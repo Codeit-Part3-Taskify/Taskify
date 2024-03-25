@@ -1,7 +1,5 @@
-import type { CardData } from 'src/types/cardTypes';
-import readCardList from 'src/apis/readCardList';
-import { useQuery } from '@tanstack/react-query';
 import { ColumnData } from 'src/types/columnTypes';
+import useInfiniteScrollCards from 'src/hooks/useInfiniteScrollColumn';
 import Card from './Card';
 import AddCard from './AddCard';
 
@@ -10,19 +8,26 @@ interface Props {
 }
 
 export default function Cards({ columnInfo }: Props) {
-  const { data } = useQuery({
-    queryKey: ['readCardList', columnInfo.id],
-    queryFn: () => readCardList(columnInfo.id)
-  });
+  const { cardList, cardContainer, handleScroll } =
+    useInfiniteScrollCards(columnInfo);
+
+  const renderCard = (card: any) => {
+    if (card?.columnId !== columnInfo?.id) return null;
+    return <Card key={card.id} cardData={card} columnInfo={columnInfo} />;
+  };
+
+  const renderCardsFromPage = (page: any) => page?.cards?.map(renderCard) ?? [];
+
   return (
-    <section className="flex flex-col gap-[1rem] tablet:gap-[1.6rem]">
+    <section className="flex flex-col gap-[1rem] tablet:gap-[1.6rem] h-full max-h-screen">
       <AddCard columnInfo={columnInfo} />
-      {data?.cards?.map(
-        (card: CardData) =>
-          card?.columnId === columnInfo?.id && (
-            <Card key={card.id} cardData={card} columnInfo={columnInfo} />
-          )
-      )}
+      <div
+        className="flex flex-col gap-[1rem] tablet:gap-[1.6rem] overflow-y-auto scrollbar-hide"
+        ref={cardContainer}
+        onScroll={handleScroll}
+      >
+        {cardList?.pages?.map(renderCardsFromPage)}
+      </div>
     </section>
   );
 }
