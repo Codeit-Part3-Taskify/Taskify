@@ -7,10 +7,8 @@ interface Props {
   columnInfo: ColumnData;
 }
 export default function Column({ columnInfo }: Props) {
-  const { cardContainer, handleScroll } = useInfiniteScrollCards(columnInfo);
-
   return (
-    <section className="p-[1.2rem] border-r border-b border-r-[#EEEEEE] w-[calc(100vw-16rem)] tablet:p-[2rem] desktop:w-[35.4rem] shrink-0 min-w-[31rem] ">
+    <section className="p-[1.2rem] border-r border-b border-r-[#EEEEEE] w-[calc(100vw-16rem)] tablet:p-[2rem] desktop:w-[35.4rem] shrink-0 min-w-[31rem]">
       <ColumnInfo columnInfo={columnInfo} />
       <Cards columnInfo={columnInfo} />
     </section>

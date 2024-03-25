@@ -22,7 +22,7 @@ export default function Cards({ columnInfo }: Props) {
     <section className="flex flex-col gap-[1rem] tablet:gap-[1.6rem] h-full max-h-screen">
       <AddCard columnInfo={columnInfo} />
       <div
-        className="overflow-y-scroll flex flex-col gap-[1rem] tablet:gap-[1.6rem] scrollbar-hide"
+        className="flex flex-col gap-[1rem] tablet:gap-[1.6rem] overflow-y-auto scrollbar-hide"
         ref={cardContainer}
         onScroll={handleScroll}
       >
