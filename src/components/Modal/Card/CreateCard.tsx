@@ -191,7 +191,11 @@ export default function CreateCard() {
                   className="w-[7.6rem] h-[7.6rem]"
                 />
               </label>
-              <button type="button" onClick={() => setImageValue('')}>
+              <button
+                type="button"
+                className="bg-[black] text-white p-2 rounded-[0.6rem]"
+                onClick={() => setImageValue('')}
+              >
                 X
               </button>
             </div>
