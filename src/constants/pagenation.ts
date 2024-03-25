@@ -4,6 +4,6 @@ export const PAGENATION_SIZE = {
     INVITATIONS: 5,
     SIDEBAR: 10,
     MYDASHBOARD: 5,
-    CARDS: 10
+    CARDS: 5
   }
 } as const;

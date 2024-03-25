@@ -11,6 +11,7 @@ import postComment from 'src/apis/postComment';
 import readCommentList from 'src/apis/readCommentList';
 import { CardData } from 'src/types/cardTypes';
 import { CommentBody, PostComment } from 'src/types/commentTypes';
+import { throttle } from 'lodash';
 
 export default function useCommentBox(cardInformation: CardData) {
   const queryClient = useQueryClient();
