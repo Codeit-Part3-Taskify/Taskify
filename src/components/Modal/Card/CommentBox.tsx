@@ -19,6 +19,14 @@ export default function CommentBox({
     errors
   } = useCommentBox(cardInformation);
 
+  const renderComment = (comment: any) => (
+    <CommentList key={comment.id} comment={comment} deleteClick={deleteClick} />
+  );
+
+  // 페이지 내의 모든 댓글을 렌더링하는 함수
+  const renderCommentsFromPage = (page: any) =>
+    page?.comments?.map(renderComment);
+
   if (isLoading) {
     return <div>loading중...</div>;
   }
@@ -53,16 +61,7 @@ export default function CommentBox({
         onScroll={handleScroll}
         className="w-[28.7rem] tablet:w-[45rem] h-[8.5rem] overflow-auto scroll"
       >
-        {commentList?.pages?.map(
-          page =>
-            page?.comments?.map((comment: any) => (
-              <CommentList
-                key={comment.id}
-                comment={comment}
-                deleteClick={deleteClick}
-              />
-            ))
-        )}
+        {commentList?.pages?.map(renderCommentsFromPage)}
       </div>
     </div>
   );

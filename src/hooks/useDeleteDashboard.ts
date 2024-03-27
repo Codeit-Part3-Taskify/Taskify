@@ -2,12 +2,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Params, useNavigate, useParams } from 'react-router-dom';
 import deleteDashboard from 'src/apis/deleteDashboard';
 
-export default function useDeleteDashboard(boardId: string | undefined) {
+export default function useDeleteDashboard() {
+  const { boardId } = useParams<Params>();
   const queryClient = useQueryClient();
   const natvigate = useNavigate();
 
   const { mutate } = useMutation({
-    mutationFn: (boardId: string | undefined) => deleteDashboard(boardId),
+    mutationFn: () => deleteDashboard(boardId),
 
     onSuccess: () => {
       queryClient.refetchQueries({
@@ -18,7 +19,7 @@ export default function useDeleteDashboard(boardId: string | undefined) {
   });
 
   const handleDashboardDeleteButtonClick = () => {
-    mutate(boardId);
+    mutate();
   };
 
   return { handleDashboardDeleteButtonClick };
