@@ -4,19 +4,9 @@ import EditDashboardMembers from 'src/components/EditDashboard/EditDashboardMemb
 import InvitationSettings from 'src/components/EditDashboard/InvitationSettings';
 import Button from 'src/components/Buttons/Button';
 import useDeleteDashboard from 'src/hooks/useDeleteDashboard';
-import { Params, useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 
 export default function EditDashboardPage() {
   const { handleDashboardDeleteButtonClick } = useDeleteDashboard();
-  const { boardId } = useParams<Params>();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!boardId) {
-      navigate('/mydashboard');
-    }
-  });
 
   return (
     <main className="tablet:mt-[2rem] tablet:ml-[2rem] mt-[1.7rem] ml-[1.2rem]">
