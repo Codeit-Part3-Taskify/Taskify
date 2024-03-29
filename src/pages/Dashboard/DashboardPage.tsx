@@ -55,10 +55,31 @@ export default function Dashboard() {
       <Helmet>
         <title>Taskify 대시보드</title>
       </Helmet>
-      {data?.data?.map((column: ColumnData) => (
-        <Column key={column.id} columnInfo={column} />
-      ))}
-      <AddColumn />
+
+      {showLeftButton && (
+        <button
+          onClick={() => scroll('left')}
+          className="w-[4rem] h-full absolute desktop:left-[30rem] tablet:left-[16rem] left-[6.7rem] bg-transparent hover:bg-violet_8 opacity-50"
+        >
+          <img src={backwardArrow} alt="왼쪽 화살표 아이콘" />
+        </button>
+      )}
+
+      <div ref={scrollContainerRef} className="flex overflow-auto">
+        {data?.data?.map((column: ColumnData) => (
+          <Column key={column.id} columnInfo={column} />
+        ))}
+        <AddColumn />
+      </div>
+
+      {showRightButton && (
+        <button
+          onClick={() => scroll('right')}
+          className="w-[4rem] h-full bg-transparent absolute right-0 hover:bg-violet_8 opacity-50"
+        >
+          <img src={forwardArrow} alt="오른쪽 화살표 아이콘" />
+        </button>
+      )}
     </main>
   );
 }
