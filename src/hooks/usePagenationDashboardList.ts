@@ -19,10 +19,17 @@ export const usePagenationDashboardList = (pageSize: number) => {
     queryFn: () => getDashboards(nowPage, pageSize)
   });
 
+  const totalCount = data?.totalCount;
+
   useEffect(() => {
-    const totalCount = data?.totalCount ?? 1;
-    const calculatedAllPage = Math.ceil(totalCount / pageSize);
-    setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
+    if (totalCount) {
+      const calculatedAllPage = Math.ceil(
+        totalCount / PAGENATION_SIZE.DASHBOARD.INVITATIONS
+      );
+      setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
+    } else {
+      setAllPage(0);
+    }
   }, [data?.totalCount]);
 
   useEffect(() => {

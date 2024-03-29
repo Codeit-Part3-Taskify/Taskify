@@ -35,8 +35,8 @@ export default function Navbar() {
 
   return (
     <div className="flex items-center w-screen tablet:h-[7rem] h-[6rem] bg-white desktop:pl-[34rem] desktop:pr-[8rem] tablet:pr-[4rem] pr-[1.2rem] border border-b-gray_D9D9D9">
-      <div className="flex desktop:justify-between justify-end w-[100%]">
-        <div className="flex items-center">
+      <div className="flex justify-end desktop:justify-between w-[100%]">
+        <div className="flex items-center hidden desktop:flex">
           <DashboardTitle />
           <NavLink
             to="/mydashboard"

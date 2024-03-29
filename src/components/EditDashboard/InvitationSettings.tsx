@@ -35,14 +35,16 @@ export default function InvitationSettings() {
           초대 내역
         </h1>
         <div className="flex flex-row tablet:gap-[1.6rem] relative tablet:static">
-          <PagenationButtons
-            allPage={allPage}
-            nowPage={nowPage}
-            handleBackwardButtonClick={handleBackwardButtonClick}
-            handleForwardButtonClick={handleForwardButtonClick}
-            isStart={isStart}
-            isEnd={isEnd}
-          />
+          {allPage ? (
+            <PagenationButtons
+              allPage={allPage}
+              nowPage={nowPage}
+              handleBackwardButtonClick={handleBackwardButtonClick}
+              handleForwardButtonClick={handleForwardButtonClick}
+              isStart={isStart}
+              isEnd={isEnd}
+            />
+          ) : null}
           <Button
             variant="primary"
             customStyles="absolute right-0 top-[4.8rem] tablet:static tablet:gap-[0.8rem] gap-[0.6rem] tablet:px-[1.6rem] px-[1.2rem] tablet:py-[0.8rem] py-[0.7rem] tablet:text-[1.4rem] text-[1.2rem] rounded-[0.4rem]"

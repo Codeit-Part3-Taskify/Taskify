@@ -10,6 +10,7 @@ export const usePagenationDashboardInvitations = () => {
   const [nowPage, setNowPage] = useState(1);
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
   const queryClient = useQueryClient();
   const { boardId } = useParams<Params>();
 
@@ -29,12 +30,17 @@ export const usePagenationDashboardInvitations = () => {
     }
   });
 
+  const totalCount = data?.totalCount;
+
   useEffect(() => {
-    const totalCount = data?.totalCount ?? 1;
-    const calculatedAllPage = Math.ceil(
-      totalCount / PAGENATION_SIZE.DASHBOARD.INVITATIONS
-    );
-    setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
+    if (totalCount) {
+      const calculatedAllPage = Math.ceil(
+        totalCount / PAGENATION_SIZE.DASHBOARD.INVITATIONS
+      );
+      setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
+    } else {
+      setAllPage(0);
+    }
   }, [data?.totalCount]);
 
   useEffect(() => {

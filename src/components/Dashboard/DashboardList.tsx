@@ -53,15 +53,17 @@ export default function DashboardList({
         ))}
       </div>
 
-      <PagenationButtons
-        allPage={allPage}
-        nowPage={nowPage}
-        handleBackwardButtonClick={handleBackwardButtonClick}
-        handleForwardButtonClick={handleForwardButtonClick}
-        isSidebar
-        isStart={isStart}
-        isEnd={isEnd}
-      />
+      {allPage ? (
+        <PagenationButtons
+          allPage={allPage}
+          nowPage={nowPage}
+          handleBackwardButtonClick={handleBackwardButtonClick}
+          handleForwardButtonClick={handleForwardButtonClick}
+          isSidebar
+          isStart={isStart}
+          isEnd={isEnd}
+        />
+      ) : null}
     </div>
   );
 }
