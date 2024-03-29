@@ -44,7 +44,7 @@ export default function DashboardList({
         }
       >
         {MyDashboardPage && <AddDashboard />}
-        {dashboards.map((dashboard: Dashboard) => (
+        {dashboards?.map((dashboard: Dashboard) => (
           <DashboardItem
             key={dashboard.id}
             dashboard={dashboard}
@@ -52,17 +52,16 @@ export default function DashboardList({
           />
         ))}
       </div>
-      <div className="fixed top-1/2">
-        <PagenationButtons
-          allPage={allPage}
-          nowPage={nowPage}
-          handleBackwardButtonClick={handleBackwardButtonClick}
-          handleForwardButtonClick={handleForwardButtonClick}
-          isSidebar
-          isStart={isStart}
-          isEnd={isEnd}
-        />
-      </div>
+
+      <PagenationButtons
+        allPage={allPage}
+        nowPage={nowPage}
+        handleBackwardButtonClick={handleBackwardButtonClick}
+        handleForwardButtonClick={handleForwardButtonClick}
+        isSidebar
+        isStart={isStart}
+        isEnd={isEnd}
+      />
     </div>
   );
 }
