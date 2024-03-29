@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { modalAtom, userEmailAtom } from 'src/store/store';
 import postLogIn from '../../apis/postLogIn';
@@ -22,10 +22,11 @@ export default function LogInForm() {
   const setModal = useSetAtom(modalAtom);
 
   // const [userEmail, setUserEmail] = useAtom(userEmailAtom);
-
-  if (localStorage.getItem('accessToken')) {
-    navigate('/mydashboard');
-  }
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      navigate('/mydashboard');
+    }
+  });
 
   const EmailError = (e: React.FocusEvent<HTMLInputElement>) => {
     if (e.target.validity.typeMismatch) {
