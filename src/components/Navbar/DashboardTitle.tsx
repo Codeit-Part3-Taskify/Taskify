@@ -11,7 +11,7 @@ export default function DashboardTitle() {
   });
 
   return (
-    <div className="items-center gap-[0.8rem]">
+    <div className="flex items-center gap-[0.8rem]">
       <div className="text-[2rem] font-bold">{data?.title}</div>
       {data?.createdByMe ? (
         <img
