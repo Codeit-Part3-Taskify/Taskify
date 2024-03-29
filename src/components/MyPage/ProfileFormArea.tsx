@@ -62,7 +62,7 @@ export default function ProfileFormArea() {
             htmlFor="file"
             className="bg-cover z-10 object-contain relative"
           >
-            {profileImageUrl && (
+            {profileImageUrl ? (
               <>
                 <img
                   src={profileImageUrl || ''}
@@ -71,9 +71,7 @@ export default function ProfileFormArea() {
                 />
                 <button className="bg-[url(./assets/images/x-button.svg)] bg-cover bg-[violet] w-[3rem] h-[3rem] absolute top-0 right-0 z-50" />
               </>
-            )}
-
-            {!profileImageUrl && (
+            ) : (
               <img
                 src={crossbutton}
                 alt="cross"
