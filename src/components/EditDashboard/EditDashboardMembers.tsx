@@ -11,7 +11,9 @@ export default function EditDashboardMembers() {
     nowPage,
     handleBackwardButtonClick,
     handleForwardButtonClick,
-    handleDeleteButtonClick
+    handleDeleteButtonClick,
+    isStart,
+    isEnd
   } = usePagenationDashboardMembers();
 
   const [displayData, setDisplayData] = useState(data);
@@ -31,6 +33,8 @@ export default function EditDashboardMembers() {
           nowPage={nowPage}
           handleBackwardButtonClick={handleBackwardButtonClick}
           handleForwardButtonClick={handleForwardButtonClick}
+          isStart={isStart}
+          isEnd={isEnd}
         />
       </div>
       <div className="text-[1.6rem] tablet:pt-[2.8rem] pt-[1.8rem]">

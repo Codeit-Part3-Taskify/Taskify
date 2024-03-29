@@ -17,7 +17,9 @@ export default function DashboardList({
     allPage,
     nowPage,
     handleBackwardButtonClick,
-    handleForwardButtonClick
+    handleForwardButtonClick,
+    isStart,
+    isEnd
   } = usePagenationDashboardList(
     MyDashboardPage
       ? PAGENATION_SIZE.DASHBOARD.MYDASHBOARD
@@ -50,14 +52,17 @@ export default function DashboardList({
           />
         ))}
       </div>
-
-      <PagenationButtons
-        allPage={allPage}
-        nowPage={nowPage}
-        handleBackwardButtonClick={handleBackwardButtonClick}
-        handleForwardButtonClick={handleForwardButtonClick}
-        isSidebar
-      />
+      <div className="fixed top-1/2">
+        <PagenationButtons
+          allPage={allPage}
+          nowPage={nowPage}
+          handleBackwardButtonClick={handleBackwardButtonClick}
+          handleForwardButtonClick={handleForwardButtonClick}
+          isSidebar
+          isStart={isStart}
+          isEnd={isEnd}
+        />
+      </div>
     </div>
   );
 }

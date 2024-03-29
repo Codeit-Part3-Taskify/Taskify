@@ -15,7 +15,9 @@ export default function InvitationSettings() {
     nowPage,
     handleBackwardButtonClick,
     handleForwardButtonClick,
-    handleDeleteButtonClick
+    handleDeleteButtonClick,
+    isStart,
+    isEnd
   } = usePagenationDashboardInvitations();
   const setModal = useSetAtom(modalAtom);
   const [displayData, setDisplayData] = useState(data);
@@ -38,6 +40,8 @@ export default function InvitationSettings() {
             nowPage={nowPage}
             handleBackwardButtonClick={handleBackwardButtonClick}
             handleForwardButtonClick={handleForwardButtonClick}
+            isStart={isStart}
+            isEnd={isEnd}
           />
           <Button
             variant="primary"

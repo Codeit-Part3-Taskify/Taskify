@@ -8,6 +8,8 @@ import deleteDashboardMember from 'src/apis/deleteDashboardMember';
 export const usePagenationDashboardMembers = () => {
   const [allPage, setAllPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
+  const [isStart, setIsStart] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
   const queryClient = useQueryClient();
   const { boardId } = useParams<Params>();
 
@@ -38,6 +40,20 @@ export const usePagenationDashboardMembers = () => {
     );
     setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
   }, [data?.totalCount]);
+
+  useEffect(() => {
+    if (nowPage === 1) {
+      setIsStart(true);
+    } else {
+      setIsStart(false);
+    }
+
+    if (nowPage === allPage) {
+      setIsEnd(true);
+    } else {
+      setIsEnd(false);
+    }
+  }, [nowPage, allPage]);
 
   const handleBackwardButtonClick = () => {
     if (nowPage === 1 || isLoading) {
@@ -70,6 +86,8 @@ export const usePagenationDashboardMembers = () => {
     setNowPage,
     handleBackwardButtonClick,
     handleForwardButtonClick,
-    handleDeleteButtonClick
+    handleDeleteButtonClick,
+    isStart,
+    isEnd
   };
 };

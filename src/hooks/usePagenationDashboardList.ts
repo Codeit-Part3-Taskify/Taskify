@@ -6,6 +6,8 @@ import { PAGENATION_SIZE } from 'src/constants/pagenation';
 export const usePagenationDashboardList = (pageSize: number) => {
   const [allPage, setAllPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
+  const [isStart, setIsStart] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const queryKey =
     pageSize === PAGENATION_SIZE.DASHBOARD.MYDASHBOARD
@@ -22,6 +24,19 @@ export const usePagenationDashboardList = (pageSize: number) => {
     const calculatedAllPage = Math.ceil(totalCount / pageSize);
     setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
   }, [data?.totalCount]);
+
+  useEffect(() => {
+    if (nowPage === 1) {
+      setIsStart(true);
+    } else {
+      setIsStart(false);
+    }
+    if (nowPage === allPage) {
+      setIsEnd(true);
+    } else {
+      setIsEnd(false);
+    }
+  }, [nowPage, allPage]);
 
   const handleBackwardButtonClick = () => {
     if (nowPage === 1 || isLoading) {
@@ -43,6 +58,8 @@ export const usePagenationDashboardList = (pageSize: number) => {
     nowPage,
     setNowPage,
     handleBackwardButtonClick,
-    handleForwardButtonClick
+    handleForwardButtonClick,
+    isStart,
+    isEnd
   };
 };
