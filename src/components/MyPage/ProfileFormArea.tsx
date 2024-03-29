@@ -7,6 +7,7 @@ import putUserInfo from 'src/apis/putUserInfo';
 import { userEmailAtom } from 'src/store/store';
 import crossbutton from '../../assets/images/cross-button.svg';
 import Button from '../Buttons/Button';
+// import xbutton from '../../assets/images/x-button.svg';
 
 export default function ProfileFormArea() {
   const queryClient = useQueryClient();
@@ -59,17 +60,24 @@ export default function ProfileFormArea() {
         <div className="tablet:w-[18.2rem] tablet:h-[18.2rem] bg-[#F5F5F5] mobile:w-[10rem] mobile:h-[10rem] ">
           <label
             htmlFor="file"
-            className="relative bg-cover w-[18.2rem] h-[18.2rem] z-10"
+            className="bg-cover z-10 object-contain relative"
           >
-            {' '}
-            {profileImageUrl && (
+            {profileImageUrl ? (
+              <>
+                <img
+                  src={profileImageUrl || ''}
+                  alt="profile"
+                  className=" z-30 object-contain"
+                />
+                <button className="bg-[url(./assets/images/x-button.svg)] bg-cover bg-[violet] w-[3rem] h-[3rem] absolute top-0 right-0 z-50" />
+              </>
+            ) : (
               <img
-                src={profileImageUrl || ''}
-                alt="profile"
-                className="w-[18.2rem] h-[18.2rem] absolute z-40"
+                src={crossbutton}
+                alt="cross"
+                className="w-[100%] h-[100%]"
               />
-            )}{' '}
-            <img src={crossbutton} alt="cross" className="w-[100%] h-[100%]" />
+            )}
           </label>
           <input
             id="file"

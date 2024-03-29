@@ -1,8 +1,9 @@
-import ReturnButton from 'src/components/Buttons/ReturnButton';
-import EditDashboardTitle from 'src/components/EditDashboard/EditDashboardTitle';
-import EditDashboardMembers from 'src/components/EditDashboard/EditDashboardMembers';
-import InvitationSettings from 'src/components/EditDashboard/InvitationSettings';
+import { Helmet } from 'react-helmet-async';
 import Button from 'src/components/Buttons/Button';
+import ReturnButton from 'src/components/Buttons/ReturnButton';
+import EditDashboardMembers from 'src/components/EditDashboard/EditDashboardMembers';
+import EditDashboardTitle from 'src/components/EditDashboard/EditDashboardTitle';
+import InvitationSettings from 'src/components/EditDashboard/InvitationSettings';
 import useDeleteDashboard from 'src/hooks/useDeleteDashboard';
 
 export default function EditDashboardPage() {
@@ -10,6 +11,9 @@ export default function EditDashboardPage() {
 
   return (
     <main className="tablet:mt-[2rem] tablet:ml-[2rem] mt-[1.7rem] ml-[1.2rem]">
+      <Helmet>
+        <title>Taskify 대시보드관리</title>
+      </Helmet>
       <ReturnButton />
       <article className="flex flex-col gap-[1.2rem] tablet:mt-[2.5rem] mt-[2.1rem] deaktop:mb-[5.6rem] tablet:mb-[4.8rem] mb-[2.4rem]">
         <EditDashboardTitle />
