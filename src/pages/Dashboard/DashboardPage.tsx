@@ -8,6 +8,7 @@ import { ColumnData } from 'src/types/columnTypes';
 import { useEffect, useRef, useState } from 'react';
 import backwardArrow from 'src/assets/images/left-arrow.png';
 import forwardArrow from 'src/assets/images/right-arrow.png';
+import useSwipe from 'src/hooks/useSwipe';
 
 export default function Dashboard() {
   const { boardId } = useParams();
@@ -15,40 +16,9 @@ export default function Dashboard() {
     queryKey: ['readColumnList', boardId],
     queryFn: () => readColumnList(boardId as string)
   });
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(true);
 
-  useEffect(() => {
-    const checkScroll = () => {
-      if (scrollContainerRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } =
-          scrollContainerRef.current;
-        setShowLeftButton(scrollLeft > 0);
-        setShowRightButton(scrollLeft < scrollWidth - clientWidth);
-      }
-    };
-
-    const scrollContainer = scrollContainerRef.current;
-    scrollContainer?.addEventListener('scroll', checkScroll);
-    checkScroll();
-
-    return () => {
-      scrollContainer?.removeEventListener('scroll', checkScroll);
-    };
-  }, [data]);
-
-  const scroll = (direction: any) => {
-    if (scrollContainerRef.current) {
-      const { current } = scrollContainerRef;
-      const scrollAmount = 500;
-      if (direction === 'left') {
-        current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      } else {
-        current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
-    }
-  };
+  const { scroll, scrollContainerRef, showLeftButton, showRightButton } =
+    useSwipe(data);
 
   return (
     <main className="flex flex-col desktop:h-full desktop:flex-row">
