@@ -10,7 +10,6 @@ export default function useCardCommon() {
   const { boardId } = useParams();
   const queryClient = useQueryClient();
 
-  const [selecTedDate, setSelectedDate] = useState(new Date());
   const [tagList, setTagList] = useState<string[]>([]);
   const [tagValue, setTagValue] = useState<string>('');
   const [imageValue, setImageValue] = useState('');
@@ -25,8 +24,6 @@ export default function useCardCommon() {
     setModal,
     boardId,
     queryClient,
-    selecTedDate,
-    setSelectedDate,
     tagList,
     setTagList,
     tagValue,

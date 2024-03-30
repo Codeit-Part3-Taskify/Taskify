@@ -1,7 +1,6 @@
 import { BaseSyntheticEvent } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import moment from 'moment';
 import { createCard } from 'src/apis/createCard';
 import type { PostCard } from 'src/types/cardTypes';
 import { uploadCardImage } from 'src/apis/uploadCardImage';
@@ -14,8 +13,6 @@ export default function useCreateCard() {
     boardId,
     memberListQeury,
     queryClient,
-    selecTedDate,
-    setSelectedDate,
     tagList,
     setTagList,
     tagValue,
@@ -26,8 +23,8 @@ export default function useCreateCard() {
   const {
     register,
     setValue,
-    control,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm<PostCard>({
     mode: 'onSubmit',
@@ -36,10 +33,6 @@ export default function useCreateCard() {
       columnId: modal.columnId
     }
   });
-  const handleChange = (dateChange: Date) => {
-    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD HH:mm'));
-    setSelectedDate(dateChange);
-  };
 
   const { mutateAsync: createCardMutation, isError } = useMutation<
     void,
@@ -63,6 +56,7 @@ export default function useCreateCard() {
     setValue('tags', newAry);
     setTagList(newAry);
   };
+
   const submit = async (formData: PostCard) => {
     if (!imageValue) {
       createCardMutation({ ...formData, imageUrl: undefined });
@@ -84,9 +78,6 @@ export default function useCreateCard() {
     submit,
     register,
     memberListQeury,
-    control,
-    handleChange,
-    selecTedDate,
     tagList,
     setTagValue,
     tagValue,
@@ -96,6 +87,7 @@ export default function useCreateCard() {
     setValue,
     handleTagDelete,
     setImageValue,
-    errors
+    errors,
+    getValues
   };
 }

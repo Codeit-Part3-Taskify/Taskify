@@ -1,12 +1,11 @@
-import { Controller } from 'react-hook-form';
-import ReactDatePicker from 'react-datepicker';
-import calendar from 'src/assets/images/calendar.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import plusBtn from 'src/assets/images/plus.svg';
 import { BasicStyle } from 'src/constants/inputstyle';
 import useCreateCard from 'src/hooks/useCreateCard';
+import { useState } from 'react';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
+import Calendar from './Calendar';
 
 export default function CreateCard() {
   const {
@@ -14,9 +13,6 @@ export default function CreateCard() {
     submit,
     register,
     memberListQeury,
-    control,
-    handleChange,
-    selecTedDate,
     tagList,
     setTagValue,
     tagValue,
@@ -26,8 +22,11 @@ export default function CreateCard() {
     setValue,
     handleTagDelete,
     setImageValue,
-    errors
+    errors,
+    getValues
   } = useCreateCard();
+  const [calendarState, setCalendarState] = useState(false);
+
   return (
     <>
       <div className="flex items-center justify-center">
@@ -105,29 +104,19 @@ export default function CreateCard() {
         <div className="relative flex flex-col">
           <label
             className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
-            htmlFor="due-data"
+            htmlFor="due-date"
           >
             마감일
           </label>
-          <Controller
-            control={control}
-            name="dueDate"
-            render={() => (
-              <ReactDatePicker
-                showIcon
-                icon={calendar}
-                className={`${BasicStyle}`}
-                closeOnScroll // 스크롤 하면 선택box 닫히게
-                showTimeSelect // 시간 나오게 하기
-                timeFormat="HH:mm" // 시간 포맷
-                timeIntervals={15} // 15분 단위로 선택 가능한 box가 나옴
-                timeCaption="time"
-                onChange={handleChange}
-                selected={selecTedDate}
-                dateFormat="yyyy-MM-dd HH:mm"
-              />
-            )}
+          <input
+            id="due-date"
+            onFocus={() => setCalendarState(true)}
+            className={BasicStyle}
+            value={getValues('dueDate')}
           />
+          {calendarState && (
+            <Calendar setValue={setValue} setCalendarState={setCalendarState} />
+          )}
         </div>
         <div className="relative flex flex-col">
           <label

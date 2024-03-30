@@ -29,7 +29,6 @@ export default function CardDetail() {
   });
   const [isDropDownClicked, setIsDropDownClicked] = useState(false);
 
-  // 모달 닫을시 답변 리스트 초기화
   const resetCommentList = () =>
     queryClient.resetQueries({
       queryKey: ['readCommentList']
@@ -136,8 +135,9 @@ export default function CardDetail() {
               마감일
             </span>
             <span className="text-[#333236] text-[1.4rem]">
-              {cardInformation?.dueDate &&
-                cardInformation?.dueDate.replaceAll('-', '.')}
+              {cardInformation?.dueDate
+                ? cardInformation?.dueDate.replaceAll('-', '.').slice(0, 10)
+                : '미정'}
             </span>
           </div>
         </div>

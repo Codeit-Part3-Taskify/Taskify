@@ -15,8 +15,6 @@ export default function useUpdateCard() {
     setModal,
     boardId,
     queryClient,
-    selecTedDate,
-    setSelectedDate,
     memberListQeury,
     tagList,
     setTagList,
@@ -26,54 +24,26 @@ export default function useUpdateCard() {
     setImageValue
   } = useCardCommon();
 
+  const { data } = useQuery<CardData>({
+    queryKey: ['readCardDetail', modal.cardId],
+    queryFn: () => readCardDetail(modal.cardId)
+  });
+
   const {
     register,
     setValue,
-    control,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    getValues
   } = useForm<PutCard>({
-    mode: 'onSubmit'
-  });
-
-  useQuery<CardData>({
-    queryKey: ['readCardDetail', modal.cardId],
-    queryFn: async () => {
-      const cardData = await readCardDetail(modal.cardId);
-      for (const [key, value] of Object.entries(cardData) as any) {
-        if (
-          key === 'title' ||
-          key === 'description' ||
-          key === 'dueDate' ||
-          key === 'imageUrl' ||
-          key === 'tags'
-        ) {
-          setValue(key, value);
-          if (key === 'imageUrl') {
-            setImageValue(value);
-          }
-          if (key === 'tags') {
-            setTagList(value);
-          }
-        } else if (key === 'assignee') {
-          setValue('assigneeUserId', value.id);
-        } else if (key === 'columnId') {
-          setValue(key, value);
-        }
-      }
-      return cardData;
-    }
+    mode: 'onSubmit',
+    defaultValues: data
   });
 
   const query = useQuery({
     queryKey: ['readColumnList', boardId],
     queryFn: () => readColumnList(boardId as string)
   });
-
-  const handleChange = (dateChange: Date) => {
-    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD HH:mm'));
-    setSelectedDate(dateChange);
-  };
 
   const { mutateAsync: updateCardMutation } = useMutation<
     void,
@@ -122,9 +92,6 @@ export default function useUpdateCard() {
     register,
     query,
     memberListQeury,
-    control,
-    handleChange,
-    selecTedDate,
     tagList,
     setTagValue,
     tagValue,
@@ -134,6 +101,7 @@ export default function useUpdateCard() {
     setValue,
     handleTagDelete,
     setImageValue,
-    errors
+    errors,
+    getValues
   };
 }
