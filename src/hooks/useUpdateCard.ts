@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import readCardDetail from 'src/apis/readCardDetail';
 import { useForm } from 'react-hook-form';
@@ -19,15 +19,14 @@ export default function useUpdateCard() {
     tagList,
     setTagList,
     tagValue,
-    setTagValue,
-    imageValue,
-    setImageValue
+    setTagValue
   } = useCardCommon();
 
   const { data } = useQuery<CardData>({
     queryKey: ['readCardDetail', modal.cardId],
     queryFn: () => readCardDetail(modal.cardId)
   });
+  const [imageValue, setImageValue] = useState(data?.imageUrl);
 
   const {
     register,

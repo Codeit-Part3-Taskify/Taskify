@@ -12,7 +12,6 @@ export default function useCardCommon() {
 
   const [tagList, setTagList] = useState<string[]>([]);
   const [tagValue, setTagValue] = useState<string>('');
-  const [imageValue, setImageValue] = useState('');
 
   const { data: memberListQeury } = useQuery({
     queryKey: ['memberList', boardId],
@@ -28,8 +27,6 @@ export default function useCardCommon() {
     setTagList,
     tagValue,
     setTagValue,
-    imageValue,
-    setImageValue,
     memberListQeury
   };
 }

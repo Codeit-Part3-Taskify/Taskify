@@ -126,8 +126,8 @@ export default function CardDetail() {
             <Profile
               size="smallSize"
               border="none"
-              profileImgSrc={cardInformation?.assignee.profileImageUrl}
-              userName={cardInformation?.assignee.nickname}
+              profileImgSrc={cardInformation?.assignee?.profileImageUrl}
+              userName={cardInformation?.assignee?.nickname}
             />
           </div>
           <div className="flex flex-col items-start justify-between gap-[0.6rem] flex-1">

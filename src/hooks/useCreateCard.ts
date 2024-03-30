@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { createCard } from 'src/apis/createCard';
@@ -16,9 +16,7 @@ export default function useCreateCard() {
     tagList,
     setTagList,
     tagValue,
-    setTagValue,
-    imageValue,
-    setImageValue
+    setTagValue
   } = useCardCommon();
   const {
     register,
@@ -33,6 +31,7 @@ export default function useCreateCard() {
       columnId: modal.columnId
     }
   });
+  const [imageValue, setImageValue] = useState('');
 
   const { mutateAsync: createCardMutation, isError } = useMutation<
     void,

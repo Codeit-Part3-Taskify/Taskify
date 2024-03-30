@@ -43,7 +43,7 @@ export default function Calendar({
   }, [currentDate]);
 
   return (
-    <main className="absolute right-1 z-10 max-w-[960px] mx-auto bg-purple-50 p-[1rem] rounded-lg shadow-lg">
+    <main className="absolute left-[16rem] top-[5rem] z-10 max-w-[960px] mx-auto bg-purple-50 p-[1rem] rounded-lg shadow-lg">
       <section className="flex items-center justify-between mx-4 my-4 text-gray-700">
         <button
           className="flex justify-center text-3xl cursor-pointer "
@@ -61,19 +61,22 @@ export default function Calendar({
           </button>
         </div>
       </section>
-      <button onClick={handleClick} type="button">
-        <div className="grid grid-cols-7 gap-2 text-center grid-flow-dense">
-          {DAY.map(day => (
-            <span className=" text-xl mb-[-6px]">{day}</span>
-          ))}
-          {dateList.map((date, index) =>
-            !date ? (
-              <span className="border-t border-t-slate-400" />
-            ) : (
-              <span
-                key={date}
-                className={`
-              pb-12
+
+      <div className="grid grid-cols-7 gap-2 text-center grid-flow-dense">
+        {DAY.map(day => (
+          <span className=" text-xl mb-[-6px]">{day}</span>
+        ))}
+        {dateList.map((date, index) =>
+          !date ? (
+            <button
+              onClick={handleClick}
+              className="border-t border-t-slate-400"
+            />
+          ) : (
+            <button
+              onClick={handleClick}
+              key={date}
+              className={`
               border-t border-t-slate-400
               hover:bg-gray-700
               hover:text-white
@@ -93,13 +96,12 @@ export default function Calendar({
                   : ''
               }
               `}
-              >
-                {date}
-              </span>
-            )
-          )}
-        </div>
-      </button>
+            >
+              {date}
+            </button>
+          )
+        )}
+      </div>
     </main>
   );
 }

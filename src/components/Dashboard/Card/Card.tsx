@@ -32,12 +32,12 @@ export default function Card({ cardData, columnInfo }: Prop) {
         }))
       }
     >
-      {cardData.imageUrl && (
+      {cardData?.imageUrl && (
         <div className="flex justify-center">
           <img
-            src={cardData.imageUrl}
+            src={cardData?.imageUrl}
             alt="이미지"
-            className="w-[26rem] h-[15rem] mb-[1rem] rounded-[0.6rem] tablet:w-[9.1rem] tablet:h-[6.3rem] tablet:m-0 desktop:w-[27.4rem] desktop:h-[16rem]"
+            className="object-contain w-[26rem] h-[15rem] mb-[1rem] rounded-[0.6rem] tablet:w-[9.1rem] tablet:h-[6.3rem] tablet:m-0 desktop:w-[27.4rem] desktop:h-[16rem]"
           />
         </div>
       )}
@@ -75,7 +75,7 @@ export default function Card({ cardData, columnInfo }: Prop) {
             </div>
           )}
           <span className="bg-[#A3C4A2] rounded-[99rem] flex items-center justify-center text-white h-[2.2rem] w-[2.2rem] tablet:text-[1.2rem]">
-            {cardData.assignee.nickname[0]}
+            {cardData?.assignee?.nickname[0]}
           </span>
         </div>
       </div>

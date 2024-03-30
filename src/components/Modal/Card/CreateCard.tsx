@@ -112,7 +112,9 @@ export default function CreateCard() {
             id="due-date"
             onFocus={() => setCalendarState(true)}
             className={BasicStyle}
-            value={getValues('dueDate')}
+            value={getValues('dueDate')?.slice(0, 10)}
+            placeholder="날짜를 선택해 주세요."
+            readOnly
           />
           {calendarState && (
             <Calendar setValue={setValue} setCalendarState={setCalendarState} />

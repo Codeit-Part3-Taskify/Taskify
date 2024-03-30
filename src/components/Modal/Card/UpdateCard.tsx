@@ -131,6 +131,7 @@ export default function updateCard() {
             onFocus={() => setCalendarState(true)}
             className={BasicStyle}
             value={getValues('dueDate')?.slice(0, 10)}
+            readOnly
           />
           {calendarState && (
             <Calendar setValue={setValue} setCalendarState={setCalendarState} />
