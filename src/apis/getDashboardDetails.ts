@@ -1,7 +1,7 @@
 import axios from 'src/apis/axiosInstance';
 import { Dashboard } from 'src/types/dashboardTypes';
 
-const getDashboardDetails = async (dashboardId: string | undefined) => {
+const getDashboardDetails = async (dashboardId: string) => {
   const { data } = await axios.get<Dashboard>(`/dashboards/${dashboardId}`);
   return data;
 };

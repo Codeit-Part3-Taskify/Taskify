@@ -7,7 +7,11 @@ export default function DashboardTitle() {
   const { boardId } = useParams<Params>();
   const { data } = useQuery({
     queryKey: ['dashboardDetails', boardId],
-    queryFn: () => getDashboardDetails(boardId)
+    queryFn: () =>
+      boardId
+        ? getDashboardDetails(boardId)
+        : Promise.reject(new Error('boardId is undefined')),
+    enabled: !!boardId
   });
 
   return (
