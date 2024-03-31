@@ -103,7 +103,7 @@ export default function CardDetail() {
               <img
                 src={cardInformation?.imageUrl}
                 alt="카드 이미지"
-                className="w-[28.7rem] h-[26.2rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
+                className="w-[28.7rem] h-[26.2rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem] object-contain"
               />
             ) : (
               <div className="flex flex-col-reverse items-center">

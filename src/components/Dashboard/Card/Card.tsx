@@ -1,7 +1,8 @@
 import { useSetAtom } from 'jotai';
 import calendar from 'src/assets/images/calendar.svg';
-import type { CardData } from 'src/types/cardTypes';
+import useDeleteCard from 'src/hooks/useDeleteCard';
 import { modalAtom } from 'src/store/store';
+import { CardData } from 'src/types/cardTypes';
 import { ColumnData } from 'src/types/columnTypes';
 
 interface Prop {
@@ -18,9 +19,11 @@ const tagsColor = [
 
 export default function Card({ cardData, columnInfo }: Prop) {
   const setModal = useSetAtom(modalAtom);
+  const deleteCardMutate = useDeleteCard();
+
   return (
     <button
-      className="p-[1.2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer tablet:flex tablet:gap-[2rem] tablet:p-[2rem] desktop:flex-col desktop:gap-[1.2rem] w-full"
+      className="relative p-[1.2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer tablet:flex tablet:gap-[2rem] tablet:p-[2rem] desktop:flex-col desktop:gap-[1.2rem] w-full"
       onClick={() =>
         setModal(prev => ({
           ...prev,
@@ -32,6 +35,15 @@ export default function Card({ cardData, columnInfo }: Prop) {
         }))
       }
     >
+      <button
+        className="absolute right-[2rem] text-gray-500 outline-none"
+        onClick={e => {
+          e.stopPropagation();
+          deleteCardMutate(cardData.id);
+        }}
+      >
+        X
+      </button>
       {cardData?.imageUrl && (
         <div className="flex justify-center">
           <img
@@ -82,4 +94,14 @@ export default function Card({ cardData, columnInfo }: Prop) {
       </div>
     </button>
   );
+}
+function useMutation<T, U, V>(arg0: {
+  mutationFn: (cardId: any) => any;
+  onSuccess: () => any;
+}): { mutate: any } {
+  throw new Error('Function not implemented.');
+}
+
+function deleteCard(cardId: any) {
+  throw new Error('Function not implemented.');
 }

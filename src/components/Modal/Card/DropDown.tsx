@@ -1,18 +1,12 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { deleteCard } from 'src/apis/deleteCard';
+import useDeleteCard from 'src/hooks/useDeleteCard';
 import { modalAtom } from 'src/store/store';
 
 const DropDownBtnStyle =
   'w-[8.1rem] h-[3.2rem] text-[1.4rem] rounded-[0.4rem] py-[0.4rem] px-[1.6rem] hover:text-[#5534DA] hover:bg-[#F1EFFD]';
 export default function DropDown() {
   const [modal, setModal] = useAtom(modalAtom);
-  const queryClient = useQueryClient();
-  const { mutate: deleteCardMutate } = useMutation<void, Error, number>({
-    mutationFn: cardId => deleteCard(cardId),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['readCardList'] })
-  });
+  const deleteCardMutate = useDeleteCard();
   return (
     <div className="absolute top-[4rem] flex flex-col gap-[0.6rem] w-[9.3rem] h-[8.2rem] p-[0.6rem] border border-solid bg-white border-[#D9D9D9] rounded-[0.6rem] shadow-[0_4px_20px_0_rgba(0,0,0,0.08)]">
       <button
