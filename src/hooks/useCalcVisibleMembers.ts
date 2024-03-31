@@ -11,7 +11,11 @@ export default function useCalcVisibleMembers() {
 
   const { data } = useQuery({
     queryKey: ['navDashboardMembers', boardId],
-    queryFn: () => getDashboardMembers(boardId)
+    queryFn: () =>
+      boardId
+        ? getDashboardMembers(boardId)
+        : Promise.reject(new Error('boardId is undefined')),
+    enabled: !!boardId
   });
 
   useEffect(() => {

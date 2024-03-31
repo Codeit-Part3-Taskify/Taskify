@@ -8,6 +8,8 @@ interface PagenationButtonsProps {
   handleBackwardButtonClick: () => void;
   handleForwardButtonClick: () => void;
   isSidebar?: boolean;
+  isStart?: boolean;
+  isEnd?: boolean;
 }
 
 export default function PagenationButtons({
@@ -15,7 +17,9 @@ export default function PagenationButtons({
   nowPage,
   handleBackwardButtonClick,
   handleForwardButtonClick,
-  isSidebar
+  isSidebar,
+  isStart,
+  isEnd
 }: PagenationButtonsProps) {
   const contatinerStyle = isSidebar
     ? 'flex tablet:flex-col-reverse items-center desktop:gap-[1.6rem] tablet:gap-[1.4rem] gap-[1.2rem]'
@@ -35,7 +39,11 @@ export default function PagenationButtons({
       <div className="flex items-center">
         <Button
           variant="secondary"
-          customStyles={`${buttonStyle} rounded-l-[0.4rem]`}
+          customStyles={
+            isStart
+              ? `${buttonStyle} rounded-l-[0.4rem] shadow opacity-30`
+              : `${buttonStyle} rounded-l-[0.4rem] shadow`
+          }
           type="button"
           onClick={handleBackwardButtonClick}
         >
@@ -43,7 +51,11 @@ export default function PagenationButtons({
         </Button>
         <Button
           variant="secondary"
-          customStyles={`${buttonStyle} rounded-r-[0.4rem]`}
+          customStyles={
+            isEnd
+              ? `${buttonStyle} rounded-r-[0.4rem] shadow opacity-30`
+              : `${buttonStyle} rounded-r-[0.4rem] shadow`
+          }
           type="button"
           onClick={handleForwardButtonClick}
         >
