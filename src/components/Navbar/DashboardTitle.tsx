@@ -7,11 +7,15 @@ export default function DashboardTitle() {
   const { boardId } = useParams<Params>();
   const { data } = useQuery({
     queryKey: ['dashboardDetails', boardId],
-    queryFn: () => getDashboardDetails(boardId)
+    queryFn: () =>
+      boardId
+        ? getDashboardDetails(boardId)
+        : Promise.reject(new Error('boardId is undefined')),
+    enabled: !!boardId
   });
 
   return (
-    <div className="items-center gap-[0.8rem] hidden desktop:flex">
+    <div className="flex items-center gap-[0.8rem]">
       <div className="text-[2rem] font-bold">{data?.title}</div>
       {data?.createdByMe ? (
         <img
