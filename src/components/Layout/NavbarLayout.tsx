@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getMyInfo } from 'src/apis/getMyInfo';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import stroke from 'src/assets/images/stroke.svg';
 import DashboardMemebers from '../Navbar/DashboardMembers';
 import DashboardTitle from '../Navbar/DashboardTitle';
@@ -27,7 +28,7 @@ export default function Navbar() {
       : basicStyle;
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = Cookies.get('accessToken');
     if (!accessToken) {
       navigate('/login');
     }
