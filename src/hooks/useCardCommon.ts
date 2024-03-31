@@ -10,9 +10,6 @@ export default function useCardCommon() {
   const { boardId } = useParams();
   const queryClient = useQueryClient();
 
-  const [tagList, setTagList] = useState<string[]>([]);
-  const [tagValue, setTagValue] = useState<string>('');
-
   const { data: memberListQeury } = useQuery({
     queryKey: ['memberList', boardId],
     queryFn: () => getMemberList(boardId as string)
@@ -23,10 +20,6 @@ export default function useCardCommon() {
     setModal,
     boardId,
     queryClient,
-    tagList,
-    setTagList,
-    tagValue,
-    setTagValue,
     memberListQeury
   };
 }

@@ -13,7 +13,7 @@ import { useState } from 'react';
 import DropDown from './DropDown';
 import CommentBox from './CommentBox';
 
-const tagsColor = [
+export const tagsColor = [
   'text-orange-400 bg-rose-100',
   'text-lime-400 bg-lime-100',
   'text-pink-500 bg-pink-100',

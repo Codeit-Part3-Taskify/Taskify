@@ -57,23 +57,24 @@ export default function Card({ cardData, columnInfo }: Prop) {
             </span>
           ))}
         </div>
-        <div
-          className={`flex items-center ${
-            cardData.dueDate ? 'justify-between' : 'justify-end'
-          } tablet:row-start-2 table:flex-2`}
-        >
-          {cardData.dueDate && (
-            <div className="flex gap-[0.6rem]">
-              <img
-                src={calendar}
-                alt="달력이미지"
-                className="w-[1.4rem] h-[1.4rem]"
-              />
+        <div className="flex items-center justify-between tablet:row-start-2 table:flex-2">
+          <div className="flex items-center gap-[0.6rem]">
+            <img
+              src={calendar}
+              alt="달력이미지"
+              className="w-[1.4rem] h-[1.4rem]"
+            />
+            {cardData.dueDate ? (
               <span className="text-[1rem] text-[#787486] font-medium tablet:text-[1.2rem]">
                 {cardData.dueDate && cardData.dueDate.slice(0, 10)}
               </span>
-            </div>
-          )}
+            ) : (
+              <span className="text-[1rem] text-[#787486] font-medium tablet:text-[1.2rem]">
+                미정
+              </span>
+            )}
+          </div>
+
           <span className="bg-[#A3C4A2] rounded-[99rem] flex items-center justify-center text-white h-[2.2rem] w-[2.2rem] tablet:text-[1.2rem]">
             {cardData?.assignee?.nickname[0]}
           </span>

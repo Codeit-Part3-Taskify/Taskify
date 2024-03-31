@@ -7,17 +7,8 @@ import { uploadCardImage } from 'src/apis/uploadCardImage';
 import useCardCommon from './useCardCommon';
 
 export default function useCreateCard() {
-  const {
-    modal,
-    setModal,
-    boardId,
-    memberListQeury,
-    queryClient,
-    tagList,
-    setTagList,
-    tagValue,
-    setTagValue
-  } = useCardCommon();
+  const { modal, setModal, boardId, memberListQeury, queryClient } =
+    useCardCommon();
   const {
     register,
     setValue,
@@ -32,7 +23,8 @@ export default function useCreateCard() {
     }
   });
   const [imageValue, setImageValue] = useState('');
-
+  const [tagList, setTagList] = useState<string[]>([]);
+  const [tagValue, setTagValue] = useState<string>('');
   const { mutateAsync: createCardMutation, isError } = useMutation<
     void,
     Error,

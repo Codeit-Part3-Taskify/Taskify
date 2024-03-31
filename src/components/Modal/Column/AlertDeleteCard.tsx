@@ -11,7 +11,10 @@ export default function AlertDeleteCard() {
       </h3>
       <div className="flex justify-end gap-[1.2rem]">
         <ModalResetButton>취소</ModalResetButton>
-        <ModalSubmitButton onClick={handleDeleteAlertClick}>
+        <ModalSubmitButton
+          customStyles="text-red-500"
+          onClick={handleDeleteAlertClick}
+        >
           삭제
         </ModalSubmitButton>
       </div>

@@ -7,6 +7,7 @@ import useUpdateCard from 'src/hooks/useUpdateCard';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
 import Calendar from './Calendar';
+import { tagsColor } from './CardDetail';
 
 export default function updateCard() {
   const {
@@ -132,11 +133,13 @@ export default function updateCard() {
             className={BasicStyle}
             value={getValues('dueDate')?.slice(0, 10)}
             readOnly
+            placeholder="날짜를 입력해 주세요."
           />
           {calendarState && (
             <Calendar setValue={setValue} setCalendarState={setCalendarState} />
           )}
         </div>
+
         <div className="relative flex flex-col">
           <label
             className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
@@ -145,25 +148,26 @@ export default function updateCard() {
             태그
           </label>
           <div
-            className={`${BasicStyle} flex overflow-x-scroll overflow-y-hidden items-center`}
+            className={`${BasicStyle} flex overflow-x-auto overflow-y-hidden items-center`}
           >
             <ul className="flex gap-[1rem] overflow-hidden shrink-0">
               {tagList &&
-                tagList.map(item => {
-                  const key = Math.random();
-                  return (
-                    <li key={key}>
+                tagList.map(item => (
+                  <>
+                    <li
+                      className={`flex items-center rounded-[0.4rem] text-[1rem] px-[0.6rem] py-[0.4rem] tablet:text-[1.2rem] ${tagsColor[item.length % 4]}`}
+                    >
                       {item}
-                      <button
-                        type="button"
-                        className="bg-[black] text-white p-2 rounded-[0.6rem]"
-                        onClick={() => handleTagDelete(item)}
-                      >
-                        x
-                      </button>
                     </li>
-                  );
-                })}
+                    <button
+                      type="button"
+                      className="bg-red-400 text-white px-1 rounded-[0.4rem] ml-[-0.5rem]"
+                      onClick={() => handleTagDelete(item)}
+                    >
+                      x
+                    </button>
+                  </>
+                ))}
             </ul>
             <input
               className="outline-none ml-[1rem]"
@@ -191,8 +195,8 @@ export default function updateCard() {
             이미지
           </h2>
           {imageValue ? (
-            <div className="flex">
-              <label htmlFor="image">
+            <div className="flex gap-3">
+              <label htmlFor="image" className="cursor-pointer">
                 <img
                   src={imageValue}
                   alt="imageValue"
@@ -201,7 +205,7 @@ export default function updateCard() {
               </label>
               <button
                 type="button"
-                className="bg-[black] text-white p-2 rounded-[0.6rem]"
+                className="bg-red-400 text-white p-2 rounded-[0.6rem]"
                 onClick={() => setImageValue('')}
               >
                 X
@@ -210,7 +214,7 @@ export default function updateCard() {
           ) : (
             <label
               htmlFor="image"
-              className="w-[7.6rem] h-[7.6rem] p-6 bg-neutral-100 rounded-md justify-center items-center inline-flex"
+              className="w-[7.6rem] h-[7.6rem] p-6 bg-neutral-100 rounded-md justify-center items-center inline-flex cursor-pointer"
             >
               <img src={plusBtn} alt="버튼" className="h-[2.8rem] w-[2.8rem]" />
             </label>

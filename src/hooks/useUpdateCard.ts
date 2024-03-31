@@ -10,24 +10,16 @@ import readColumnList from 'src/apis/readColumnList';
 import useCardCommon from './useCardCommon';
 
 export default function useUpdateCard() {
-  const {
-    modal,
-    setModal,
-    boardId,
-    queryClient,
-    memberListQeury,
-    tagList,
-    setTagList,
-    tagValue,
-    setTagValue
-  } = useCardCommon();
+  const { modal, setModal, boardId, queryClient, memberListQeury } =
+    useCardCommon();
 
   const { data } = useQuery<CardData>({
     queryKey: ['readCardDetail', modal.cardId],
     queryFn: () => readCardDetail(modal.cardId)
   });
   const [imageValue, setImageValue] = useState(data?.imageUrl);
-
+  const [tagList, setTagList] = useState<string[]>(data?.tags || []);
+  const [tagValue, setTagValue] = useState<string>('');
   const {
     register,
     setValue,
