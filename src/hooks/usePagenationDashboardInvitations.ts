@@ -8,6 +8,9 @@ import deleteDashboardInvitation from 'src/apis/deleteDashboardInvitation';
 export const usePagenationDashboardInvitations = () => {
   const [allPage, setAllPage] = useState(1);
   const [nowPage, setNowPage] = useState(1);
+  const [isStart, setIsStart] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   const queryClient = useQueryClient();
   const { boardId } = useParams<Params>();
 
@@ -27,13 +30,31 @@ export const usePagenationDashboardInvitations = () => {
     }
   });
 
+  const totalCount = data?.totalCount;
+
   useEffect(() => {
-    const totalCount = data?.totalCount ?? 1;
-    const calculatedAllPage = Math.ceil(
-      totalCount / PAGENATION_SIZE.DASHBOARD.INVITATIONS
-    );
-    setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
+    if (totalCount) {
+      const calculatedAllPage = Math.ceil(
+        totalCount / PAGENATION_SIZE.DASHBOARD.INVITATIONS
+      );
+      setAllPage(calculatedAllPage === 0 ? 1 : calculatedAllPage);
+    } else {
+      setAllPage(0);
+    }
   }, [data?.totalCount]);
+
+  useEffect(() => {
+    if (nowPage === 1) {
+      setIsStart(true);
+    } else {
+      setIsStart(false);
+    }
+    if (nowPage === allPage) {
+      setIsEnd(true);
+    } else {
+      setIsEnd(false);
+    }
+  }, [nowPage, allPage]);
 
   const handleBackwardButtonClick = () => {
     if (nowPage === 1 || isLoading) {
@@ -66,6 +87,8 @@ export const usePagenationDashboardInvitations = () => {
     setNowPage,
     handleBackwardButtonClick,
     handleForwardButtonClick,
-    handleDeleteButtonClick
+    handleDeleteButtonClick,
+    isStart,
+    isEnd
   };
 };
