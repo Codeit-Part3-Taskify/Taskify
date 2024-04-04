@@ -23,6 +23,17 @@ export default function Card({ cardData, columnInfo }: Prop) {
 
   return (
     <button
+      draggable="true"
+      onDragStart={e => {
+        setModal(prev => ({
+          ...prev,
+          name: 'cardDetail',
+          cardId: cardData.id,
+          columnId: cardData.columnId,
+          columnTitle: columnInfo.title
+        }));
+        e.dataTransfer.setData('cardId', String(cardData.id));
+      }}
       className="relative p-[1.2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer tablet:flex tablet:gap-[2rem] tablet:p-[2rem] desktop:flex-col desktop:gap-[1.2rem] w-full"
       onClick={() =>
         setModal(prev => ({

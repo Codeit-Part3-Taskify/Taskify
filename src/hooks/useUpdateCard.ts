@@ -93,6 +93,8 @@ export default function useUpdateCard() {
     handleTagDelete,
     setImageValue,
     errors,
-    getValues
+    getValues,
+    updateCardMutation,
+    data
   };
 }

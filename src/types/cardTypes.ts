@@ -20,12 +20,12 @@ export interface CardData {
 }
 
 export interface PutCard {
-  assigneeUserId: number;
-  columnId: number;
-  title: string;
-  description: string;
+  assigneeUserId?: number;
+  columnId?: number;
+  title?: string;
+  description?: string;
   dueDate?: string;
-  tags: string[];
+  tags?: string[];
   imageUrl?: any;
 }
 
