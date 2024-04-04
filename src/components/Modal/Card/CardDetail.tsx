@@ -13,7 +13,7 @@ import { useState } from 'react';
 import DropDown from './DropDown';
 import CommentBox from './CommentBox';
 
-const tagsColor = [
+export const tagsColor = [
   'text-orange-400 bg-rose-100',
   'text-lime-400 bg-lime-100',
   'text-pink-500 bg-pink-100',
@@ -29,7 +29,6 @@ export default function CardDetail() {
   });
   const [isDropDownClicked, setIsDropDownClicked] = useState(false);
 
-  // 모달 닫을시 답변 리스트 초기화
   const resetCommentList = () =>
     queryClient.resetQueries({
       queryKey: ['readCommentList']
@@ -104,7 +103,7 @@ export default function CardDetail() {
               <img
                 src={cardInformation?.imageUrl}
                 alt="카드 이미지"
-                className="w-[28.7rem] h-[26.2rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem]"
+                className="w-[28.7rem] h-[26.2rem] tablet:w-[45rem] mb-[2.4rem] rounded-[0.6rem] object-contain"
               />
             ) : (
               <div className="flex flex-col-reverse items-center">
@@ -127,8 +126,8 @@ export default function CardDetail() {
             <Profile
               size="smallSize"
               border="none"
-              profileImgSrc={cardInformation?.assignee.profileImageUrl}
-              userName={cardInformation?.assignee.nickname}
+              profileImgSrc={cardInformation?.assignee?.profileImageUrl}
+              userName={cardInformation?.assignee?.nickname}
             />
           </div>
           <div className="flex flex-col items-start justify-between gap-[0.6rem] flex-1">
@@ -136,8 +135,9 @@ export default function CardDetail() {
               마감일
             </span>
             <span className="text-[#333236] text-[1.4rem]">
-              {cardInformation?.dueDate &&
-                cardInformation?.dueDate.replaceAll('-', '.')}
+              {cardInformation?.dueDate
+                ? cardInformation?.dueDate.replaceAll('-', '.').slice(0, 10)
+                : '미정'}
             </span>
           </div>
         </div>

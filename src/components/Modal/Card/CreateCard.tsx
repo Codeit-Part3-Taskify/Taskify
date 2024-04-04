@@ -1,12 +1,12 @@
-import { Controller } from 'react-hook-form';
-import ReactDatePicker from 'react-datepicker';
-import calendar from 'src/assets/images/calendar.svg';
 import 'react-datepicker/dist/react-datepicker.css';
 import plusBtn from 'src/assets/images/plus.svg';
 import { BasicStyle } from 'src/constants/inputstyle';
 import useCreateCard from 'src/hooks/useCreateCard';
+import { useState } from 'react';
 import ModalResetButton from '../../Buttons/ModalResetButton';
 import ModalSubmitButton from '../../Buttons/ModalSubmitButton';
+import Calendar from './Calendar';
+import { tagsColor } from './CardDetail';
 
 export default function CreateCard() {
   const {
@@ -14,9 +14,6 @@ export default function CreateCard() {
     submit,
     register,
     memberListQeury,
-    control,
-    handleChange,
-    selecTedDate,
     tagList,
     setTagValue,
     tagValue,
@@ -26,8 +23,11 @@ export default function CreateCard() {
     setValue,
     handleTagDelete,
     setImageValue,
-    errors
+    errors,
+    getValues
   } = useCreateCard();
+  const [calendarState, setCalendarState] = useState(false);
+
   return (
     <>
       <div className="flex items-center justify-center">
@@ -105,29 +105,21 @@ export default function CreateCard() {
         <div className="relative flex flex-col">
           <label
             className="text-[1.8rem] text-[#333236] mb-[1rem] font-medium"
-            htmlFor="due-data"
+            htmlFor="due-date"
           >
             마감일
           </label>
-          <Controller
-            control={control}
-            name="dueDate"
-            render={() => (
-              <ReactDatePicker
-                showIcon
-                icon={calendar}
-                className={`${BasicStyle}`}
-                closeOnScroll // 스크롤 하면 선택box 닫히게
-                showTimeSelect // 시간 나오게 하기
-                timeFormat="HH:mm" // 시간 포맷
-                timeIntervals={15} // 15분 단위로 선택 가능한 box가 나옴
-                timeCaption="time"
-                onChange={handleChange}
-                selected={selecTedDate}
-                dateFormat="yyyy-MM-dd HH:mm"
-              />
-            )}
+          <input
+            id="due-date"
+            onFocus={() => setCalendarState(true)}
+            className={BasicStyle}
+            value={getValues('dueDate')?.slice(0, 10)}
+            placeholder="날짜를 선택해 주세요."
+            readOnly
           />
+          {calendarState && (
+            <Calendar setValue={setValue} setCalendarState={setCalendarState} />
+          )}
         </div>
         <div className="relative flex flex-col">
           <label
@@ -141,21 +133,22 @@ export default function CreateCard() {
           >
             <ul className="flex gap-[1rem] overflow-hidden shrink-0">
               {tagList &&
-                tagList.map(item => {
-                  const key = Math.random();
-                  return (
-                    <li key={key}>
+                tagList.map(item => (
+                  <>
+                    <li
+                      className={`flex items-center rounded-[0.4rem] text-[1rem] px-[0.6rem] py-[0.4rem] tablet:text-[1.2rem] ${tagsColor[item.length % 4]}`}
+                    >
                       {item}
-                      <button
-                        type="button"
-                        className="bg-[black] text-white p-2 rounded-[0.6rem]"
-                        onClick={() => handleTagDelete(item)}
-                      >
-                        x
-                      </button>
                     </li>
-                  );
-                })}
+                    <button
+                      type="button"
+                      className="bg-gray-400 text-white px-1 rounded-[0.4rem] ml-[-0.5rem]"
+                      onClick={() => handleTagDelete(item)}
+                    >
+                      x
+                    </button>
+                  </>
+                ))}
             </ul>
             <input
               className="outline-none ml-[1rem]"
@@ -183,17 +176,17 @@ export default function CreateCard() {
             이미지
           </h2>
           {imageValue ? (
-            <div className="flex">
-              <label htmlFor="image">
+            <div className="flex gap-3">
+              <label htmlFor="image" className="cursor-pointer">
                 <img
                   src={imageValue}
                   alt="imageValue"
-                  className="w-[7.6rem] h-[7.6rem]"
+                  className="w-[7.6rem] h-[7.6rem] rounded-md"
                 />
               </label>
               <button
                 type="button"
-                className="bg-[black] text-white p-2 rounded-[0.6rem]"
+                className="bg-red-400 text-white p-2 rounded-[0.6rem]"
                 onClick={() => setImageValue('')}
               >
                 X
@@ -202,7 +195,7 @@ export default function CreateCard() {
           ) : (
             <label
               htmlFor="image"
-              className="w-[7.6rem] h-[7.6rem] p-6 bg-neutral-100 rounded-md justify-center items-center inline-flex"
+              className="w-[7.6rem] h-[7.6rem] p-6 bg-neutral-100 rounded-md justify-center items-center inline-flex cursor-pointer"
             >
               <img src={plusBtn} alt="버튼" className="h-[2.8rem] w-[2.8rem]" />
             </label>

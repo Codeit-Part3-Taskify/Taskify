@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import readCardDetail from 'src/apis/readCardDetail';
 import { useForm } from 'react-hook-form';
@@ -10,70 +10,31 @@ import readColumnList from 'src/apis/readColumnList';
 import useCardCommon from './useCardCommon';
 
 export default function useUpdateCard() {
-  const {
-    modal,
-    setModal,
-    boardId,
-    queryClient,
-    selecTedDate,
-    setSelectedDate,
-    memberListQeury,
-    tagList,
-    setTagList,
-    tagValue,
-    setTagValue,
-    imageValue,
-    setImageValue
-  } = useCardCommon();
+  const { modal, setModal, boardId, queryClient, memberListQeury } =
+    useCardCommon();
 
+  const { data } = useQuery<CardData>({
+    queryKey: ['readCardDetail', modal.cardId],
+    queryFn: () => readCardDetail(modal.cardId)
+  });
+  const [imageValue, setImageValue] = useState(data?.imageUrl);
+  const [tagList, setTagList] = useState<string[]>(data?.tags || []);
+  const [tagValue, setTagValue] = useState<string>('');
   const {
     register,
     setValue,
-    control,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    getValues
   } = useForm<PutCard>({
-    mode: 'onSubmit'
-  });
-
-  useQuery<CardData>({
-    queryKey: ['readCardDetail', modal.cardId],
-    queryFn: async () => {
-      const cardData = await readCardDetail(modal.cardId);
-      for (const [key, value] of Object.entries(cardData) as any) {
-        if (
-          key === 'title' ||
-          key === 'description' ||
-          key === 'dueDate' ||
-          key === 'imageUrl' ||
-          key === 'tags'
-        ) {
-          setValue(key, value);
-          if (key === 'imageUrl') {
-            setImageValue(value);
-          }
-          if (key === 'tags') {
-            setTagList(value);
-          }
-        } else if (key === 'assignee') {
-          setValue('assigneeUserId', value.id);
-        } else if (key === 'columnId') {
-          setValue(key, value);
-        }
-      }
-      return cardData;
-    }
+    mode: 'onSubmit',
+    defaultValues: data
   });
 
   const query = useQuery({
     queryKey: ['readColumnList', boardId],
     queryFn: () => readColumnList(boardId as string)
   });
-
-  const handleChange = (dateChange: Date) => {
-    setValue('dueDate', moment(dateChange).format('yyyy-MM-DD HH:mm'));
-    setSelectedDate(dateChange);
-  };
 
   const { mutateAsync: updateCardMutation } = useMutation<
     void,
@@ -122,9 +83,6 @@ export default function useUpdateCard() {
     register,
     query,
     memberListQeury,
-    control,
-    handleChange,
-    selecTedDate,
     tagList,
     setTagValue,
     tagValue,
@@ -134,6 +92,9 @@ export default function useUpdateCard() {
     setValue,
     handleTagDelete,
     setImageValue,
-    errors
+    errors,
+    getValues,
+    updateCardMutation,
+    data
   };
 }

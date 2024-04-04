@@ -1,7 +1,8 @@
 import { useSetAtom } from 'jotai';
 import calendar from 'src/assets/images/calendar.svg';
-import type { CardData } from 'src/types/cardTypes';
+import useDeleteCard from 'src/hooks/useDeleteCard';
 import { modalAtom } from 'src/store/store';
+import { CardData } from 'src/types/cardTypes';
 import { ColumnData } from 'src/types/columnTypes';
 
 interface Prop {
@@ -18,9 +19,22 @@ const tagsColor = [
 
 export default function Card({ cardData, columnInfo }: Prop) {
   const setModal = useSetAtom(modalAtom);
+  const deleteCardMutate = useDeleteCard();
+
   return (
     <button
-      className="p-[1.2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer tablet:flex tablet:gap-[2rem] tablet:p-[2rem] desktop:flex-col desktop:gap-[1.2rem] w-full"
+      draggable="true"
+      onDragStart={e => {
+        setModal(prev => ({
+          ...prev,
+          name: 'cardDetail',
+          cardId: cardData.id,
+          columnId: cardData.columnId,
+          columnTitle: columnInfo.title
+        }));
+        e.dataTransfer.setData('cardId', String(cardData.id));
+      }}
+      className="relative p-[1.2rem] bg-white border border-solid border-[#D9D9D9] rounded-[0.6rem] cursor-pointer tablet:flex tablet:gap-[2rem] tablet:p-[2rem] desktop:flex-col desktop:gap-[1.2rem] w-full"
       onClick={() =>
         setModal(prev => ({
           ...prev,
@@ -32,12 +46,21 @@ export default function Card({ cardData, columnInfo }: Prop) {
         }))
       }
     >
-      {cardData.imageUrl && (
+      <button
+        className="absolute right-[2rem] text-gray-500 outline-none"
+        onClick={e => {
+          e.stopPropagation();
+          deleteCardMutate(cardData.id);
+        }}
+      >
+        X
+      </button>
+      {cardData?.imageUrl && (
         <div className="flex justify-center">
           <img
-            src={cardData.imageUrl}
+            src={cardData?.imageUrl}
             alt="이미지"
-            className="w-[26rem] h-[15rem] mb-[1rem] rounded-[0.6rem] tablet:w-[9.1rem] tablet:h-[6.3rem] tablet:m-0 desktop:w-[27.4rem] desktop:h-[16rem]"
+            className="object-contain w-[26rem] h-[15rem] mb-[1rem] rounded-[0.6rem] tablet:w-[9.1rem] tablet:h-[6.3rem] tablet:m-0 desktop:w-[27.4rem] desktop:h-[16rem]"
           />
         </div>
       )}
@@ -57,28 +80,39 @@ export default function Card({ cardData, columnInfo }: Prop) {
             </span>
           ))}
         </div>
-        <div
-          className={`flex items-center ${
-            cardData.dueDate ? 'justify-between' : 'justify-end'
-          } tablet:row-start-2 table:flex-2`}
-        >
-          {cardData.dueDate && (
-            <div className="flex gap-[0.6rem]">
-              <img
-                src={calendar}
-                alt="달력이미지"
-                className="w-[1.4rem] h-[1.4rem]"
-              />
+        <div className="flex items-center justify-between tablet:row-start-2 table:flex-2">
+          <div className="flex items-center gap-[0.6rem]">
+            <img
+              src={calendar}
+              alt="달력이미지"
+              className="w-[1.4rem] h-[1.4rem]"
+            />
+            {cardData.dueDate ? (
               <span className="text-[1rem] text-[#787486] font-medium tablet:text-[1.2rem]">
                 {cardData.dueDate && cardData.dueDate.slice(0, 10)}
               </span>
-            </div>
-          )}
+            ) : (
+              <span className="text-[1rem] text-[#787486] font-medium tablet:text-[1.2rem]">
+                미정
+              </span>
+            )}
+          </div>
+
           <span className="bg-[#A3C4A2] rounded-[99rem] flex items-center justify-center text-white h-[2.2rem] w-[2.2rem] tablet:text-[1.2rem]">
-            {cardData.assignee.nickname[0]}
+            {cardData?.assignee?.nickname[0]}
           </span>
         </div>
       </div>
     </button>
   );
+}
+function useMutation<T, U, V>(arg0: {
+  mutationFn: (cardId: any) => any;
+  onSuccess: () => any;
+}): { mutate: any } {
+  throw new Error('Function not implemented.');
+}
+
+function deleteCard(cardId: any) {
+  throw new Error('Function not implemented.');
 }
