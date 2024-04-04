@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { modalAtom, userEmailAtom } from 'src/store/store';
 import postLogIn from '../../apis/postLogIn';
 import eye from '../../assets/images/eye.svg';
@@ -23,7 +24,7 @@ export default function LogInForm() {
 
   // const [userEmail, setUserEmail] = useAtom(userEmailAtom);
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
+    if (Cookies.get('accessToken')) {
       navigate('/mydashboard');
     }
   });
@@ -49,7 +50,7 @@ export default function LogInForm() {
     mutationKey: ['user'],
     mutationFn: postLogIn as any,
     onSuccess: (data: any) => {
-      localStorage.setItem('accessToken', data.accessToken);
+      Cookies.set('accessToken', data.accessToken, { expires: 1 });
       setUserEmail(email);
       navigate('/mydashboard');
     },

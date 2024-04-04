@@ -17,7 +17,9 @@ export default function DashboardList({
     allPage,
     nowPage,
     handleBackwardButtonClick,
-    handleForwardButtonClick
+    handleForwardButtonClick,
+    isStart,
+    isEnd
   } = usePagenationDashboardList(
     MyDashboardPage
       ? PAGENATION_SIZE.DASHBOARD.MYDASHBOARD
@@ -42,7 +44,7 @@ export default function DashboardList({
         }
       >
         {MyDashboardPage && <AddDashboard />}
-        {dashboards.map((dashboard: Dashboard) => (
+        {dashboards?.map((dashboard: Dashboard) => (
           <DashboardItem
             key={dashboard.id}
             dashboard={dashboard}
@@ -51,13 +53,17 @@ export default function DashboardList({
         ))}
       </div>
 
-      <PagenationButtons
-        allPage={allPage}
-        nowPage={nowPage}
-        handleBackwardButtonClick={handleBackwardButtonClick}
-        handleForwardButtonClick={handleForwardButtonClick}
-        isSidebar
-      />
+      {allPage ? (
+        <PagenationButtons
+          allPage={allPage}
+          nowPage={nowPage}
+          handleBackwardButtonClick={handleBackwardButtonClick}
+          handleForwardButtonClick={handleForwardButtonClick}
+          isSidebar
+          isStart={isStart}
+          isEnd={isEnd}
+        />
+      ) : null}
     </div>
   );
 }

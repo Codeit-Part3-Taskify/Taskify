@@ -5,7 +5,7 @@ import Navbar from './NavbarLayout';
 
 export default function Layout() {
   return (
-    <div className="relative flex h-full">
+    <div className="relative flex w-screen">
       <Modal />
       <div className="fixed top-0 z-0">
         <Navbar />
